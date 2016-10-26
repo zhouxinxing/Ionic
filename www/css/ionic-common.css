@@ -463,6 +463,17 @@
   padding-right: 15px;
   color: white; }
 
+.com-price-box {
+  font-size: 1.4rem;
+  padding: 0 5px; }
+  .com-price-box .com-price {
+    color: #ff5d50;
+    text-align: center;
+    font-size: 1.6rem; }
+  .com-price-box .com-price-desc {
+    font-size: 1.2rem;
+    color: #00c1af; }
+
 /********end   reset style*********/
 /*************begin 日历控件主题修改*************/
 .mbsc-android-holo .dwv {

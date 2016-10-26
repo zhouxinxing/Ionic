@@ -55,7 +55,7 @@ define(function () {
 					params         : {},//用于设置URL参数的对象
 					data           : {}, //请求发送的数据
 					headers        : {}, //请求头设置
-					timeout        : 15000, //超时范围
+					timeout        : 60000, //超时范围
 					withCredentials: false, //是否为XHR对象添加withCredentials属性（在跨域请求时提供凭据）
 					success        : function (data) {
 					},

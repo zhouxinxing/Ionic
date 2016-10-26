@@ -449,6 +449,19 @@ $price-color:#ff5d50;
   padding-right: 15px;
   color: white;
 }
+.com-price-box {
+  font-size: 1.4rem;
+  padding: 0 5px;
+  .com-price{
+    color: $price-color;
+    text-align: center;
+    font-size: 1.6rem;
+  }
+  .com-price-desc{
+    font-size: 1.2rem;
+    color: $field-checkbox-color;
+  }
+}
 /********end   reset style*********/
 
 /*************begin 日历控件主题修改*************/

@@ -1,6 +1,6 @@
-define(['controllers/app.controller', 'services/app.service', 'directives/app.directives'], function () {
+define(['controllers/app.controller', 'services/app.service', 'directives/app.directives','filters/app.filters'], function () {
    'use strict';
-   var app = angular.module('app', ['ionic', 'oc.lazyLoad', 'app.controller', 'app.service', 'app.directives']);
+   var app = angular.module('app', ['ionic', 'oc.lazyLoad', 'app.controller', 'app.service', 'app.directives','app.filters']);
 
    app.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) { //ionic tabs Android显示在顶部处理
 
@@ -32,8 +32,8 @@ define(['controllers/app.controller', 'services/app.service', 'directives/app.di
       });
    });
    //全局常量方法
-   app.constant('interface', {
-      mitInterface: 'http://agenttest.sinosafe.com.cn/mss/xszc/service/ydzyService'
+   app.constant('$interFace', {
+      mitMainFace: 'http://agenttest.sinosafe.com.cn/mss/xszc/service/ydzyService' //主接口
    });
    //启动方法
    app.bootstrap = function () {
