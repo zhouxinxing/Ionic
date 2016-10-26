@@ -2,34 +2,38 @@
    <span class="input-label">品牌</span>
    <select ng-model="BRAND_NAME">
       <option value="">请选择</option>
-      <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:VHL.BRAND_NAME" value="{{VHL.BRAND_NAME}}">{{VHL.BRAND_NAME}}</option>
+      <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:'BRAND_NAME'" value="{{VHL.BRAND_NAME}}">{{VHL.BRAND_NAME}}</option>
    </select>
 </label>
 <label class="item item-input item-select">
    <span class="input-label">车款</span>
    <select ng-model="FAMILY_NAME">
       <option value="">请选择</option>
-      <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:VHL.FAMILY_NAME" value="{{VHL.FAMILY_NAME}}">{{VHL.FAMILY_NAME}}</option>
+      <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:'FAMILY_NAME'" value="{{VHL.FAMILY_NAME}}">{{VHL.FAMILY_NAME}}</option>
    </select>
 </label>
 <label class="item item-input item-select">
-   <span class="input-label">排气量</span>
-   <select ng-model="DISPLACEMENT">
-      <option value="请选择">请选择</option>
-      <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:VHL.DISPLACEMENT" value="{{VHL.DISPLACEMENT}}">{{VHL.DISPLACEMENT}}</option>
-   </select>
+  <span class="input-label">排气量</span>
+  <select ng-model="DISPLACEMENT">
+    <option value="">请选择</option>
+    <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:'DISPLACEMENT'" value="{{VHL.DISPLACEMENT}}">{{VHL.DISPLACEMENT}}</option>
+  </select>
 </label>
 <label class="item item-input item-select">
-   <span class="input-label">手动自动</span>
-   <select ng-model="CAR_REMARK">
-      <option value="请选择">请选择</option>
-      <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:VHL.CAR_REMARK" value="{{VHL.CAR_REMARK}}">{{VHL.CAR_REMARK}}</option>
-   </select>
+  <span class="input-label">手动自动</span>
+  <select ng-model="CAR_REMARK">
+    <option value="">请选择</option>
+    <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:'CAR_REMARK'" value="{{VHL.CAR_REMARK}}">{{VHL.CAR_REMARK}}</option>
+  </select>
 </label>
 <label class="item item-input item-select">
-   <span class="input-label">车辆型号</span>
-   <select ng-model="MODEL_NAME">
-      <option value="请选择">请选择</option>
-      <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:VHL.MODEL_NAME" value="{{VHL.MODEL_NAME}}">{{VHL.MODEL_NAME}}</option>
-   </select>
+  <span class="input-label">车辆型号</span>
+  <select ng-model="MODEL_NAME">
+    <option value="">请选择</option>
+    <option ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:'MODEL_NAME'" value="{{VHL.MODEL_CODE}}">{{VHL.DESCRIBE+'(参考价:'+VHL.VEHICLE_PRICE+')'}}</option>
+  </select>
 </label>
+<ion-list>
+  <ion-radio ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:'MODEL_NAME'" ng-value="VHL.MODEL_CODE">{{VHL.DESCRIBE+'(参考价:'+VHL.VEHICLE_PRICE+')'}}</ion-radio>
+</ion-list>
+

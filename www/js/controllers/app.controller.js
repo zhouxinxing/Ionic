@@ -32,7 +32,8 @@ define(function () {
             }
             else {
                $handleService.http({
-                  url: $interFace.mitMainFace,
+                  //url: $interFace.mitMainFace,
+                  url:'data/basedata.json',
                   method: 'POST',
                   headers: {
                      token: 'F584A4FBD0AA477DB25B314F5EEDE806',
