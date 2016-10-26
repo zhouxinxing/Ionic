@@ -1,0 +1,436 @@
+@import '_$utils_common';
+@import '_$loading_common';
+
+$therm-color: #ef473a;
+$view-bg-color: #f7f7f7;
+$font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+$font-size: 10px;
+$font-black-color: black;
+$box-border: 1px #E8E8E8 solid;
+$mobiscroll-therm-color: #ff6161;
+$field-checkbox-color:#00c1af;
+$search-button-color:#00BCD4;
+$bar-footer-height:50px;
+$nav-therm-color:white;
+
+*, .ionic-body, html, body {
+  font-family: $font-family;
+  font-size: $font-size;
+}
+
+/*************begin 通用样式****************/
+.hidden-box{
+  display: none;
+}
+.no-padding{
+  padding: 0;
+}
+/*************end   通用样式****************/
+
+/****begin ionic style change****/
+.nav-therm{
+  color: $nav-therm-color !important;
+}
+.card {
+  box-shadow: none;
+  border: $box-border;
+}
+.button{
+  min-height: 36px;
+  line-height:initial;
+  color: white;
+  border-radius: 1px;
+  height: 40px;
+}
+.input-label {
+  font-size: 1.4rem;
+  color: $font-black-color;
+}
+
+.menu-header-title {
+  padding: 6px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.item-complex .item-content, .item-radio .item-content {
+  padding: 10px 49px 10px 15px;
+  background: none;
+}
+
+
+.card-form{
+  .item {
+    border-left: 0;
+    border-right: 0;
+    background: none;
+    border: none;
+    border-bottom: $box-border;
+    padding: 3px 5px;
+    input, select {
+      font-size: 1.4rem;
+    }
+    .toggle {
+      width: 65%;
+      top: 5px;
+      text-align: right;
+      margin: 0;
+      padding: 0;
+      display: table;
+      zoom: 1;
+      .track {
+        position: relative;
+        border-width: 1px;
+        .handle {
+          left: 1px;
+          top: 1px;
+        }
+      }
+    }
+    .range {
+      width: 70%;
+    }
+  }
+
+  .item-content {
+    font-size: 1.4rem;
+    span {
+      font-size: 1.4rem;
+    }
+  }
+
+  .item-select {
+    select {
+      right: 0;
+      padding: 0;
+      margin: 1px 0;
+      width: 65%;
+      direction: ltr;
+    }
+  }
+
+  .item-modal-select{
+    .toggle{
+      top: 0;
+    }
+  }
+}
+
+
+.mit-view {
+  background-color: $view-bg-color;
+}
+
+.item.item-text-wrap {
+  padding: 0;
+}
+
+.form-group {
+  background: white;
+  margin: 10px 0;
+  .input-label {
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .toggle {
+    padding-right: 10px;
+  }
+
+  .checkbox-box{
+    .item-checkbox {
+      display: block;
+      padding: 14px 0 10px 44px;
+    }
+    .item{
+      border: none;
+    }
+    .checkbox input, .checkbox-icon{
+      width: 22px;
+      height: 22px;
+      top: 2px;
+    }
+    .checkbox input:checked+.checkbox-icon:before, .checkbox input:checked:before {
+      background: #ffffff;
+      border-color: $field-checkbox-color;
+    }
+    .checkbox input:after, .checkbox-icon:after{
+      border: 1px solid $field-checkbox-color;
+      border-top: 0;
+      border-right: 0;
+      width: 11px;
+      height: 6px;
+      top: 30%;
+      left: 25%;
+    }
+    .checkbox input:before, .checkbox-icon:before{
+      border-radius: 2px;
+      border-width: 1px;
+      width: 100%;
+      height: 100%;
+      margin-top:0;
+      margin-left:0;
+    }
+  }
+  .field-check-box {
+    display: inline-block;
+    position: absolute;
+    right: 25px;
+    top: 5px;
+    .field-title{
+      color: $field-checkbox-color;
+      display: block;
+      margin-top: -8px
+    }
+  }
+  /**表单分组-标题**/
+  .form-group-title {
+    padding: 10px 8px;
+    color: #ff5353;
+    font-size: 1.5rem;
+    position: relative;
+    border-bottom: 1px #e2e2e2 solid;
+  }
+}
+
+.item-modal-select {
+  &:active {
+    background: #cacaca;
+  }
+  .toggle {
+    top: 0;
+    .item-left-note {
+      color: #929292;
+      margin-right: 5px;
+    }
+  }
+}
+
+/***查询组件样式***/
+.scm-form-item{
+  padding: 5px 0;
+  .item-input{
+    float: left;
+    border-bottom: none;
+    display: inline-block;
+    margin-right: 0;
+    padding-right: 0;
+    width: 75%;
+    .ion-search{
+      display: inline-block;
+      position: absolute;
+      left: 15px;
+      top: 12px;
+    }
+    .search-input{
+      border: 1px #e8e8e8 solid;
+      padding: 17px 26px;
+      min-height: initial;
+      border-right: none;
+      border-radius: 0;
+      margin-top: 1px;
+    }
+  }
+  .button-search{
+    float: left;
+    width: 24%;
+    height: 100%;
+    margin-top: 3px;
+    background-color: $search-button-color;
+  }
+}
+.scm-card{
+  margin: 0.3rem;
+  padding: 0.5rem;
+  .item-select select{
+    direction:rtl;
+    padding-right: 30px;
+  }
+  .button-sure-scm{
+    background: $search-button-color;
+    color: white;
+    border-radius: 1px;
+    height: 40px;
+  }
+}
+
+/***车险报价***/
+.item-ron-wrap{
+  border-bottom: none;
+  .item{
+    border-bottom: none;
+  }
+  .ins-header-checkbox{
+    .checkbox-box{
+      width: 35%;
+      display: inline-block;
+    }
+    .item-input{
+      width: 65%;
+      display: inline-block;
+    }
+  }
+  .input-label-inline{
+    font-size: 1.5rem;
+    margin-right: 4px;
+  }
+  .validate-input{
+    display: inline-block;
+    color: $field-checkbox-color;
+  }
+  .item-validate-picker{
+    color: $field-checkbox-color;
+  }
+  .list-title span{
+    display: inline-block;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #b1b1b1;
+  }
+  .form-group{
+    .checkbox-box .checkbox-icon{
+      top: 4px;
+    }
+  }
+}
+.risks-list{
+  width: 100%;
+  font-size: 1.3rem;
+  tr{
+    th{
+      font-size: 1.3rem;
+      color: #828282;
+    }
+    td{
+      input{
+        text-align: center;
+        line-height: 30px;
+        display: inline-block;
+        width: 60%;
+      }
+      i{
+        display: inline-block;
+        position: relative;
+        top:2px;
+      }
+    }
+  }
+  .item-content{
+    white-space: initial;
+  }
+  .non-ded-checkbox{
+    position: relative;
+    top: 6px;
+  }
+  .td-title{
+    padding-left: 16px;
+    font-size: 1.6rem;
+    color: #FF5722;
+  }
+}
+.bar-footer-price{
+  height: $bar-footer-height;
+}
+.price-tags-box{
+  width: 100%;
+  .price-tags{
+    width: 50%;
+    float: left;
+    height: 100%;
+    text-align: center;
+  }
+  .price-tags-left{
+    font-size: 1.6rem;
+    line-height: $bar-footer-height;
+    span{
+      color: #ff5d50;
+      font-weight: bold;
+    }
+  }
+  .price-tags-right{
+    .button{
+      width: 100%;
+      height: 100%;
+      font-size: 1.6rem;
+      background-color: #ef473a;
+      line-height: $bar-footer-height;
+    }
+  }
+}
+.bar-footer-padding{
+  margin-bottom: $bar-footer-height;
+}
+
+/***电子投保样式****/
+.insurance-list{
+  i{
+    color: #387ef5;
+  }
+}
+
+/****modal select 样式重置****/
+.modal-backdrop{
+  .bar-stable .button.button-clear{
+    color: black;
+  }
+  .item{
+    padding: 5px 15px;
+  }
+  .button{
+    font-size: 1.5rem;
+  }
+  .agent-item-content{
+    font-size: 1.3rem;
+    display: inline-block;
+    width: 30%;
+    text-align: left;
+    padding: 8px;
+    color: #6d6d6d;
+  }
+}
+/****end ionic style change****/
+
+/********begin reset style*********/
+.button-width-full {
+  margin: 1rem 0;
+  width: 96%;
+  left: 2%;
+  min-height: 40px;
+  line-height: 40px;
+}
+
+.list-block-from {
+  input {
+    background-color: initial !important;
+  }
+}
+
+.bar.bar-stable.theme-color {
+  background-color: $therm-color;
+  .title {
+    color: white;
+    text-align: center;
+    left: 0 !important;
+    right: 0 !important;
+  }
+}
+
+.bar-stable .button.button-clear {
+  color: white;
+}
+.bar .title.title-left{
+  text-align: center;
+}
+/********end   reset style*********/
+
+/*************begin 日历控件主题修改*************/
+.mbsc-android-holo .dwv{
+  color: $mobiscroll-therm-color !important;
+  border-bottom: 2px solid $mobiscroll-therm-color !important;
+}
+.mbsc-android-holo .dwwol{
+  border-color: $mobiscroll-therm-color !important;
+}
+/*************end   日历控件主题修改*************/

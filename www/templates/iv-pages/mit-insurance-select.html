@@ -1,0 +1,387 @@
+<ion-view view-title="车险报价" class="mit-view" hide-tabs="true">
+   <ion-content class="im-wrapper bar-footer-padding">
+      <div class="card-form" ng-controller="formController">
+         <form class="list-block-from" name="form" ng-submit="owinfoSubmit(form);" novalidate="novalidate">
+            <div class="form-group">
+               <div class="form-group-title">车辆信息</div>
+               <label class="item item-input">
+                  <span class="input-label">车型名称</span>
+                  <input type="text" value="BMW60620(BMW740)轿车"/>
+               </label>
+               <label class="item item-input">
+                  <span class="input-label">制造厂商</span>
+                  <input type="text" value="华晨宝马汽车有限公司"/>
+               </label>
+               <label class="item item-input">
+                  <span class="input-label">车辆年份</span>
+                  <input type="text" value="2003"/>
+               </label>
+               <label class="item item-input">
+                  <span class="input-label">新车购置价</span>
+                  <input type="text" value="36800"/>
+               </label>
+               <label class="item item-input">
+                  <span class="input-label">座位数</span>
+                  <input type="text" value="5"/>
+               </label>
+               <label class="item item-input">
+                  <span class="input-label">排气量</span>
+                  <input type="text" value="2.49"/>
+               </label>
+               <label class="item item-input item-select">
+                  <span class="input-label">验车情况</span>
+                  <select>
+                     <option value="">已验车</option>
+                     <option value="">免验车</option>
+                  </select>
+               </label>
+               <label class="item item-input item-select">
+                  <span class="input-label">理由</span>
+                  <select>
+                     <option value="">验车合格</option>
+                     <option value="">验车不合格</option>
+                  </select>
+               </label>
+            </div>
+            <div class="item item-ron-wrap">
+               <div class="form-group">
+                  <div class="ins-header-checkbox">
+                     <div class="checkbox-box">
+                        <ion-checkbox ng-checked="false" ng-model="SY_ORIG_FLG"><span>商业险</span></ion-checkbox>
+                     </div>
+                     <label class="item item-input item-validate-picker">
+                        <i class="ion-android-calendar"></i>
+                        <span class="input-label-inline">生效日期</span>
+                        <input type="text" class="validate-input" placeholder="请选择生效日期" datepicker="true" datepicker-init="true" init-picker='{"maxDate":"0,3,0","minDate":"0,0,1"}'/>
+                     </label>
+                  </div>
+                  <table class="risks-list" ng-hide="!SY_ORIG_FLG">
+                     <tr>
+                        <th style="width: 50%;">险种</th>
+                        <th>保额(元)</th>
+                        <th>保费</th>
+                     </tr>
+                     <tr>
+                        <td>
+                           <div class="tab-cel checkbox-box">
+                              <ion-checkbox ng-checked="true" ng-value="030101"><span>车辆损失险</span></ion-checkbox>
+                           </div>
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="500000" readonly/>
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="1830.6" readonly class="action-price"/>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <div class="tab-cel checkbox-box">
+                              <ion-checkbox ng-checked="true" ng-value="030102"><span>商业第三者责任险</span></ion-checkbox>
+                           </div>
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="100000" readonly />
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="1936.6" readonly  class="action-price"/>
+                           <i class="ion-ios-arrow-right"></i>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <div class="tab-cel checkbox-box">
+                              <ion-checkbox ng-checked="true" ng-value="030103"><span>全车盗抢险</span></ion-checkbox>
+                           </div>
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="5000" readonly />
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="1936.6" readonly  class="action-price"/>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <div class="tab-cel checkbox-box">
+                              <ion-checkbox ng-checked="true" ng-value="030104"><span>车上人员责任险（司机）</span></ion-checkbox>
+                           </div>
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="200000" readonly />
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="1930.6" readonly  class="action-price"/>
+                           <i class="ion-ios-arrow-right"></i>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <div class="tab-cel checkbox-box">
+                              <ion-checkbox ng-checked="true" ng-value="030105"><span>车上人员责任险（乘客）</span></ion-checkbox>
+                           </div>
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="80000" readonly />
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="16932.2" readonly  class="action-price"/>
+                           <i class="ion-ios-arrow-right"></i>
+                        </td>
+                     </tr>
+                     <tr class="tr-title">
+                        <td colspan="3" class="td-title" ng-click="isAddInsure=!isAddInsure"  ng-init="isAddInsure = false">
+                           <span><i class="icon {{isAddInsure?'ion-ios-minus-empty':'ion-ios-plus-empty'}}"></i>附加险</span>
+                        </td>
+                     </tr>
+                     <table class="risks-list" ng-show="isAddInsure">
+                        <tr>
+                           <td width="50%">
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030107"><span>玻璃单独破碎险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="1200" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="50.9" readonly  class="action-price"/>
+                              <i class="ion-ios-arrow-right"></i>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030108"><span>自燃损失险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="8000" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="150" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030109"><span>新增设备损失险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="6000" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="10000" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030110"><span>车身划痕损失险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="8630" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="10000" readonly  class="action-price"/>
+                              <i class="ion-ios-arrow-right"></i>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030111"><span>发动机涉水损失险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="9562" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="136.5" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030112"><span>修理期间费用补偿险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="8500" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="895.4" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030113"><span>车上货物责任险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="90000" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="1505.5" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030114"><span>精神损害抚慰金责任险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="9562" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="986.3" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030115"><span>车辆损失保险无法找到第三方特约险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="18000" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="326.0" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>指定修理厂特约险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="1566" readonly />
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="12" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(车损)</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center"></td>
+                           <td class="text-center">
+                              <input type="text" value="12.8" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(三者)</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center"></td>
+                           <td class="text-center">
+                              <input type="text" value="25.0" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(盗抢)</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center"></td>
+                           <td class="text-center">
+                              <input type="text" value="18.6" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(司机)</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center"></td>
+                           <td class="text-center">
+                              <input type="text" value="12.8" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(乘客)</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center"></td>
+                           <td class="text-center">
+                              <input type="text" value="12.8" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(车身刮痕损失险)</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center"></td>
+                           <td class="text-center">
+                              <input type="text" value="12.8" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(自然损失险)</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center"></td>
+                           <td class="text-center">
+                              <input type="text" value="12.8" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(发动机涉水损失险)</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center"></td>
+                           <td class="text-center">
+                              <input type="text" value="12.8" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                     </table>
+                  </table>
+               </div>
+               <div class="form-group">
+                  <div class="ins-header-checkbox">
+                     <div class="checkbox-box">
+                        <ion-checkbox ng-checked="false" ng-model="JQ_ORIG_FLG"><span>交强险</span></ion-checkbox>
+                     </div>
+                     <label class="item item-input item-validate-picker">
+                        <i class="ion-android-calendar"></i>
+                        <span class="input-label-inline">生效日期</span>
+                        <input type="text" class="validate-input" placeholder="请选择生效日期" datepicker="true" init-picker='{"maxDate":"0,3,0","minDate":"0,0,1"}'/>
+                     </label>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </ion-content>
+   <div class="bar bar-footer no-padding bar-footer-price">
+      <div class="price-tags-box">
+         <div class="price-tags price-tags-left">
+            总价:<span>￥12680.63</span>
+         </div>
+         <div class="price-tags price-tags-right">
+            <button class="button button-balanced">计算保费</button>
+         </div>
+      </div>
+   </div>
+</ion-view>

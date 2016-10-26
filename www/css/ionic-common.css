@@ -1,0 +1,475 @@
+@charset "UTF-8";
+.app-toast {
+  display: none;
+  position: absolute;
+  z-index: 99999;
+  color: #fff;
+  top: 70%;
+  font-size: 1.5em;
+  text-align: center;
+  width: 100%;
+  left: 0; }
+  .app-toast > a {
+    padding: 10px 15px;
+    background: #222;
+    opacity: .9;
+    display: inline-block;
+    max-width: 90%;
+    margin: 0 auto;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px; }
+
+.loadingbox {
+  width: 50px;
+  height: 50px;
+  position: relative; }
+
+.container1 > div, .container2 > div, .container3 > div {
+  width: 8px;
+  height: 8px;
+  background-color: #ff4242;
+  border-radius: 100%;
+  position: absolute;
+  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+  animation: bouncedelay 1.2s infinite ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+.loadingbox .loadingbox-container {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+.container2 {
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg); }
+
+.container3 {
+  -webkit-transform: rotateZ(90deg);
+  transform: rotateZ(90deg); }
+
+.circle1 {
+  top: 0;
+  left: 0; }
+
+.circle2 {
+  top: 0;
+  right: 0; }
+
+.circle3 {
+  right: 0;
+  bottom: 0; }
+
+.circle4 {
+  left: 0;
+  bottom: 0; }
+
+.container2 .circle1 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s; }
+
+.container3 .circle1 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s; }
+
+.container1 .circle2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s; }
+
+.container2 .circle2 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s; }
+
+.container3 .circle2 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s; }
+
+.container1 .circle3 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s; }
+
+.container2 .circle3 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s; }
+
+.container3 .circle3 {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s; }
+
+.container1 .circle4 {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s; }
+
+.container2 .circle4 {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s; }
+
+.container3 .circle4 {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s; }
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1); } }
+
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0);
+    -webkit-transform: scale(0); }
+  40% {
+    transform: scale(1);
+    -webkit-transform: scale(1); } }
+
+*, .ionic-body, html, body {
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+  font-size: 10px; }
+
+/*************begin 通用样式****************/
+.hidden-box {
+  display: none; }
+
+.no-padding {
+  padding: 0; }
+
+/*************end   通用样式****************/
+/****begin ionic style change****/
+.nav-therm {
+  color: white !important; }
+
+.card {
+  box-shadow: none;
+  border: 1px #E8E8E8 solid; }
+
+.button {
+  min-height: 36px;
+  line-height: initial;
+  color: white;
+  border-radius: 1px;
+  height: 40px; }
+
+.input-label {
+  font-size: 1.4rem;
+  color: black; }
+
+.menu-header-title {
+  padding: 6px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.6rem; }
+
+.item-complex .item-content, .item-radio .item-content {
+  padding: 10px 49px 10px 15px;
+  background: none; }
+
+.card-form .item {
+  border-left: 0;
+  border-right: 0;
+  background: none;
+  border: none;
+  border-bottom: 1px #E8E8E8 solid;
+  padding: 3px 5px; }
+  .card-form .item input, .card-form .item select {
+    font-size: 1.4rem; }
+  .card-form .item .toggle {
+    width: 65%;
+    top: 5px;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    display: table;
+    zoom: 1; }
+    .card-form .item .toggle .track {
+      position: relative;
+      border-width: 1px; }
+      .card-form .item .toggle .track .handle {
+        left: 1px;
+        top: 1px; }
+  .card-form .item .range {
+    width: 70%; }
+
+.card-form .item-content {
+  font-size: 1.4rem; }
+  .card-form .item-content span {
+    font-size: 1.4rem; }
+
+.card-form .item-select select {
+  right: 0;
+  padding: 0;
+  margin: 1px 0;
+  width: 65%;
+  direction: ltr; }
+
+.card-form .item-modal-select .toggle {
+  top: 0; }
+
+.mit-view {
+  background-color: #f7f7f7; }
+
+.item.item-text-wrap {
+  padding: 0; }
+
+.form-group {
+  background: white;
+  margin: 10px 0;
+  /**表单分组-标题**/ }
+  .form-group .input-label {
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+  .form-group .toggle {
+    padding-right: 10px; }
+  .form-group .checkbox-box .item-checkbox {
+    display: block;
+    padding: 14px 0 10px 44px; }
+  .form-group .checkbox-box .item {
+    border: none; }
+  .form-group .checkbox-box .checkbox input, .form-group .checkbox-box .checkbox-icon {
+    width: 22px;
+    height: 22px;
+    top: 2px; }
+  .form-group .checkbox-box .checkbox input:checked + .checkbox-icon:before, .form-group .checkbox-box .checkbox input:checked:before {
+    background: #ffffff;
+    border-color: #00c1af; }
+  .form-group .checkbox-box .checkbox input:after, .form-group .checkbox-box .checkbox-icon:after {
+    border: 1px solid #00c1af;
+    border-top: 0;
+    border-right: 0;
+    width: 11px;
+    height: 6px;
+    top: 30%;
+    left: 25%; }
+  .form-group .checkbox-box .checkbox input:before, .form-group .checkbox-box .checkbox-icon:before {
+    border-radius: 2px;
+    border-width: 1px;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 0; }
+  .form-group .field-check-box {
+    display: inline-block;
+    position: absolute;
+    right: 25px;
+    top: 5px; }
+    .form-group .field-check-box .field-title {
+      color: #00c1af;
+      display: block;
+      margin-top: -5px; }
+  .form-group .form-group-title {
+    padding: 10px 8px;
+    color: #ff5353;
+    font-size: 1.5rem;
+    position: relative;
+    border-bottom: 1px #e2e2e2 solid; }
+
+.item-modal-select:active {
+  background: #cacaca; }
+
+.item-modal-select .toggle {
+  top: 0; }
+  .item-modal-select .toggle .item-left-note {
+    color: #929292;
+    margin-right: 5px; }
+
+/***查询组件样式***/
+.scm-form-item {
+  padding: 5px 0; }
+  .scm-form-item .item-input {
+    float: left;
+    border-bottom: none;
+    display: inline-block;
+    margin-right: 0;
+    padding-right: 0;
+    width: 75%; }
+    .scm-form-item .item-input .ion-search {
+      display: inline-block;
+      position: absolute;
+      left: 15px;
+      top: 12px; }
+    .scm-form-item .item-input .search-input {
+      border: 1px #e8e8e8 solid;
+      padding: 17px 26px;
+      min-height: initial;
+      border-right: none;
+      border-radius: 0;
+      margin-top: 1px; }
+  .scm-form-item .button-search {
+    float: left;
+    width: 24%;
+    height: 100%;
+    margin-top: 3px;
+    background-color: #00BCD4; }
+
+.scm-card {
+  margin: 0.3rem;
+  padding: 0.5rem; }
+  .scm-card .item-select select {
+    direction: rtl;
+    padding-right: 30px;
+    width: 65%; }
+  .scm-card .button-sure-scm {
+    background: #00BCD4;
+    color: white;
+    border-radius: 1px;
+    height: 40px; }
+
+/***车险报价***/
+.item-ron-wrap {
+  border-bottom: none; }
+  .item-ron-wrap .item {
+    border-bottom: none; }
+  .item-ron-wrap .ins-header-checkbox .checkbox-box {
+    width: 35%;
+    display: inline-block; }
+  .item-ron-wrap .ins-header-checkbox .item-input {
+    width: 65%;
+    display: inline-block; }
+  .item-ron-wrap .input-label-inline {
+    font-size: 1.5rem;
+    margin-right: 4px; }
+  .item-ron-wrap .validate-input {
+    display: inline-block;
+    color: #00c1af; }
+  .item-ron-wrap .item-validate-picker {
+    color: #00c1af; }
+  .item-ron-wrap .list-title span {
+    display: inline-block;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #b1b1b1; }
+  .item-ron-wrap .form-group .checkbox-box .checkbox-icon {
+    top: 4px; }
+
+.risks-list {
+  width: 100%;
+  font-size: 1.3rem; }
+  .risks-list tr th {
+    font-size: 1.3rem;
+    color: #828282; }
+  .risks-list tr td input {
+    text-align: center;
+    line-height: 30px;
+    display: inline-block;
+    width: 60%; }
+  .risks-list tr td i {
+    display: inline-block;
+    position: relative;
+    top: 2px; }
+  .risks-list .item-content {
+    white-space: initial; }
+  .risks-list .non-ded-checkbox {
+    position: relative;
+    top: 6px; }
+  .risks-list .tr-title {
+    border-top: 1px #ffe1e1 solid;
+    border-bottom: 1px #ffe1e1 solid; }
+  .risks-list .td-title {
+    font-size: 1.5rem;
+    color: #FF5722;
+    padding: 5px 16px; }
+    .risks-list .td-title i {
+      font-size: 25px;
+      margin-right: 5px; }
+  .risks-list .action-price {
+    color: #ff5d50; }
+
+.bar-footer-price {
+  height: 50px; }
+
+.price-tags-box {
+  width: 100%; }
+  .price-tags-box .price-tags {
+    width: 50%;
+    float: left;
+    height: 100%;
+    text-align: center; }
+  .price-tags-box .price-tags-left {
+    font-size: 1.6rem;
+    line-height: 50px; }
+    .price-tags-box .price-tags-left span {
+      color: #ff5d50;
+      font-weight: bold; }
+  .price-tags-box .price-tags-right .button {
+    width: 100%;
+    height: 100%;
+    font-size: 1.6rem;
+    background-color: #ef473a;
+    line-height: 50px; }
+
+.bar-footer-padding {
+  margin-bottom: 50px; }
+
+/***电子投保样式****/
+.insurance-list i {
+  color: #387ef5; }
+
+/****modal select 样式重置****/
+.modal-backdrop .bar-stable .button.button-clear {
+  color: black; }
+
+.modal-backdrop .item {
+  padding: 5px 15px; }
+
+.modal-backdrop .button {
+  font-size: 1.5rem; }
+
+.modal-backdrop .agent-item-content {
+  font-size: 1.3rem;
+  display: inline-block;
+  width: 30%;
+  text-align: left;
+  padding: 8px;
+  color: #6d6d6d; }
+
+.margin-right-arrow {
+  margin-right: 12px; }
+
+/****end ionic style change****/
+/********begin reset style*********/
+.button-width-full {
+  margin: 1rem 0;
+  width: 96%;
+  left: 2%;
+  min-height: 40px;
+  line-height: 40px; }
+
+.list-block-from input {
+  background-color: initial !important; }
+
+.bar.bar-stable.theme-color {
+  background-color: #ef473a; }
+  .bar.bar-stable.theme-color .title {
+    color: white;
+    text-align: center;
+    left: 0 !important;
+    right: 0 !important; }
+
+.bar-stable .button.button-clear {
+  color: white; }
+
+.bar .title.title-left {
+  text-align: center; }
+
+.nav-right-button {
+  z-index: 99;
+  position: absolute;
+  width: 100%;
+  height: 44px;
+  font-size: 40px;
+  text-align: right;
+  padding-right: 15px;
+  color: white; }
+
+/********end   reset style*********/
+/*************begin 日历控件主题修改*************/
+.mbsc-android-holo .dwv {
+  color: #ff6161 !important;
+  border-bottom: 2px solid #ff6161 !important; }
+
+.mbsc-android-holo .dwwol {
+  border-color: #ff6161 !important; }
+
+/*************end   日历控件主题修改*************/

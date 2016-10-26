@@ -1,0 +1,80 @@
+<ion-view view-title="车辆信息" class="mit-view" hide-tabs="true">
+   <ion-content class="im-wrapper">
+      <div class="card-form" ng-controller="formController">
+         <form class="list-block-from" name="form" ng-submit="carinfoSubmit(form);" novalidate="novalidate">
+            <div class="item item-text-wrap">
+               <div class="list">
+                  <div class="form-group">
+                     <div class="form-group-title">车辆信息</div>
+                     <!--
+                     <label class="item item-input">
+                       <span class="input-label">是否是新车</span>
+                       <label class="toggle">
+                         <input type="checkbox" name="IS_NEW_CAR" ng-model="IS_NEW_CAR">
+                         <div class="track"><div class="handle"></div></div>
+                       </label>
+                     </label>
+                     -->
+                     <label class="item item-input">
+                        <span class="input-label">车牌号</span>
+                        <input type="text" placeholder="{{IS_NEW_CAR?'*新车无车牌*':'请输入车牌号'}}" name="LCN_NO" ng-model="LCN_NO" ng-disabled="IS_NEW_CAR" required required-msg="请输入车牌号"
+                               ng-pattern="/^[\u4e00-\u9fa5]{1}[A-Za-z]{1}[A-Z_0-9]{5}$/" pattern-msg="您的车牌号输入有误"/>
+                        <div class="checkbox-box field-check-box">
+                           <ion-checkbox ng-model="IS_NEW_CAR">
+                              <span class="field-title">新车未上牌</span>
+                           </ion-checkbox>
+                        </div>
+                     </label>
+                     <label class="item item-input item-modal-select" ng-model="brandModel">
+                        <span class="input-label">品牌型号</span>
+                        <label class="toggle" ui-sref="tab.carModelSelect">
+                           <span class="item-left-note">请选择品牌型号</span>
+                           <i class="ion-ios-arrow-right"></i>
+                           <input type="hidden" name="VEHICLE_NAME" ng-model="VEHICLE_NAME" /> <!--品牌型号-->
+                           <input type="hidden" name="BRND_CDE" ng-model="BRND_CDE" /> <!--车型代码-->
+                        </label>
+                     </label>
+                     <label class="item item-input">
+                        <span class="input-label">车架号</span>
+                        <input type="text" placeholder="请输入车架号" name="VHL_FRM" ng-model="VHL_FRM" required required-msg="请输入车架号" ng-pattern="" pattern-msg="您的车架号称输入有误"/>
+                     </label>
+                     <label class="item item-input">
+                        <span class="input-label">发动机号</span>
+                        <input type="text" placeholder="请输入发动机号" name="ENG_NO" ng-model="ENG_NO" required required-msg="请输入发动机号" ng-pattern="" pattern-msg="您的发动机号输入有误"/>
+                     </label>
+                     <label class="item item-input">
+                        <span class="input-label">车辆登记日期</span>
+                        <input type="text" placeholder="请选择车辆登记日期" name="REGISTER_DATE" ng-model="REGISTER_DATE" datepicker="true" settings="{{settings}}"/>
+                     </label>
+                     <label class="item item-input">
+                        <span class="input-label">打印厂牌车型</span>
+                        <input type="text" placeholder="请输入打印厂牌车型" name="BRND_NME_OTHER" ng-model="BRND_NME_OTHER" required required-msg="请输入打印厂牌车型" ng-pattern="" pattern-msg="您的打印厂牌车型输入有误"/>
+                     </label>
+                     <!--<label class="item item-input item-select">-->
+                        <!--<span class="input-label">玻璃类型</span>-->
+                        <!--<select name="GLASS_TYPE">-->
+                           <!--<option value="domestic">国产</option>-->
+                           <!--<option value="imported">进口</option>-->
+                        <!--</select>-->
+                     <!--</label>-->
+                     <label class="item item-input">
+                        <span class="input-label">是否过户车</span>
+                        <label class="toggle">
+                           <input type="checkbox" name="CHGOWNERFLAG" ng-model="CHGOWNERFLAG">
+                           <div class="track">
+                              <div class="handle"></div>
+                           </div>
+                        </label>
+                     </label>
+                     <label class="item item-input" ng-hide="!CHGOWNERFLAG">
+                        <span class="input-label">转籍过户日期</span>
+                        <input type="text" placeholder="请选择转籍过户日期" name="TRANSFERDATE" ng-model="TRANSFERDATE" datepicker="true" settings="{{settings}}"/>
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <button type="submit" class="button button-assertive button-width-full">下一步</button>
+         </form>
+      </div>
+   </ion-content>
+</ion-view>
