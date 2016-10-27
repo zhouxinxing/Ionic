@@ -17,7 +17,7 @@
                      -->
                      <label class="item item-input">
                         <span class="input-label">车牌号</span>
-                        <input type="text" placeholder="{{IS_NEW_CAR?'*新车无车牌*':'请输入车牌号'}}" name="LCN_NO" ng-model="LCN_NO" ng-disabled="IS_NEW_CAR" required required-msg="请输入车牌号"
+                        <input type="text" placeholder="{{IS_NEW_CAR?'*新车未上牌*':'请输入车牌号'}}" name="LCN_NO" ng-model="LCN_NO" ng-disabled="IS_NEW_CAR" required required-msg="请输入车牌号"
                                ng-pattern="/^[\u4e00-\u9fa5]{1}[A-Za-z]{1}[A-Z_0-9]{5}$/" pattern-msg="您的车牌号输入有误"/>
                         <div class="checkbox-box field-check-box">
                            <ion-checkbox ng-model="IS_NEW_CAR">
@@ -28,10 +28,8 @@
                      <label class="item item-input item-modal-select" ng-model="brandModel">
                         <span class="input-label">品牌型号</span>
                         <label class="toggle" ui-sref="tab.carModelSelect">
-                           <span class="item-left-note">请选择品牌型号</span>
+                           <span class="item-left-note" ng-model="VHL_DATA">{{VHL_DATA.RUN_NAME || '请选择品牌型号'}}</span>
                            <i class="ion-ios-arrow-right margin-right-arrow"></i>
-                           <input type="hidden" name="VEHICLE_NAME" ng-model="VEHICLE_NAME" /> <!--品牌型号-->
-                           <input type="hidden" name="BRND_CDE" ng-model="BRND_CDE" /> <!--车型代码-->
                         </label>
                      </label>
                      <label class="item item-input">

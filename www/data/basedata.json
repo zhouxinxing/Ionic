@@ -285,7 +285,7 @@
       "CAR_STYLE": "进口车",
       "DESCRIBE": "2013款 奥迪 A8 AUDI A8L 40TFSI HYBRID轿车 手自一体 HYBRID 涡轮增压 5座 2.0L",
       "DISPLACEMENT": "1.984",
-      "FAMILY_NAME": "A8-60",
+      "FAMILY_NAME": "A8",
       "FUELFLAG": "0",
       "MARKET_YEAR": "201305",
       "MODEL": "",
@@ -300,7 +300,7 @@
       "VEHICLE_PRICE": "913300"
     },
     {
-      "BRAND_NAME": "进口奥迪",
+      "BRAND_NAME": "奥迪",
       "CAR_MAKER": "德国奥迪汽车股份有限公司",
       "CAR_PRICE": "663800",
       "CAR_REMARK": "手自一体 舒适型",

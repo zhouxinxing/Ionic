@@ -1,18 +1,30 @@
 define(function () {
    'use strict';
    var app = angular.module('app.controller', []);
-   app.controller('formController', function ($scope, $rootScope, $http, $location, $handleService, $interFace,$compile) {
+   app.controller('formController', function ($scope, $rootScope, $http, $location, $handleService, $interFace, $compile,$ionicScrollDelegate) {
+      //滚动重置
+      (function (window) {
+         window.setInterval(function () {
+            $ionicScrollDelegate.$getByHandle('iselectScroll').resize();
+         },1000);
+      }(window));
+
       //个人代理信息查询方法
       (function () {
          $scope.agentOptions = [];
-         var url = 'http://10.11.29.12:8080/micro-plat/app/js/basedata.json';
          $scope.agentSelect = function () {
             $handleService.http({
-               url: url,
+               url: $interFace.mitMainFace,
                method: 'POST',
+               headers: {
+                  token: '683AC7EB53C944F6A2CDDC238EC04C92',
+                  method: 'queryPersonProxyList',
+                  encrypt: 'plain',
+                  'Accept-Source': 'HWEB'
+               },
                success: function (data) {
+                  $scope.agentOptions = data.data;
                   $handleService.logger('info', data);
-                  $scope.agentOptions = data;
                },
                error: function (ex) {
                   $handleService.logger('error', ex);
@@ -23,7 +35,7 @@ define(function () {
 
       //车型查询-方法
       (function () {
-         $scope.CAR_SEARCH_INFO ="奥迪A8";
+         $scope.CAR_SEARCH_INFO = "奥迪A8";
          $scope.queryCarModule = function () {
             //判断查询条件 非空再调用接口
             if ($U.isEmpty($scope.CAR_SEARCH_INFO)) {
@@ -33,10 +45,10 @@ define(function () {
             else {
                $handleService.http({
                   //url: $interFace.mitMainFace,
-                  url:'data/basedata.json',
+                  url: 'data/basedata.json',
                   method: 'POST',
                   headers: {
-                     token: 'F584A4FBD0AA477DB25B314F5EEDE806',
+                     token: '4B7B3F4057554C7BA50431CE9806506B',
                      method: 'queryNewBusinessCarType',
                      encrypt: 'plain',
                      'Accept-Source': 'HWEB'
@@ -53,10 +65,10 @@ define(function () {
                      $http.get('templates/iv-pages/tools/model-select-tools.html').success(function (html) {
                         window.setTimeout(function () {
                            $scope.CAR_DATA = data;
-                           angular.element('.list-screen-box').empty().append($compile(html)($scope.$new()));
-                        },0);
+                           angular.element('.list-screen-box').empty().append($compile(html)($scope));
+                        }, 0);
                      });
-                     $handleService.logger('info',  data.VHL_LIST);
+                     $handleService.logger('info', '车型查询返回数据成功，共 (' + ($U.isEmpty(data.VHL_LIST) ? 0 : data.VHL_LIST.length) + ') 条');
                   },
                   error: function (ex) {
                      $handleService.logger('error', ex);
@@ -64,18 +76,81 @@ define(function () {
                });
             }
          };
+         $scope.checkCarModel = function (VHL) {
+            $rootScope.VHL_DATA = VHL;
+         };
+         $scope.chooseCarModel = function () {
+            if ($U.isNotEmpty($scope.VHL_DATA)) {
+               $location.path("tab/carinfo");
+            }
+            else {
+               $U.showToast('请选择您的车辆型号');
+            }
+         };
          //数据过滤->传入参数 进行条件过滤
-         var carClaprocess = function (opts) {
+         $scope.carClaprocess = function () {
+            var resultArrayX = [], resultArrayY = [], resultArrayZ = [], resultArrayM = [];
+            var carModelListHtml = '<ion-radio ng-repeat="VHL in SCREEN_AFTER.VHL_LIST" ng-value="VHL.MODEL_CODE" ng-click="checkCarModel(VHL);">{{VHL.DESCRIBE+"(参考价:"+VHL.VEHICLE_PRICE+")"}}</ion-radio>';
             var options = {
-               VAL_DATA: {},
-               BRAND_NAME: '', //品牌
-               FAMILY_NAME: '', //车款名称
-               DISPLACEMENT: '', //排气量
-               CAR_REMARK: '', //手动自动
-               MODEL_NAME: ''  //车辆型号
+               VAL_DATA: $scope.CAR_DATA,
+               BRAND_NAME: $scope.BRAND_NAME, //品牌
+               FAMILY_NAME: $scope.FAMILY_NAME, //车款名称
+               DISPLACEMENT: $scope.DISPLACEMENT, //排气量
+               CAR_REMARK: $scope.CAR_REMARK //手动自动
             };
+            if ($U.isNotEmpty(options.VAL_DATA.VHL_LIST)) {
+               angular.forEach(options.VAL_DATA.VHL_LIST, function (xitem, xndex, xrray) {
+                  //品牌判断
+                  if ($U.isNotEmpty(options.BRAND_NAME)) {
+                     if (options.BRAND_NAME == xitem.BRAND_NAME) {
+                        resultArrayX.push(xitem);
+                     }
+                  }
+                  else {
+                     resultArrayX = options.VAL_DATA.VHL_LIST;
+                  }
+               });
+               //车款判断
+               angular.forEach(resultArrayX, function (yitem, yindex, yarray) {
+                  if ($U.isNotEmpty(options.FAMILY_NAME)) {
+                     if (options.FAMILY_NAME == yitem.FAMILY_NAME) {
+                        resultArrayY.push(yitem);
+                     }
+                  }
+                  else {
+                     resultArrayY = resultArrayX;
+                  }
+               });
+               //排量判断
+               angular.forEach(resultArrayY, function (zitem, zindex, zarray) {
+                  if ($U.isNotEmpty(options.DISPLACEMENT)) {
+                     if (options.DISPLACEMENT == zitem.DISPLACEMENT) {
+                        resultArrayZ.push(zitem);
+                     }
+                  }
+                  else {
+                     resultArrayZ = resultArrayY;
+                  }
+               });
+               //手动自动
+               angular.forEach(resultArrayZ, function (mitem, mindex, marray) {
+                  if ($U.isNotEmpty(options.CAR_REMARK)) {
+                     if (options.CAR_REMARK == mitem.CAR_REMARK) {
+                        resultArrayM.push(mitem);
+                     }
+                  }
+                  else {
+                     resultArrayM = resultArrayZ;
+                  }
+               });
+               //进行车型数据渲染
+               $scope.SCREEN_AFTER = {"VHL_LIST": resultArrayM};
+               angular.element('.car-module-list div.list').empty().append($compile(carModelListHtml)($scope));
+            }
          };
       }());
+
+      //报价 试算接口
 
       //车主信息提交方法
       $scope.owinfoSubmit = function (form) {

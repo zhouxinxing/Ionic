@@ -164,6 +164,11 @@
   padding: 10px 49px 10px 15px;
   background: none; }
 
+.icon-for-right {
+  float: right;
+  font-size: 2rem;
+  color: black; }
+
 .card-form .item {
   border-left: 0;
   border-right: 0;
@@ -294,18 +299,22 @@
       padding: 17px 26px;
       min-height: initial;
       border-right: none;
-      border-radius: 0;
-      margin-top: 1px; }
+      margin-top: 1px;
+      border-bottom-left-radius: 3px;
+      border-top-left-radius: 3px; }
   .scm-form-item .button-search {
     float: left;
     width: 24%;
     height: 100%;
     margin-top: 3px;
-    background-color: #00BCD4; }
+    background-color: #00BCD4;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px; }
 
 .scm-card {
   margin: 0.3rem;
-  padding: 0.5rem; }
+  padding: 0.5rem;
+  border: none; }
   .scm-card .item-select select {
     direction: rtl;
     padding-right: 30px;
@@ -313,8 +322,16 @@
   .scm-card .button-sure-scm {
     background: #00BCD4;
     color: white;
-    border-radius: 1px;
-    height: 40px; }
+    border-radius: 3px;
+    height: 40px;
+    margin: 0;
+    margin-top: 15px; }
+  .scm-card .search-note-box {
+    width: 100%;
+    text-align: center;
+    padding-top: 10%;
+    font-size: 2.5rem;
+    color: #d2d2d2; }
 
 /***车险报价***/
 .item-ron-wrap {
@@ -353,7 +370,7 @@
     text-align: center;
     line-height: 30px;
     display: inline-block;
-    width: 60%; }
+    width: 100%; }
   .risks-list tr td i {
     display: inline-block;
     position: relative;
@@ -473,6 +490,13 @@
   .com-price-box .com-price-desc {
     font-size: 1.2rem;
     color: #00c1af; }
+
+.car-module-list .list {
+  height: 200px; }
+
+.car-module-list .item {
+  font-size: 1.3rem;
+  color: #795548; }
 
 /********end   reset style*********/
 /*************begin 日历控件主题修改*************/

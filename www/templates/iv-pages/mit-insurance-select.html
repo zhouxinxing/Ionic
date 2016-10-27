@@ -1,47 +1,52 @@
 <ion-view view-title="车险报价" class="mit-view" hide-tabs="true">
-   <ion-content class="im-wrapper bar-footer-padding">
+   <ion-content class="im-wrapper bar-footer-padding"  delegate-handle="iselectScroll">
       <div class="card-form" ng-controller="formController">
          <form class="list-block-from" name="form" ng-submit="owinfoSubmit(form);" novalidate="novalidate">
             <div class="form-group">
-               <div class="form-group-title">车辆信息</div>
-               <label class="item item-input">
-                  <span class="input-label">车型名称</span>
-                  <input type="text" value="BMW60620(BMW740)轿车"/>
-               </label>
-               <label class="item item-input">
-                  <span class="input-label">制造厂商</span>
-                  <input type="text" value="华晨宝马汽车有限公司"/>
-               </label>
-               <label class="item item-input">
-                  <span class="input-label">车辆年份</span>
-                  <input type="text" value="2003"/>
-               </label>
-               <label class="item item-input">
-                  <span class="input-label">新车购置价</span>
-                  <input type="text" value="36800"/>
-               </label>
-               <label class="item item-input">
-                  <span class="input-label">座位数</span>
-                  <input type="text" value="5"/>
-               </label>
-               <label class="item item-input">
-                  <span class="input-label">排气量</span>
-                  <input type="text" value="2.49"/>
-               </label>
-               <label class="item item-input item-select">
-                  <span class="input-label">验车情况</span>
-                  <select>
-                     <option value="">已验车</option>
-                     <option value="">免验车</option>
-                  </select>
-               </label>
-               <label class="item item-input item-select">
-                  <span class="input-label">理由</span>
-                  <select>
-                     <option value="">验车合格</option>
-                     <option value="">验车不合格</option>
-                  </select>
-               </label>
+               <div class="form-group-title" ng-click="IS_SHOW_CARINFO = !IS_SHOW_CARINFO" ng-init="IS_SHOW_CARINFO = false">
+                  <span>车辆信息</span>
+                  <i class="icon {{IS_SHOW_CARINFO?'ion-ios-arrow-down':'ion-ios-arrow-right'}} icon-for-right"></i>
+               </div>
+               <div ng-show="IS_SHOW_CARINFO">
+                  <label class="item item-input">
+                     <span class="input-label">车型名称</span>
+                     <input type="text" value="{{VHL_DATA.MODEL_NAME}}" readonly/>
+                  </label>
+                  <label class="item item-input">
+                     <span class="input-label">制造厂商</span>
+                     <input type="text" value="{{VHL_DATA.CAR_MAKER}}" readonly/>
+                  </label>
+                  <label class="item item-input">
+                     <span class="input-label">车辆年份</span>
+                     <input type="text" value="{{VHL_DATA.MARKET_YEAR}}" readonly/>
+                  </label>
+                  <label class="item item-input">
+                     <span class="input-label">新车购置价</span>
+                     <input type="text" value="{{VHL_DATA.VEHICLE_PRICE}}" readonly/>
+                  </label>
+                  <label class="item item-input">
+                     <span class="input-label">座位数</span>
+                     <input type="text" value="{{VHL_DATA.SET_NUM}}"/>
+                  </label>
+                  <label class="item item-input">
+                     <span class="input-label">排气量</span>
+                     <input type="text" value="{{VHL_DATA.DISPLACEMENT}}"/>
+                  </label>
+                  <label class="item item-input item-select">
+                     <span class="input-label">验车情况</span>
+                     <select>
+                        <option value="">已验车</option>
+                        <option value="">免验车</option>
+                     </select>
+                  </label>
+                  <label class="item item-input item-select">
+                     <span class="input-label">理由</span>
+                     <select>
+                        <option value="">验车合格</option>
+                        <option value="">验车不合格</option>
+                     </select>
+                  </label>
+               </div>
             </div>
             <div class="item item-ron-wrap">
                <div class="form-group">
@@ -55,7 +60,7 @@
                         <input type="text" class="validate-input" placeholder="请选择生效日期" datepicker="true" datepicker-init="true" init-picker='{"maxDate":"0,3,0","minDate":"0,0,1"}'/>
                      </label>
                   </div>
-                  <table class="risks-list" ng-hide="!SY_ORIG_FLG">
+                  <table class="risks-list" ng-show="SY_ORIG_FLG">
                      <tr>
                         <th style="width: 50%;">险种</th>
                         <th>保额(元)</th>
@@ -134,7 +139,7 @@
                            <span><i class="icon {{isAddInsure?'ion-ios-minus-empty':'ion-ios-plus-empty'}}"></i>附加险</span>
                         </td>
                      </tr>
-                     <table class="risks-list" ng-show="isAddInsure">
+                     <table class="risks-list" ng-show="isAddInsure&&SY_ORIG_FLG">
                         <tr>
                            <td width="50%">
                               <div class="tab-cel checkbox-box">
@@ -392,7 +397,7 @@
    <div class="bar bar-footer no-padding bar-footer-price">
       <div class="price-tags-box">
          <div class="price-tags price-tags-left">
-            总价:<span>￥12680.63</span>
+            总价:<span>￥0</span>
          </div>
          <div class="price-tags price-tags-right">
             <button class="button button-balanced">计算保费</button>
