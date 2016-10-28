@@ -1,7 +1,71 @@
 <ion-view view-title="移动展业" class="mit-view">
-    <ion-content class="im-wrapper">
-        <button class="button button-block button-calm" ui-sref="tab.owinfo">车险投保</button>
-        <button class="button button-block button-balanced">一键续保</button>
-        <button class="button button-block button-energized">非车投保</button>
-    </ion-content>
+   <ion-content class="im-wrapper" ng-controller="indexController">
+      <ion-slide-box class="banner-swiper" does-continue="true" slide-interval="1000">
+         <ion-slide>
+            <img src="images/banner/banner-02.png">
+         </ion-slide>
+         <ion-slide>
+            <img src="images/banner/banner-03.png">
+         </ion-slide>
+         <ion-slide>
+            <img src="images/banner/banner-01.png">
+         </ion-slide>
+      </ion-slide-box>
+      <div class="row-list">
+         <div class="row">
+            <div class="col col-50">
+               <button class="button button-block button-calm" ng-square ui-sref="tab.owinfo">
+                  <i class="icon ion-model-s"></i><br/>
+                  车险投保
+               </button>
+            </div>
+            <div class="col col-50">
+               <button class="button button-block button-balanced" ng-square>
+                  <i class="icon ion-beer"></i><br/>
+                  一键续保
+               </button>
+            </div>
+         </div>
+         <div class="row bland-row">
+            <div class="col col-50">
+               <button class="button button-block button-positive">
+                  <i class="icon ion-umbrella"></i><br>
+                  非车投保
+               </button>
+            </div>
+            <div class="col col-25">
+               <button class="button button-block button-assertive">
+                  <i class="icon ion-social-yen"></i><br>
+                  我的业绩
+               </button>
+            </div>
+            <div class="col col-25">
+               <button class="button button-block button-calm">
+                  <i class="icon ion-ios-camera"></i><br>
+                  影像补传
+               </button>
+            </div>
+         </div>
+         <div class="row bland-row">
+            <div class="col">
+               <button class="button button-block button-balanced">
+                  <i class="icon ion-ios-search-strong"></i><br>
+                  投保查询
+               </button>
+            </div>
+            <div class="col">
+               <button class="button button-block button-energized">
+                  <i class="icon ion-android-drafts"></i><br>
+                  草稿箱
+               </button>
+            </div>
+            <div class="col">
+               <button class="button button-block button-royal">
+                  <i class="icon ion-ios-bell"></i><br>
+                  待办事项
+               </button>
+            </div>
+         </div>
+      </div>
+   </ion-content>
 </ion-view>

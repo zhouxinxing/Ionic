@@ -24,9 +24,9 @@ define(['modules/app'], function (app) {
          jsLoader: requirejs, //使用requirejs去加载文件
          modules: [
             {
-               name: 'formHandleController',
+               name: 'formControllerFile',
                files: [
-                  'js/controllers/component/app.form.handles.controller.js'
+                  'js/controllers/app.form.controller.js'
                ]
             }
          ]
@@ -103,11 +103,11 @@ define(['modules/app'], function (app) {
          views: {
             'indexContent': {
                templateUrl: 'templates/iv-pages/mit-owinfo.html',
-               controller: 'formHandleController'
+               controller: 'formController'
             }
          },
          resolve: resovleDep({
-            name: 'formHandleController'
+            name: 'formControllerFile'
          })
       });
       //车辆信息页面
@@ -116,11 +116,11 @@ define(['modules/app'], function (app) {
          views: {
             'indexContent':{
                templateUrl: 'templates/iv-pages/mit-carinfo.html',
-               controller: 'formHandleController'
+               controller: 'formController'
             }
          },
          resolve: resovleDep({
-            name: 'formHandleController'
+            name: 'formControllerFile'
          })
       });
       //车型查询页面
@@ -129,11 +129,11 @@ define(['modules/app'], function (app) {
          views: {
             'indexContent':{
                templateUrl: 'templates/iv-pages/mit-car-model-select.html',
-               controller: 'formHandleController'
+               controller: 'formController'
             }
          },
          resolve: resovleDep({
-            name: 'formHandleController'
+            name: 'formControllerFile'
          })
       });
       //险别选择页面
@@ -142,11 +142,11 @@ define(['modules/app'], function (app) {
          views: {
             'indexContent':{
                templateUrl: 'templates/iv-pages/mit-insurance-select.html',
-               controller: 'formHandleController'
+               controller: 'formController'
             }
          },
          resolve: resovleDep({
-            name: 'formHandleController'
+            name: 'formControllerFile'
          })
       });
       /*********************end   车险投保页面***********************/

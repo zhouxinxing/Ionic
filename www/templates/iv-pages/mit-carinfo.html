@@ -1,6 +1,6 @@
 <ion-view view-title="车辆信息" class="mit-view" hide-tabs="true">
    <ion-content class="im-wrapper">
-      <div class="card-form" ng-controller="formController">
+      <div class="card-form">
          <form class="list-block-from" name="form" ng-submit="carinfoSubmit(form);" novalidate="novalidate">
             <div class="item item-text-wrap">
                <div class="list">
@@ -66,7 +66,7 @@
                      </label>
                      <label class="item item-input" ng-hide="!CHGOWNERFLAG">
                         <span class="input-label">转籍过户日期</span>
-                        <input type="text" placeholder="请选择转籍过户日期" name="TRANSFERDATE" ng-model="TRANSFERDATE" datepicker="true" settings="{{settings}}"/>
+                        <input type="text" ng-date-picker placeholder="请选择转籍过户日期" name="TRANSFERDATE" ng-model="TRANSFERDATE"/>
                      </label>
                   </div>
                </div>

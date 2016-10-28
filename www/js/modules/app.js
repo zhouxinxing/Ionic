@@ -1,6 +1,6 @@
-define(['controllers/app.controller', 'services/app.service', 'directives/app.directives','filters/app.filters'], function () {
+define(['controllers/app.controller'], function () {
    'use strict';
-   var app = angular.module('app', ['ionic', 'oc.lazyLoad', 'app.controller', 'app.service', 'app.directives','app.filters']);
+   var app = angular.module('app', ['ionic', 'oc.lazyLoad', 'app.controller']);
 
    app.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) { //ionic tabs Android显示在顶部处理
 

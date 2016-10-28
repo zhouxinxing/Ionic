@@ -1,6 +1,6 @@
 <ion-view view-title="车险报价" class="mit-view" hide-tabs="true">
    <ion-content class="im-wrapper bar-footer-padding"  delegate-handle="iselectScroll">
-      <div class="card-form" ng-controller="formController">
+      <div class="card-form">
          <form class="list-block-from" name="form" ng-submit="owinfoSubmit(form);" novalidate="novalidate">
             <div class="form-group">
                <div class="form-group-title" ng-click="IS_SHOW_CARINFO = !IS_SHOW_CARINFO" ng-init="IS_SHOW_CARINFO = false">
@@ -57,7 +57,7 @@
                      <label class="item item-input item-validate-picker">
                         <i class="ion-android-calendar"></i>
                         <span class="input-label-inline">生效日期</span>
-                        <input type="text" class="validate-input" placeholder="请选择生效日期" datepicker="true" datepicker-init="true" init-picker='{"maxDate":"0,3,0","minDate":"0,0,1"}'/>
+                        <input type="text" class="validate-input" ng-date-picker placeholder="请选择生效日期" init-picker='{"maxDate":"0,3,0","minDate":"0,0,1"}'/>
                      </label>
                   </div>
                   <table class="risks-list" ng-show="SY_ORIG_FLG">
@@ -371,7 +371,7 @@
                      <label class="item item-input item-validate-picker">
                         <i class="ion-android-calendar"></i>
                         <span class="input-label-inline">生效日期</span>
-                        <input type="text" class="validate-input" placeholder="请选择生效日期" datepicker="true" init-picker='{"maxDate":"0,3,0","minDate":"0,0,1"}'/>
+                        <input type="text" class="validate-input" ng-date-picker placeholder="请选择生效日期" init-picker='{"maxDate":"0,3,0","minDate":"0,0,1"}'/>
                      </label>
                   </div>
                   <div class="com-price-box" ng-show="JQ_ORIG_FLG">

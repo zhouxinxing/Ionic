@@ -498,6 +498,20 @@
   font-size: 1.3rem;
   color: #795548; }
 
+.banner-swiper img {
+  width: 100%; }
+
+.bland-row button {
+  height: 8rem; }
+
+.bland-row .col-25 button {
+  font-size: 1.2rem; }
+
+.row-list .row .button.button-block {
+  margin-top: 0;
+  margin-bottom: 0;
+  border-radius: 3px; }
+
 /********end   reset style*********/
 /*************begin 日历控件主题修改*************/
 .mbsc-android-holo .dwv {
