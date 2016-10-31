@@ -8,13 +8,13 @@
                      <label class="item item-input">
                         <span class="input-label">是否选择个代</span>
                         <label class="toggle">
-                           <input type="checkbox" name="IS_CMPNY_AGT" ng-model="IS_CMPNY_AGT">
+                           <input type="checkbox" name="IS_CMPNY_AGT" ng-model="CAR_BEANS.IS_CMPNY_AGT">
                            <div class="track">
                               <div class="handle"></div>
                            </div>
                         </label>
                      </label>
-                     <label class="item item-input item-modal-select" modal-select="" ng-click="agentSelect()" ng-model="agentModel" ng-hide="!IS_CMPNY_AGT" options="agentOptions" on-select="" has-search="true"  footer-class="hidden-box" search-placeholder="请输入关键字搜索" cancel-search-button="取消" modal-title="个人代理">
+                     <label class="item item-input item-modal-select" modal-select="" ng-click="agentSelect()" ng-model="agentModel" ng-show="CAR_BEANS.IS_CMPNY_AGT" options="agentOptions" on-select="" has-search="true" footer-class="hidden-box" search-placeholder="请输入关键字搜索" cancel-search-button="取消" modal-title="个人代理">
                         <div class="option">
                            <span class="agent-item-content">{{option.CHANNEL_NAME}}</span>
                            <span class="agent-item-content">{{option.CHANNEL_CODE}}</span>
@@ -24,8 +24,8 @@
                         <label class="toggle">
                            <span class="item-left-note">{{agentModel.CHANNEL_NAME || '请选择个人代理'}}</span>
                            <i class="ion-ios-arrow-right"></i>
-                           <input type="hidden" name="CMPNY_AGT_CDE" ng-model="CMPNY_AGT_CDE" value="{{agentModel.CHANNEL_CODE}}"/> <!--代理人工号-->
-                           <input type="hidden" name="CMPNY_AGT_NME" ng-model="CMPNY_AGT_NME" value="{{agentModel.CHANNEL_NAME}}"/> <!--代理人姓名-->
+                           <input type="hidden" name="CMPNY_AGT_CDE" ng-model="CMPNY_AGT_CDES" ng-value="{{CAR_BEANS.CMPNY_AGT_CDE=agentModel.CHANNEL_CODE}}" /> <!--代理人工号-->
+                           <input type="hidden" name="CMPNY_AGT_NME" ng-model="CMPNY_AGT_NME"  ng-value="{{CAR_BEANS.CMPNY_AGT_NME=agentModel.CHANNEL_NAME}}"/> <!--代理人姓名-->
                         </label>
                      </label>
                   </div>
@@ -33,37 +33,36 @@
                      <div class="form-group-title">车主信息</div>
                      <label class="item item-input">
                         <span class="input-label">车主姓名</span>
-                        <input type="text" placeholder="请输入姓名" name="DRV_OWNER" ng-model="DRV_OWNER" required required-msg="请输入姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的姓名输入有误"/>
+                        <input type="text" placeholder="请输入姓名" name="DRV_OWNER" ng-model="CAR_BEANS.DRV_OWNER" required required-msg="请输入车主姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的车主姓名输入有误"/>
                      </label>
                      <label class="item item-input">
                         <span class="input-label">车主身份证号</span>
-                        <input type="text" placeholder="请输入身份证号" name="CERTI_CODE" ng-model="CERTI_CODE" required required-msg="请输入身份证号" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/" pattern-msg="您的身份证号输入有误"/>
+                        <input type="text" placeholder="请输入身份证号" name="CERTI_CODE" ng-model="CAR_BEANS.CERTI_CODE" required required-msg="请输入车主身份证号" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/" pattern-msg="您的车主身份证号输入有误"/>
                      </label>
                      <label class="item item-input">
                         <span class="input-label">车主手机</span>
-                        <input type="number" placeholder="请输入手机号码" name="CERTI_TEL" ng-model="CERTI_TEL" required ng-pattern="/^[1][3-9][0-9]{9}$/"/>
+                        <input type="number" placeholder="请输入手机号码" name="CERTI_TEL" ng-model="CAR_BEANS.CERTI_TEL" required required-msg="请输入车主手机号码" ng-pattern="/^[1][3-9][0-9]{9}$/" pattern-msg="您的车主手机号码输入有误"/>
                      </label>
                   </div>
                   <div class="form-group">
                      <div class="form-group-title">
                         <div>投保人信息</div>
                         <div class="checkbox-box field-check-box">
-                           <ion-checkbox ng-checked="true" ng-model="APP_SAME_CHECK" ng-init="APP_SAME_CHECK = true"><span class="field-title">同车主</span></ion-checkbox>
+                           <ion-checkbox ng-checked="true" ng-model="CAR_BEANS.APP_SAME_CHECK" ng-init="CAR_BEANS.APP_SAME_CHECK = true"><span class="field-title">同车主</span></ion-checkbox>
                         </div>
                      </div>
-                     <div ng-hide="APP_SAME_CHECK">
+                     <div ng-if="!CAR_BEANS.APP_SAME_CHECK">
                         <label class="item item-input">
                            <span class="input-label">姓名</span>
-                           <input type="text" placeholder="请输入姓名" name="APP_NME" ng-model="APP_NME" ng-value="APP_SAME_CHECK?DRV_OWNER:''" required required-msg="请输入姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的姓名输入有误"/>
+                           <input type="text" placeholder="请输入姓名" name="APP_NME" ng-model="CAR_BEANS.APP_NME" ng-value="CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.DRV_OWNER:''" ng-require="!CAR_BEANS.APP_SAME_CHECK" required-msg="请输入投保人姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的投保人姓名输入有误"/>
                         </label>
                         <label class="item item-input">
                            <span class="input-label">身份证号码</span>
-                           <input type="text" placeholder="请输入身份证号" name="APP_CERT_NO" ng-model="APP_CERT_NO" ng-value="APP_SAME_CHECK?CERTI_CODE:''" required required-msg="请输入身份证号" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/"
-                                  pattern-msg="您的身份证号输入有误"/>
+                           <input type="text" placeholder="请输入身份证号" name="APP_CERT_NO" ng-model="CAR_BEANS.APP_CERT_NO" ng-value="CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.CERTI_CODE:''" required required-msg="请输入投保人身份证号" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/" pattern-msg="您的投保人身份证号输入有误"/>
                         </label>
                         <label class="item item-input">
                            <span class="input-label">手机号码</span>
-                           <input type="number" placeholder="请输入手机号码" name="APP_TEL" ng-model="APP_TEL" ng-value="APP_SAME_CHECK?CERTI_TEL:''" required ng-pattern="/^[1][3-9][0-9]{9}$/"/>
+                           <input type="number" placeholder="请输入手机号码" name="APP_TEL" ng-model="CAR_BEANS.APP_TEL" ng-value="CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.CERTI_TEL:''" required required-msg="请输入投保人手机号码" ng-pattern="/^[1][3-9][0-9]{9}$/" pattern-msg="您的投保人手机号码输入不正确"/>
                         </label>
                      </div>
                   </div>
@@ -71,22 +70,21 @@
                      <div class="form-group-title">
                         <div>被保险人信息</div>
                         <div class="checkbox-box field-check-box">
-                           <ion-checkbox ng-checked="true" ng-model="REC_SAME_CHECK" ng-init="REC_SAME_CHECK = true"><span class="field-title">同车主</span></ion-checkbox>
+                           <ion-checkbox ng-checked="true" ng-model="CAR_BEANS.REC_SAME_CHECK" ng-init="CAR_BEANS.REC_SAME_CHECK = true"><span class="field-title">同车主</span></ion-checkbox>
                         </div>
                      </div>
-                     <div ng-hide="REC_SAME_CHECK">
+                     <div ng-hide="CAR_BEANS.REC_SAME_CHECK">
                         <label class="item item-input">
                            <span class="input-label">姓名</span>
-                           <input type="text" placeholder="请输入姓名" name="INSRNT_CNM" ng-model="INSRNT_CNM" ng-value="REC_SAME_CHECK?DRV_OWNER:''" required required-msg="请输入姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的姓名输入有误"/>
+                           <input type="text" placeholder="请输入姓名" name="INSRNT_CNM" ng-model="CAR_BEANS.INSRNT_CNM" ng-value="REC_SAME_CHECK?DRV_OWNER:''" required required-msg="请输入被保人姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的被保人姓名输入有误"/>
                         </label>
                         <label class="item item-input">
                            <span class="input-label">身份证号码</span>
-                           <input type="text" placeholder="请输入身份证号" name="BIZ_CERT_NO" ng-model="BIZ_CERT_NO"  ng-value="REC_SAME_CHECK?CERTI_CODE:''" required required-msg="请输入身份证号" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/"
-                                  pattern-msg="您的身份证号输入有误"/>
+                           <input type="text" placeholder="请输入身份证号" name="BIZ_CERT_NO" ng-model="CAR_BEANS.BIZ_CERT_NO" ng-value="REC_SAME_CHECK?CERTI_CODE:''" required required-msg="请输入被保人身份证号" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/" pattern-msg="您的被保人身份证号输入有误"/>
                         </label>
                         <label class="item item-input">
                            <span class="input-label">手机号码</span>
-                           <input type="number" placeholder="请输入手机号码" name="INSRNT_TEL" ng-model="INSRNT_TEL" ng-value="REC_SAME_CHECK?CERTI_TEL:''" required ng-pattern="/^[1][3-9][0-9]{9}$/"/>
+                           <input type="number" placeholder="请输入手机号码" name="INSRNT_TEL" ng-model="CAR_BEANS.INSRNT_TEL" ng-value="REC_SAME_CHECK?CERTI_TEL:''" required required-msg="请输入被保人手机号码" ng-pattern="/^[1][3-9][0-9]{9}$/" pattern-msg="您的被保人手机号码输入不正确"/>
                         </label>
                      </div>
                   </div>

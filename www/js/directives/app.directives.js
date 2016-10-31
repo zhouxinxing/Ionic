@@ -91,7 +91,6 @@ define(['mobiscroll'],function () {
          restrict: 'A',
          replace: true,
          link: function (scope, element, attr) {
-            console.log(attr.ngSquare);
             if($U.isNotEmpty(attr.ngSquare)){
                element.css({
                   width:attr.ngSquare,
@@ -106,5 +105,20 @@ define(['mobiscroll'],function () {
          }
       };
    });
+   //5.操作属性
+   app.directive('ngRequire', [function () {
+         return {
+            restrict: 'A',
+            multiElement: true,
+            link: function (scope, element, attr) {
+               scope.$watch(attr.ngRequire, function ngRequireWatchAction (value) {
+                  if($U.isNotEmpty(attr.ngRequire)){
+                     value?element.attr('required',true):element.removeAttr('required');
+                  }
+               });
+            }
+         };
+      }
+   ]);
    return app;
 });

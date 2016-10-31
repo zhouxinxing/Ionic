@@ -1,19 +1,23 @@
-define(['services/app.service', 'directives/app.directives','filters/app.filters'],function () {
+define(['services/app.service', 'directives/app.directives', 'filters/app.filters', 'modules/app.car.beans', 'modalSelect'], function () {
    'use strict';
-   var app = angular.module('app.form.controller', ['app.handle.service', 'app.directives','app.filters']);
+   var app = angular.module('app.form.controller', ['app.handle.service', 'app.directives', 'app.filters', 'app.car.beans', 'ionic-modal-select']);
    //表单控制器
-   app.controller('formController', function ($scope, $rootScope, $http, $location, $handleService, $interFace, $compile,$ionicScrollDelegate) {
+   app.controller('formController', function ($scope, $rootScope, $http, $location, $handleService, $interFace, $compile, $ionicScrollDelegate, $carBeans) {
       //滚动重置
       (function (window) {
-         window.setInterval(function () {
+         window.clearInterval($rootScope.scrollTimer);
+         $rootScope.scrollTimer = window.setInterval(function () {
             $ionicScrollDelegate.$getByHandle('iselectScroll').resize();
-         },1000);
+         }, 1000);
          //解决安卓BUG-》点击checkbox 的时候，焦点总是移动
          angular.element('input[type="checkbox"]').on('change', function () {
             angular.element('input').blur();
          });
       }(window));
 
+      //window.setInterval(function () {
+      //   console.info($rootScope.CAR_BEANS);
+      //},3500);
 
       //公共方法
       (function () {
@@ -44,7 +48,7 @@ define(['services/app.service', 'directives/app.directives','filters/app.filters
                url: $interFace.mitMainFace,
                method: 'POST',
                headers: {
-                  token: '683AC7EB53C944F6A2CDDC238EC04C92',
+                  token: '8239FE1D36F44F81B7A6A1E13E557721',
                   method: 'queryPersonProxyList',
                   encrypt: 'plain',
                   'Accept-Source': 'HWEB'
@@ -104,10 +108,10 @@ define(['services/app.service', 'directives/app.directives','filters/app.filters
             }
          };
          $scope.checkCarModel = function (VHL) {
-            $rootScope.VHL_DATA = VHL;
+            $rootScope.VHL_DATA =$rootScope.CAR_BEANS.VHL_DATA= VHL;
          };
          $scope.chooseCarModel = function () {
-            if ($U.isNotEmpty($scope.VHL_DATA)) {
+            if ($U.isNotEmpty($rootScope.VHL_DATA)) {
                $location.path("tab/carinfo");
             }
             else {
@@ -179,9 +183,13 @@ define(['services/app.service', 'directives/app.directives','filters/app.filters
 
       //车主信息提交方法
       $scope.owinfoSubmit = function (form) {
-         $scope.validateForm.call(this, form);// apply 参数必须是数组  call 任意类型都可以传
-         $location.path("tab/carinfo");
-         if (form.$valid) {
+         //个人代理选择校验
+         if($rootScope.CAR_BEANS.IS_CMPNY_AGT && !$rootScope.CAR_BEANS.CMPNY_AGT_CDE){
+            $U.showToast('请选择个人代理');
+            return;
+         }
+         $scope.validateForm.call(this,form);// apply 参数必须是数组  call 任意类型都可以传
+         if(form.$valid) {
             //校验通过->1.参数保存 2.路由跳转
             $location.path("tab/carinfo");
          }
@@ -190,7 +198,9 @@ define(['services/app.service', 'directives/app.directives','filters/app.filters
       //车辆信息提交方法
       $scope.carinfoSubmit = function (form) {
          $scope.validateForm.call(this, form);// apply 参数必须是数组  call 任意类型都可以传
-         $location.path("tab/insuranceSelect");
+         if (form.$valid) {
+            $location.path("tab/insuranceSelect");
+         }
       };
    });
    return app;
