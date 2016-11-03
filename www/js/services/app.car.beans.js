@@ -3,7 +3,21 @@
  ***/
 define(function () {
    'use strict';
-   var app = angular.module('app.car.beans', []).factory('$carBeans', ['$rootScope', function ($rootScope) {
+   var app = angular.module('app.car.beans', []).factory('$carBeansService', ['$rootScope', function ($rootScope) {
+
+      //Token 临时
+      $rootScope.TOKEN='18C9B20D86E64BCD90147F6669772AEB';
+
+      $rootScope.BASE_BEAN = {
+         //第三者责任险保额对象
+         LIABILITY_INS: [5, 10, 15, 20, 30, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+         //司机座位险
+         DRIVER_SEAT: [1, 2, 3, 4, 5, 10, 15, 20],
+         //乘客座位险
+         PASSENGER_SEAT: [1, 2, 3, 4, 5, 10, 15, 20],
+         //刮痕险
+         SCRATCH_INS: [0.2, 0.5, 1, 2]
+      };
       $rootScope.CAR_BEANS = {
          /** 续保查询保单号 */
          XB_QUERY_PLY_NO: "",
@@ -12,11 +26,11 @@ define(function () {
          /** 续保查询车架号 */
          XB_QUERY_VIN_NO: "",
          /** 商业险保险起期 */
-         INSRNC_BGN_TM: "",
+         INSRNC_BGN_TM: new Date(new Date().setDate((new Date().getDate()+1))).format('yyyy-MM-dd 00:00'),
          /** 商业险保险止期 */
          INSRNC_END_TM: "",
          /** 交强险保险起期 */
-         INSRNC_BGN_TM_JQ: "",
+         INSRNC_BGN_TM_JQ: new Date(new Date().setDate((new Date().getDate()+1))).format('yyyy-MM-dd 00:00'),
          /** 交强险保险止期 */
          INSRNC_END_TM_JQ: "",
          /** 投保人姓名 */
@@ -46,19 +60,19 @@ define(function () {
          /** 付款人姓名 */
          PAY_PRSN_NME: "",
          /** 车牌号码 */
-         LCN_NO: "",
+         LCN_NO: "粤B60260",
          /** 发动机号 */
-         ENG_NO: "",
+         ENG_NO: "6026989632",
          /** 车架号/VIN码 */
-         VHL_FRM: "",
+         VHL_FRM: "LSVAM4187C2184847",
          /**车型代码 */
-         BRND_CDE: "",
+         BRND_CDE: "ADI1230DGA",
          /**   打印厂牌车型 */
          BRND_NME_OTHER: "",
          /**品牌类型 */
          VEHICLE_NAME: "",
          /** 初次登记日期 */
-         REGISTER_DATE: "",
+         REGISTER_DATE: "2016-06-08",
          /** 过户车标志 */
          CHGOWNERFLAG: "",
          /** 转移登记日期 */
@@ -80,9 +94,9 @@ define(function () {
          /** 报价单号 */
          CAL_APP_NO: "",
          /** 新车购置价 */
-         VHL_VAL: "",
+         VHL_VAL: "920500",
          /** 新车购置价修改后的值 */
-         VHL_VAL_FLOAT: "",
+         VHL_VAL_FLOAT: "990500",
          /** 实际价值 */
          ACT_VALUE: "",
          /** 折扣系数*/
@@ -99,7 +113,10 @@ define(function () {
          SET_NUM: "",
          /** 险种list */
          CVRG_LIST: [
+            //1.车辆损失险
             {
+               //购买标记
+               PURCHASE_FLAG:true,
                /** 险种序号 */
                SEQ_NO: "",
                /** 险种代码 */
@@ -142,60 +159,248 @@ define(function () {
                NUMBER_PER: "",
                /** 不计免赔保费 **/
                N_YL12: ""
+            },
+            //2.第三者责任险
+            {
+               //购买标记
+               PURCHASE_FLAG:true,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "50000",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: ""
+            },
+            //3.全车盗抢险
+            {
+               //购买标记
+               PURCHASE_FLAG:true,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: ""
+            },
+            //4.司机座位险
+            {
+               //购买标记
+               PURCHASE_FLAG:true,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "10000",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: ""
+            },
+            //5.乘客座位险
+            {
+               //购买标记
+               PURCHASE_FLAG:true,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "10000",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: ""
+            },
+            //6.玻璃单独破碎险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+               /** 防弹玻璃(0 否,1 是) */
+               BULLET_GLASS: "0"
+            },
+            //7.自燃损失险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+            },
+            //8.新增设备损失险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+            },
+            //9.车身划痕损失险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+            },
+            //10.发动机涉水损失险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+            },
+            //11.修理期间费用补偿险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+            },
+            //12.车上货物责任险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+            },
+            //13.精神损害抚慰金责任险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+            },
+            //14.车辆损失保险无法找到第三方特约险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+            },
+            //15.指定修理厂险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
+            },
+            //16.交强险
+            {
+               //购买标记
+               PURCHASE_FLAG:false,
+               /** 险种代码 */
+               INSRNC_CDE: "",
+               /** 保险金额/赔偿限额(元） */
+               AMT: "",
+               /** 不计免赔(0:否 1：是) */
+               FRANCHISE_FLAG: "",
             }
          ],
          /** 车型数据*/
          VHL_DATA: {
-            /** 车型代码 */
-            MODEL_CODE: "",
-            /** 车型名称 */
-            MODEL_NAME: "",
-            /** 车型分类 */
-            CAR_SORT: "",
-            /** 进口/国产 */
-            CAR_STYLE: "",
-            /** 制造厂商 */
-            CAR_MAKER: "",
-            /** 吨位 */
-            TONNAGE: "",
-            /** 座位数 */
-            SET_NUM: "",
-            /** 排量 */
-            DISPLACEMENT: "",
-            /** 整备质量 */
-            QUALITY: "",
-            /** 车辆年份 */
-            MARKET_YEAR: "",
-            /** 新车购置价 */
-            CAR_PRICE: "",
-            /** 描述 */
-            CAR_REMARK: "",
-            /** 风险类型 */
-            RISK_NAME: "",
-            /** 车船税减免标志 */
-            FUELFLAG: "",
-            /** 新能源标志 */
-            NEW_ENERGY_FLAG: "",
-            /** 车型(传平台) */
-            MODEL: "",
-            /** 车型描述 */
-            DESCRIBE: "",
-            /**item是否选择 */
-            ischecked: "",
-            /** 开具税务机关 */
-            PAYTAX_REVENUE: "",
-            /** 减免标志 */
-            TAX_TYPE: "",
-            /** 能源种类 */
-            FUEL_TYPE: "",
-            /** 减免税原因 */
-            DEDUE_CDE: "",
-            /** 减免税方案*/
-            DEDUE_TYP: "",
-            /** 减免税比例*/
-            DEDUE_RATE: "",
-            /** 减免税凭证*/
-            PAYTAX_VOU: ""
+            ///** 车型代码 */
+            //MODEL_CODE: "",
+            ///** 车型名称 */
+            //MODEL_NAME: "",
+            ///** 车型分类 */
+            //CAR_SORT: "",
+            ///** 进口/国产 */
+            //CAR_STYLE: "",
+            ///** 制造厂商 */
+            //CAR_MAKER: "",
+            ///** 吨位 */
+            //TONNAGE: "",
+            ///** 座位数 */
+            //SET_NUM: "",
+            ///** 排量 */
+            //DISPLACEMENT: "",
+            ///** 整备质量 */
+            //QUALITY: "",
+            ///** 车辆年份 */
+            //MARKET_YEAR: "",
+            ///** 新车购置价 */
+            //CAR_PRICE: "",
+            ///** 描述 */
+            //CAR_REMARK: "",
+            ///** 风险类型 */
+            //RISK_NAME: "",
+            ///** 车船税减免标志 */
+            //FUELFLAG: "",
+            ///** 新能源标志 */
+            //NEW_ENERGY_FLAG: "",
+            ///** 车型(传平台) */
+            //MODEL: "",
+            ///** 车型描述 */
+            //DESCRIBE: "",
+            ///**item是否选择 */
+            //ischecked: "",
+            ///** 开具税务机关 */
+            //PAYTAX_REVENUE: "",
+            ///** 减免标志 */
+            //TAX_TYPE: "",
+            ///** 能源种类 */
+            //FUEL_TYPE: "",
+            ///** 减免税原因 */
+            //DEDUE_CDE: "",
+            ///** 减免税方案*/
+            //DEDUE_TYP: "",
+            ///** 减免税比例*/
+            //DEDUE_RATE: "",
+            ///** 减免税凭证*/
+            //PAYTAX_VOU: ""
+            "BRAND_NAME": "奥迪",
+            "CAR_MAKER": "德国奥迪汽车股份有限公司",
+            "CAR_PRICE": "920500",
+            "CAR_REMARK": "手自一体 舒适型 245kw",
+            "CAR_SORT": "轿车类",
+            "CAR_STYLE": "进口车",
+            "DESCRIBE": "2012款 奥迪 A8 AUDI A8L 50TFSI QUATTRO轿车 手自一体 舒适型 245kw 5座 3.0L",
+            "DISPLACEMENT": "2.995",
+            "FAMILY_NAME": "A8",
+            "FUELFLAG": "0",
+            "MARKET_YEAR": "201208",
+            "MODEL": "",
+            "MODEL_CODE": "ADI1230DGA",
+            "MODEL_NAME": "AUDI A8L 50TFSI QUATTRO轿车",
+            "NEW_ENERGY_FLAG": "",
+            "QUALITY": "2075",
+            "RISK_NAME": "正常车型",
+            "RUN_NAME": "奥迪A8L 3.0T AT舒适型",
+            "SET_NUM": "5",
+            "TONNAGE": "",
+            "VEHICLE_PRICE": "999200"
          },
          /** 投保人同车主 1，被保人同车主2，投被保人都不同车主3,投保人被保人都同车主4*/
          VISIBLE_NO: "",
@@ -203,6 +408,8 @@ define(function () {
          PAYTAX_REVENUE: "",
          /** 减免税凭证*/
          PAYTAX_VOU: "",//
+         //是否选择个贷
+         IS_CMPNY_AGT:false,
          /** 代理人工号*/
          CMPNY_AGT_CDE: "",
          /** 代理人名称*/

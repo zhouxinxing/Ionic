@@ -24,9 +24,21 @@ define(['modules/app'], function (app) {
          jsLoader: requirejs, //使用requirejs去加载文件
          modules: [
             {
-               name: 'formControllerFile',
+               name: 'owInfoControllerFile',
                files: [
-                  'js/controllers/app.form.controller.js'
+                  'js/controllers/app.owInfo.controller.js'
+               ]
+            },
+            {
+               name: 'carInfoControllerFile',
+               files: [
+                  'js/controllers/app.carInfo.controller.js'
+               ]
+            },
+            {
+               name: 'guaSelectControllerFile',
+               files: [
+                  'js/controllers/app.guaSelect.controller.js'
                ]
             }
          ]
@@ -103,11 +115,11 @@ define(['modules/app'], function (app) {
          views: {
             'indexContent': {
                templateUrl: 'templates/iv-pages/mit-owinfo.html',
-               controller: 'formController'
+               controller: 'owInfoController'
             }
          },
          resolve: resovleDep({
-            name: 'formControllerFile'
+            name: 'owInfoControllerFile'
          })
       });
       //车辆信息页面
@@ -116,11 +128,11 @@ define(['modules/app'], function (app) {
          views: {
             'indexContent':{
                templateUrl: 'templates/iv-pages/mit-carinfo.html',
-               controller: 'formController'
+               controller: 'carInfoController'
             }
          },
          resolve: resovleDep({
-            name: 'formControllerFile'
+            name: 'carInfoControllerFile'
          })
       });
       //车型查询页面
@@ -129,11 +141,11 @@ define(['modules/app'], function (app) {
          views: {
             'indexContent':{
                templateUrl: 'templates/iv-pages/mit-car-model-select.html',
-               controller: 'formController'
+               controller: 'carInfoController'
             }
          },
          resolve: resovleDep({
-            name: 'formControllerFile'
+            name: 'carInfoControllerFile'
          })
       });
       //险别选择页面
@@ -142,11 +154,11 @@ define(['modules/app'], function (app) {
          views: {
             'indexContent':{
                templateUrl: 'templates/iv-pages/mit-insurance-select.html',
-               controller: 'formController'
+               controller: 'guaSelectController'
             }
          },
          resolve: resovleDep({
-            name: 'formControllerFile'
+            name: 'guaSelectControllerFile'
          })
       });
       /*********************end   车险投保页面***********************/

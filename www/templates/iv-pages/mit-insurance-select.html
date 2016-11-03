@@ -1,5 +1,5 @@
 <ion-view view-title="车险报价" class="mit-view" hide-tabs="true">
-   <ion-content class="im-wrapper bar-footer-padding"  delegate-handle="iselectScroll">
+   <ion-content class="im-wrapper bar-footer-padding"  delegate-handle="handleScroll">
       <div class="card-form">
          <form class="list-block-from" name="form" ng-submit="owinfoSubmit(form);" novalidate="novalidate">
             <div class="form-group">
@@ -10,38 +10,38 @@
                <div ng-show="IS_SHOW_CARINFO">
                   <label class="item item-input">
                      <span class="input-label">车型名称</span>
-                     <input type="text" value="{{VHL_DATA.MODEL_NAME}}" readonly/>
+                     <input type="text" value="{{CAR_BEANS.VHL_DATA.MODEL_NAME}}" readonly/>
                   </label>
                   <label class="item item-input">
                      <span class="input-label">制造厂商</span>
-                     <input type="text" value="{{VHL_DATA.CAR_MAKER}}" readonly/>
+                     <input type="text" value="{{CAR_BEANS.VHL_DATA.CAR_MAKER}}" readonly/>
                   </label>
                   <label class="item item-input">
                      <span class="input-label">车辆年份</span>
-                     <input type="text" value="{{VHL_DATA.MARKET_YEAR}}" readonly/>
+                     <input type="text" value="{{CAR_BEANS.VHL_DATA.MARKET_YEAR}}" readonly/>
                   </label>
                   <label class="item item-input">
                      <span class="input-label">新车购置价</span>
-                     <input type="text" value="{{VHL_DATA.VEHICLE_PRICE}}" readonly/>
+                     <input type="text" value="{{CAR_BEANS.VHL_DATA.VEHICLE_PRICE}}" readonly/>
                   </label>
                   <label class="item item-input">
                      <span class="input-label">座位数</span>
-                     <input type="text" value="{{VHL_DATA.SET_NUM}}"/>
+                     <input type="text" value="{{CAR_BEANS.VHL_DATA.SET_NUM}}"/>
                   </label>
                   <label class="item item-input">
                      <span class="input-label">排气量</span>
-                     <input type="text" value="{{VHL_DATA.DISPLACEMENT}}"/>
+                     <input type="text" value="{{CAR_BEANS.VHL_DATA.DISPLACEMENT}}"/>
                   </label>
                   <label class="item item-input item-select">
                      <span class="input-label">验车情况</span>
-                     <select>
+                     <select ng-model="CAR_BEANS.CHK_CDE">
                         <option value="">已验车</option>
                         <option value="">免验车</option>
                      </select>
                   </label>
                   <label class="item item-input item-select">
                      <span class="input-label">理由</span>
-                     <select>
+                     <select ng-model="CAR_BEANS.CHK_RSLT">
                         <option value="">验车合格</option>
                         <option value="">验车不合格</option>
                      </select>
@@ -52,86 +52,114 @@
                <div class="form-group">
                   <div class="ins-header-checkbox">
                      <div class="checkbox-box">
-                        <ion-checkbox ng-checked="false" ng-model="SY_ORIG_FLG"><span>商业险</span></ion-checkbox>
+                        <ion-checkbox ng-checked="true" ng-model="CAR_BEANS.SY_ORIG_FLG" ng-init="CAR_BEANS.SY_ORIG_FLG=true"><span>商业险</span></ion-checkbox>
                      </div>
                      <label class="item item-input item-validate-picker">
                         <i class="ion-android-calendar"></i>
                         <span class="input-label-inline">生效日期</span>
-                        <input type="text" class="validate-input" ng-date-picker placeholder="请选择生效日期" init-picker='{"maxDate":"0,3,0","minDate":"0,0,1"}'/>
+                        <input type="text" ng-date-picker="datetime" class="validate-input" placeholder="请选择生效日期" ng-model="CAR_BEANS.INSRNC_BGN_TM" ng-change="beginTimerHandle();" init-picker='{"maxDate":"0,3,0,0","minDate":"0,0,0,1","initVal":"true"}'/>
                      </label>
                   </div>
-                  <table class="risks-list" ng-show="SY_ORIG_FLG">
+                  <table class="risks-list" ng-show="CAR_BEANS.SY_ORIG_FLG">
                      <tr>
-                        <th style="width: 50%;">险种</th>
-                        <th>保额(元)</th>
-                        <th>保费</th>
+                        <th style="width: 40%;">险种</th>
+                        <th style="width: 30%;">保额(元)</th>
+                        <th style="width: 25%;">保费(元)</th>
+                        <th></th>
                      </tr>
                      <tr>
                         <td>
                            <div class="tab-cel checkbox-box">
-                              <ion-checkbox ng-checked="true" ng-value="030101"><span>车辆损失险</span></ion-checkbox>
+                              <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[0].PURCHASE_FLAG"><span>车辆损失险</span></ion-checkbox>
                            </div>
                         </td>
                         <td class="text-center">
-                           <input type="text" value="500000" readonly/>
+                           <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[0].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[0].INSRNC_CDE='030101'"/> <!--险种代码-->
+                           <input type="text" ng-model="CAR_BEANS.CVRG_LIST[0].AMT" readonly/> <!--险种金额-->
                         </td>
                         <td class="text-center">
-                           <input type="text" value="1830.6" readonly class="action-price"/>
+                           <input type="text" value="待计算" readonly class="action-price"/>
                         </td>
+                        <td></td>
                      </tr>
                      <tr>
                         <td>
                            <div class="tab-cel checkbox-box">
-                              <ion-checkbox ng-checked="true" ng-value="030102"><span>商业第三者责任险</span></ion-checkbox>
+                              <ion-checkbox  ng-model="CAR_BEANS.CVRG_LIST[1].PURCHASE_FLAG"><span>第三者责任险</span></ion-checkbox>
                            </div>
                         </td>
                         <td class="text-center">
-                           <input type="text" value="100000" readonly />
+                           <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[1].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[1].INSRNC_CDE='030102'"/>
+                           <div class="ui-select">
+                              <label ng-bind="CAR_BEANS.CVRG_LIST[1].AMT"></label>
+                              <select ng-model="CAR_BEANS.CVRG_LIST[1].AMT">
+                                 <option ng-repeat="LIABILITY_ITEM in BASE_BEAN.LIABILITY_INS" value="{{LIABILITY_ITEM*10000}}">{{LIABILITY_ITEM+'万'}}</option>
+                              </select>
+                           </div>
                         </td>
                         <td class="text-center">
-                           <input type="text" value="1936.6" readonly  class="action-price"/>
-                           <i class="ion-ios-arrow-right"></i>
+                           <input type="text" value="待计算" readonly  class="action-price"/>
                         </td>
-                     </tr>
-                     <tr>
                         <td>
-                           <div class="tab-cel checkbox-box">
-                              <ion-checkbox ng-checked="true" ng-value="030103"><span>全车盗抢险</span></ion-checkbox>
-                           </div>
-                        </td>
-                        <td class="text-center">
-                           <input type="text" value="5000" readonly />
-                        </td>
-                        <td class="text-center">
-                           <input type="text" value="1936.6" readonly  class="action-price"/>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td>
-                           <div class="tab-cel checkbox-box">
-                              <ion-checkbox ng-checked="true" ng-value="030104"><span>车上人员责任险（司机）</span></ion-checkbox>
-                           </div>
-                        </td>
-                        <td class="text-center">
-                           <input type="text" value="200000" readonly />
-                        </td>
-                        <td class="text-center">
-                           <input type="text" value="1930.6" readonly  class="action-price"/>
-                           <i class="ion-ios-arrow-right"></i>
+                           <i class="icon ion-ios-arrow-right"></i>
                         </td>
                      </tr>
                      <tr>
                         <td>
                            <div class="tab-cel checkbox-box">
-                              <ion-checkbox ng-checked="true" ng-value="030105"><span>车上人员责任险（乘客）</span></ion-checkbox>
+                              <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[2].PURCHASE_FLAG"><span>全车盗抢险</span></ion-checkbox>
                            </div>
                         </td>
                         <td class="text-center">
-                           <input type="text" value="80000" readonly />
+                           <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[2].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[2].INSRNC_CDE='030103'"/> <!--险种代码-->
+                           <input type="text" ng-model="CAR_BEANS.CVRG_LIST[2].AMT" ng-init="CAR_BEANS.CVRG_LIST[2].AMT=CAR_BEANS.VHL_DATA.ACT_VALUE" readonly/>
                         </td>
                         <td class="text-center">
-                           <input type="text" value="16932.2" readonly  class="action-price"/>
-                           <i class="ion-ios-arrow-right"></i>
+                           <input type="text" value="待计算" readonly  class="action-price"/>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <div class="tab-cel checkbox-box">
+                              <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[3].PURCHASE_FLAG"><span>司机座位险</span></ion-checkbox>
+                           </div>
+                        </td>
+                        <td class="text-center">
+                           <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[3].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[3].INSRNC_CDE='030104'"/>
+                           <div class="ui-select">
+                              <label ng-bind="CAR_BEANS.CVRG_LIST[3].AMT"></label>
+                              <select ng-model="CAR_BEANS.CVRG_LIST[3].AMT">
+                                 <option ng-repeat="DRIVER_SEAT_ITEM in BASE_BEAN.DRIVER_SEAT" value="{{DRIVER_SEAT_ITEM*10000}}">{{DRIVER_SEAT_ITEM+'万'}}</option>
+                              </select>
+                           </div>
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="待计算" readonly  class="action-price"/>
+                        </td>
+                        <td>
+                           <i class="icon ion-ios-arrow-right"></i>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <div class="tab-cel checkbox-box">
+                              <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[4].PURCHASE_FLAG"><span>乘客座位险</span></ion-checkbox>
+                           </div>
+                        </td>
+                        <td class="text-center">
+                           <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[4].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[4].INSRNC_CDE='030105'"/>
+                           <div class="ui-select">
+                              <label ng-bind="CAR_BEANS.CVRG_LIST[4].AMT"></label>
+                              <select ng-model="CAR_BEANS.CVRG_LIST[4].AMT">
+                                 <option ng-repeat="PASSENGER_SEAT_ITEM in BASE_BEAN.PASSENGER_SEAT" value="{{PASSENGER_SEAT_ITEM*10000}}">{{PASSENGER_SEAT_ITEM+'万'}}</option>
+                              </select>
+                           </div>
+                        </td>
+                        <td class="text-center">
+                           <input type="text" value="待计算" readonly  class="action-price"/>
+                        </td>
+                        <td>
+                           <i class="icon ion-ios-arrow-right"></i>
                         </td>
                      </tr>
                      <tr class="tr-title">
@@ -139,225 +167,261 @@
                            <span><i class="icon {{isAddInsure?'ion-ios-minus-empty':'ion-ios-plus-empty'}}"></i>附加险</span>
                         </td>
                      </tr>
-                     <table class="risks-list" ng-show="isAddInsure&&SY_ORIG_FLG">
+                     <table class="risks-list" ng-show="isAddInsure&&CAR_BEANS.SY_ORIG_FLG">
+                        <tr><th style="width: 40%;"></th><th style="width: 30%;"></th><th style="width: 25%;"></th><th></th></tr>
                         <tr>
-                           <td width="50%">
+                           <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030107"><span>玻璃单独破碎险</span></ion-checkbox>
+                                 <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[5].PURCHASE_FLAG"><span>玻璃单独破碎险</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="1200" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[5].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[5].INSRNC_CDE='030107'"/>
+                              <div class="ui-select">
+                                 <label>{{CAR_BEANS.CVRG_LIST[5].BULLET_GLASS=="0"?'普通玻璃':'防弹玻璃'}}</label>
+                                 <select ng-model="CAR_BEANS.CVRG_LIST[5].BULLET_GLASS">
+                                    <option value="0">普通玻璃</option>
+                                    <option value="1">防弹玻璃</option>
+                                 </select>
+                              </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="50.9" readonly  class="action-price"/>
-                              <i class="ion-ios-arrow-right"></i>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
+                           </td>
+                           <td>
+                              <i class="icon ion-ios-arrow-right"></i>
                            </td>
                         </tr>
                         <tr>
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030108"><span>自燃损失险</span></ion-checkbox>
+                                 <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[6].PURCHASE_FLAG"><span>自燃损失险</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="8000" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[6].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[6].INSRNC_CDE='030101'"/> <!--险种代码-->
+                              <input type="text" ng-model="CAR_BEANS.CVRG_LIST[6].AMT" ng-init="CAR_BEANS.CVRG_LIST[6].AMT=CAR_BEANS.VHL_DATA.ACT_VALUE" readonly/> <!--险种金额-->
                            </td>
                            <td class="text-center">
-                              <input type="text" value="150" readonly  class="action-price"/>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
+                           </td>
+                           <td></td>
+                        </tr>
+                        <!--<tr>-->
+                           <!--<td>-->
+                              <!--<div class="tab-cel checkbox-box">-->
+                                 <!--<ion-checkbox ng-checked="false" ng-value="030109"><span>新增设备损失险</span></ion-checkbox>-->
+                              <!--</div>-->
+                           <!--</td>-->
+                           <!--<td class="text-center">-->
+                              <!--<input type="text" value="6000" readonly />-->
+                           <!--</td>-->
+                           <!--<td class="text-center">-->
+                              <!--<input type="text" value="10000" readonly  class="action-price"/>-->
+                           <!--</td>-->
+                        <!--</tr>-->
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[8].PURCHASE_FLAG"><span>车身划痕损失险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[8].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[8].INSRNC_CDE='030110'"/>
+                              <div class="ui-select">
+                                 <label ng-bind="CAR_BEANS.CVRG_LIST[8].AMT"></label>
+                                 <select ng-model="CAR_BEANS.CVRG_LIST[8].AMT">
+                                    <option ng-repeat="SCRATCH_INS_ITEM in BASE_BEAN.SCRATCH_INS" value="{{SCRATCH_INS_ITEM*10000}}">{{SCRATCH_INS_ITEM+'万'}}</option>
+                                 </select>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="待计算" readonly  class="action-price"/>
+                           </td>
+                           <td></td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[9].PURCHASE_FLAG"><span>发动机涉水损失险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[9].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[9].INSRNC_CDE='030111'"/>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="待计算" readonly  class="action-price"/>
+                           </td>
+                           <td></td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[10].PURCHASE_FLAG"><span>修理期间费用补偿险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[10].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[10].INSRNC_CDE='030112'"/>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="待计算" readonly  class="action-price"/>
+                           </td>
+                        </tr>
+                        <!--<tr>-->
+                           <!--<td>-->
+                              <!--<div class="tab-cel checkbox-box">-->
+                                 <!--<ion-checkbox ng-checked="false" ng-value="030113"><span>车上货物责任险</span></ion-checkbox>-->
+                              <!--</div>-->
+                           <!--</td>-->
+                           <!--<td class="text-center">-->
+                              <!--<input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[11].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[11].INSRNC_CDE='030113'"/>-->
+                           <!--</td>-->
+                           <!--<td class="text-center">-->
+                              <!--<input type="text" value="待计算" readonly  class="action-price"/>-->
+                           <!--</td>-->
+                        <!--</tr>-->
+                        <tr>
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[12].PURCHASE_FLAG"><span>精神损害抚慰金责任险</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[12].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[12].INSRNC_CDE='030112'"/>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
                         <tr>
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030109"><span>新增设备损失险</span></ion-checkbox>
+                                 <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[13].PURCHASE_FLAG"><span>无法找到第三方责任险</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="6000" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[13].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[13].INSRNC_CDE='030115'"/>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="10000" readonly  class="action-price"/>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
                         <tr>
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030110"><span>车身划痕损失险</span></ion-checkbox>
+                                 <ion-checkbox ng-model="CAR_BEANS.CVRG_LIST[14].PURCHASE_FLAG"><span>指定修理厂特约险</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="8630" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[14].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[14].INSRNC_CDE='030116'"/>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="10000" readonly  class="action-price"/>
-                              <i class="ion-ios-arrow-right"></i>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
-                        <tr>
+                        <tr ng-if="CAR_BEANS.CVRG_LIST[0].PURCHASE_FLAG">
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030111"><span>发动机涉水损失险</span></ion-checkbox>
+                                 <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[0].PURCHASE_FLAG"><span>不计免赔险(车损)</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="9562" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[0].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[0].FRANCHISE_FLAG='1'"/>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="136.5" readonly  class="action-price"/>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
+                           </td>
+                           <td></td>
+                        </tr>
+                        <tr ng-if="CAR_BEANS.CVRG_LIST[1].PURCHASE_FLAG">
+                           <td>
+                              <div class="tab-cel checkbox-box">
+                                 <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[1].PURCHASE_FLAG"><span>不计免赔险(三者)</span></ion-checkbox>
+                              </div>
+                           </td>
+                           <td class="text-center">
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[1].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[1].FRANCHISE_FLAG='1'"/>
+                           </td>
+                           <td class="text-center">
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
-                        <tr>
+                        <tr ng-if="CAR_BEANS.CVRG_LIST[2].PURCHASE_FLAG">
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030112"><span>修理期间费用补偿险</span></ion-checkbox>
+                                 <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[2].PURCHASE_FLAG"><span>不计免赔险(盗抢)</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="8500" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[2].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[2].FRANCHISE_FLAG='1'"/>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="895.4" readonly  class="action-price"/>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
-                        <tr>
+                        <tr ng-if="CAR_BEANS.CVRG_LIST[3].PURCHASE_FLAG">
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030113"><span>车上货物责任险</span></ion-checkbox>
+                                 <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[3].PURCHASE_FLAG"><span>不计免赔险(司机)</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="90000" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[3].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[3].FRANCHISE_FLAG='1'"/>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="1505.5" readonly  class="action-price"/>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
-                        <tr>
+                        <tr ng-if="CAR_BEANS.CVRG_LIST[4].PURCHASE_FLAG">
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030114"><span>精神损害抚慰金责任险</span></ion-checkbox>
+                                 <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[4].PURCHASE_FLAG"><span>不计免赔险(乘客)</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="9562" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[4].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[4].FRANCHISE_FLAG='1'"/>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="986.3" readonly  class="action-price"/>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
-                        <tr>
+                        <tr ng-if="CAR_BEANS.CVRG_LIST[8].PURCHASE_FLAG">
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030115"><span>车辆损失保险无法找到第三方特约险</span></ion-checkbox>
+                                 <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[8].PURCHASE_FLAG"><span>不计免赔险(刮痕)</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="18000" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[8].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[8].FRANCHISE_FLAG='1'"/>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="326.0" readonly  class="action-price"/>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
-                        <tr>
+                        <tr ng-if="CAR_BEANS.CVRG_LIST[6].PURCHASE_FLAG">
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>指定修理厂特约险</span></ion-checkbox>
+                                 <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[6].PURCHASE_FLAG"><span>不计免赔险(自燃)</span></ion-checkbox>
                               </div>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="1566" readonly />
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[6].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[6].FRANCHISE_FLAG='1'"/>
                            </td>
                            <td class="text-center">
-                              <input type="text" value="12" readonly  class="action-price"/>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
-                        <tr>
+                        <tr ng-if="CAR_BEANS.CVRG_LIST[9].PURCHASE_FLAG">
                            <td>
                               <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(车损)</span></ion-checkbox>
+                                 <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[9].PURCHASE_FLAG"><span>不计免赔险(涉水)</span></ion-checkbox>
                               </div>
                            </td>
-                           <td class="text-center"></td>
                            <td class="text-center">
-                              <input type="text" value="12.8" readonly  class="action-price"/>
+                              <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[9].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[9].FRANCHISE_FLAG='1'"/>
                            </td>
-                        </tr>
-                        <tr>
-                           <td>
-                              <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(三者)</span></ion-checkbox>
-                              </div>
-                           </td>
-                           <td class="text-center"></td>
                            <td class="text-center">
-                              <input type="text" value="25.0" readonly  class="action-price"/>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>
-                              <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(盗抢)</span></ion-checkbox>
-                              </div>
-                           </td>
-                           <td class="text-center"></td>
-                           <td class="text-center">
-                              <input type="text" value="18.6" readonly  class="action-price"/>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>
-                              <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(司机)</span></ion-checkbox>
-                              </div>
-                           </td>
-                           <td class="text-center"></td>
-                           <td class="text-center">
-                              <input type="text" value="12.8" readonly  class="action-price"/>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>
-                              <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(乘客)</span></ion-checkbox>
-                              </div>
-                           </td>
-                           <td class="text-center"></td>
-                           <td class="text-center">
-                              <input type="text" value="12.8" readonly  class="action-price"/>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>
-                              <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(车身刮痕损失险)</span></ion-checkbox>
-                              </div>
-                           </td>
-                           <td class="text-center"></td>
-                           <td class="text-center">
-                              <input type="text" value="12.8" readonly  class="action-price"/>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>
-                              <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(自然损失险)</span></ion-checkbox>
-                              </div>
-                           </td>
-                           <td class="text-center"></td>
-                           <td class="text-center">
-                              <input type="text" value="12.8" readonly  class="action-price"/>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>
-                              <div class="tab-cel checkbox-box">
-                                 <ion-checkbox ng-checked="true" ng-value="030116"><span>不计免赔险(发动机涉水损失险)</span></ion-checkbox>
-                              </div>
-                           </td>
-                           <td class="text-center"></td>
-                           <td class="text-center">
-                              <input type="text" value="12.8" readonly  class="action-price"/>
+                              <input type="text" value="待计算" readonly  class="action-price"/>
                            </td>
                         </tr>
                      </table>
@@ -366,22 +430,27 @@
                <div class="form-group">
                   <div class="ins-header-checkbox">
                      <div class="checkbox-box">
-                        <ion-checkbox ng-checked="false" ng-model="JQ_ORIG_FLG"><span>交强险</span></ion-checkbox>
+                        <ion-checkbox ng-checked="false" ng-model="CAR_BEANS.JQ_ORIG_FLG"><span>交强险</span></ion-checkbox>
                      </div>
                      <label class="item item-input item-validate-picker">
                         <i class="ion-android-calendar"></i>
                         <span class="input-label-inline">生效日期</span>
-                        <input type="text" class="validate-input" ng-date-picker placeholder="请选择生效日期" init-picker='{"maxDate":"0,3,0","minDate":"0,0,1"}'/>
+                        <input type="text" class="validate-input" ng-date-picker="datetime" placeholder="请选择生效日期" ng-model="CAR_BEANS.INSRNC_BGN_TM_JQ" init-picker='{"maxDate":"0,3,0,0","minDate":"0,0,0,1","initVal":"true"}'/>
                      </label>
                   </div>
-                  <div class="com-price-box" ng-show="JQ_ORIG_FLG">
+                  <div class="com-price-box" ng-show="CAR_BEANS.JQ_ORIG_FLG">
+                     <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[15].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[15].INSRNC_CDE='0357'"/>
                      <div class="row">
                         <div class="col col-50">交强险</div>
-                        <div class="col col-50 com-price">￥950</div>
+                        <div class="col col-50 com-price">
+                           <div class="item-content"><span>待计算</span></div>
+                        </div>
                      </div>
                      <div class="row">
                         <div class="col col-50">车船税</div>
-                        <div class="col col-50 com-price">￥650</div>
+                        <div class="col col-50 com-price">
+                           <div class="item-content"><span>待计算</span></div>
+                        </div>
                      </div>
                      <div class="row com-price-desc">
                         <div class="col">
@@ -400,7 +469,7 @@
             总价:<span>￥0</span>
          </div>
          <div class="price-tags price-tags-right">
-            <button class="button button-balanced">计算保费</button>
+            <button class="button button-balanced" ng-click="calAmount();">计算保费</button>
          </div>
       </div>
    </div>

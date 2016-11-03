@@ -73,7 +73,7 @@
                            <ion-checkbox ng-checked="true" ng-model="CAR_BEANS.REC_SAME_CHECK" ng-init="CAR_BEANS.REC_SAME_CHECK = true"><span class="field-title">同车主</span></ion-checkbox>
                         </div>
                      </div>
-                     <div ng-hide="CAR_BEANS.REC_SAME_CHECK">
+                     <div ng-if="!CAR_BEANS.REC_SAME_CHECK">
                         <label class="item item-input">
                            <span class="input-label">姓名</span>
                            <input type="text" placeholder="请输入姓名" name="INSRNT_CNM" ng-model="CAR_BEANS.INSRNT_CNM" ng-value="REC_SAME_CHECK?DRV_OWNER:''" required required-msg="请输入被保人姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的被保人姓名输入有误"/>

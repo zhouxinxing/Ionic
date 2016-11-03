@@ -46,15 +46,15 @@ define(['mobiscroll'],function () {
             var settings = {
                theme: 'android-ics light',//样式
                mode: 'scroller',//选择模式  scroller  clickpick  mixed
-               display: 'bottom',//指定显示模式
-               headerText: '选择日期',//头部提示文字
+               display: 'bottom',//指定显示模式 modal bottom
+               //headerText: '选择日期',//头部提示文字
                showLabel: true,//是否显示labels
                preset: 'date',
                dateFormat: 'yyyy-mm-dd',
                lang: 'zh',
                showNow: false,
                nowText: "今天",
-               fixedWidth: [160, 160, 160],//三组滚动框的宽度
+               fixedWidth: [160, 160, 160,200,200],//三组滚动框的宽度
                labels: ['年', '月', '日'],
                defaultValue: new Date(),
                maxDate: new Date('2026'),
@@ -66,22 +66,37 @@ define(['mobiscroll'],function () {
                if ($U.isNotEmpty(_init.maxDate) && $U.isNotEmpty(_init.minDate)) {
                   var maxDateSet = _init.maxDate.split(','),
                      minDateSet = _init.minDate.split(',');
-                  if (maxDateSet.length == 3 && minDateSet.length == 3) {
+                  if (maxDateSet.length >= 3 && minDateSet.length >= 3) {
                      //最大日期 设置值
                      _maxDate.setFullYear(_maxDate.getFullYear() + Number(maxDateSet[0]));
                      _maxDate.setMonth(_maxDate.getMonth() + Number(maxDateSet[1]));
                      _maxDate.setDate(_maxDate.getDate() + Number(maxDateSet[2]));
+                     if($U.isNotEmpty(maxDateSet[3])){
+                        _maxDate.setHours(_maxDate.getHours() + Number(maxDateSet[3]));
+                     }
                      //最小日期 设置值
                      _minDate.setFullYear(_minDate.getFullYear() + Number(minDateSet[0]));
                      _minDate.setMonth(_minDate.getMonth() + Number(minDateSet[1]));
                      _minDate.setDate(_minDate.getDate() + Number(minDateSet[2]));
+                     if($U.isNotEmpty(minDateSet[3])){
+                        _minDate.setHours(_minDate.getHours() + Number(minDateSet[3]));
+                     }
                      //赋值给时间控件参数
                      settings.maxDate = _maxDate;
                      settings.minDate = _minDate;
+                     //初始化值
+                     if(_init.initVal === "true"){
+                        element.val(new Date().format(settings.minDate.format('yyyy-MM-dd')));
+                     }
                   }
                }
             }
-            element.scroller(settings);
+            if(attr.ngDatePicker === 'datetime'){
+               element.scroller(settings).datetime(settings);
+            }
+            else{
+               element.scroller(settings);
+            }
          }
       };
    });

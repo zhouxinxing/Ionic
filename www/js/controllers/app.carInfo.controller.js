@@ -1,72 +1,24 @@
-define(['services/app.service', 'directives/app.directives', 'filters/app.filters', 'modules/app.car.beans', 'modalSelect'], function () {
-   'use strict';
-   var app = angular.module('app.form.controller', ['app.handle.service', 'app.directives', 'app.filters', 'app.car.beans', 'ionic-modal-select']);
-   //表单控制器
-   app.controller('formController', function ($scope, $rootScope, $http, $location, $handleService, $interFace, $compile, $ionicScrollDelegate, $carBeans) {
-      //滚动重置
-      (function (window) {
-         window.clearInterval($rootScope.scrollTimer);
-         $rootScope.scrollTimer = window.setInterval(function () {
-            $ionicScrollDelegate.$getByHandle('iselectScroll').resize();
-         }, 1000);
-         //解决安卓BUG-》点击checkbox 的时候，焦点总是移动
-         angular.element('input[type="checkbox"]').on('change', function () {
-            angular.element('input').blur();
-         });
-      }(window));
-
-      //window.setInterval(function () {
-      //   console.info($rootScope.CAR_BEANS);
-      //},3500);
-
-      //公共方法
-      (function () {
-         $scope.validateForm = function (form) {
-            var error = form.$error,
-               elem = angular.element('form'),
-               defmsg = '您信息填写不完整或者输入有误',
-               msg = '';
-            if ($U.isNotEmpty(error.required)) {  //有空值
-               msg = elem.find('[name=' + error.required[0].$name + ']').attr('required-msg');
-            }
-            else if ($U.isNotEmpty(error.pattern)) {  //正则不通过
-               msg = elem.find('[name=' + error.pattern[0].$name + ']').attr('pattern-msg');
-            }
-            else {
-               return true;
-            }
-            $U.showToast($U.isNotEmpty(msg) ? msg : defmsg);
-            return false;
-         };
-      }());
-
-      //个人代理信息查询方法
-      (function () {
-         $scope.agentOptions = [];
-         $scope.agentSelect = function () {
-            $handleService.http({
-               url: $interFace.mitMainFace,
-               method: 'POST',
-               headers: {
-                  token: '8239FE1D36F44F81B7A6A1E13E557721',
-                  method: 'queryPersonProxyList',
-                  encrypt: 'plain',
-                  'Accept-Source': 'HWEB'
-               },
-               success: function (data) {
-                  $scope.agentOptions = data.data;
-                  $handleService.logger('info', data);
-               },
-               error: function (ex) {
-                  $handleService.logger('error', ex);
-               }
-            });
-         };
-      }());
-
-      //车型查询-方法
-      (function () {
+define([
+      'services/app.service',
+      'directives/app.directives',
+      'filters/app.filters',
+      'services/app.car.beans',
+      'modalSelect'],
+   function () {
+      'use strict';
+      var app = angular.module('app.carInfo.controller', [
+         'app.handle.service',
+         'app.directives',
+         'app.filters',
+         'app.car.beans',
+         'ionic-modal-select'
+      ]);
+      //表单控制器
+      app.controller('carInfoController', function ($scope,$rootScope, $http, $location, $handleService, $interFace, $compile, $carBeansService) {
+         //----------------------------------------begin 车辆信息页面----------------------------------------//
          $scope.CAR_SEARCH_INFO = "奥迪A8";
+         $handleService.initFormApp();
+         //车型查询-方法
          $scope.queryCarModule = function () {
             //判断查询条件 非空再调用接口
             if ($U.isEmpty($scope.CAR_SEARCH_INFO)) {
@@ -79,7 +31,7 @@ define(['services/app.service', 'directives/app.directives', 'filters/app.filter
                   url: 'data/basedata.json',
                   method: 'POST',
                   headers: {
-                     token: '4B7B3F4057554C7BA50431CE9806506B',
+                     token: $rootScope.TOKEN,
                      method: 'queryNewBusinessCarType',
                      encrypt: 'plain',
                      'Accept-Source': 'HWEB'
@@ -107,11 +59,20 @@ define(['services/app.service', 'directives/app.directives', 'filters/app.filter
                });
             }
          };
+         //车型选择事件
          $scope.checkCarModel = function (VHL) {
-            $rootScope.VHL_DATA =$rootScope.CAR_BEANS.VHL_DATA= VHL;
+            $rootScope.CAR_BEANS.VHL_DATA = VHL;
+            //给车型数据 拿出来进行封装
+            //1.车型代码
+            $rootScope.CAR_BEANS.BRND_CDE = VHL.MODEL_CODE;
+            //3.新车购置价
+            $rootScope.CAR_BEANS.VHL_VAL = VHL.CAR_PRICE;
+            //3.浮动价
+            $rootScope.CAR_BEANS.VHL_VAL_FLOAT = VHL.VEHICLE_PRICE;
          };
+         //车型选择-确定按钮
          $scope.chooseCarModel = function () {
-            if ($U.isNotEmpty($rootScope.VHL_DATA)) {
+            if ($U.isNotEmpty($rootScope.CAR_BEANS.VHL_DATA)) {
                $location.path("tab/carinfo");
             }
             else {
@@ -179,29 +140,20 @@ define(['services/app.service', 'directives/app.directives', 'filters/app.filter
                angular.element('.car-module-list div.list').empty().append($compile(carModelListHtml)($scope));
             }
          };
-      }());
 
-      //车主信息提交方法
-      $scope.owinfoSubmit = function (form) {
-         //个人代理选择校验
-         if($rootScope.CAR_BEANS.IS_CMPNY_AGT && !$rootScope.CAR_BEANS.CMPNY_AGT_CDE){
-            $U.showToast('请选择个人代理');
-            return;
-         }
-         $scope.validateForm.call(this,form);// apply 参数必须是数组  call 任意类型都可以传
-         if(form.$valid) {
-            //校验通过->1.参数保存 2.路由跳转
-            $location.path("tab/carinfo");
-         }
-      };
-
-      //车辆信息提交方法
-      $scope.carinfoSubmit = function (form) {
-         $scope.validateForm.call(this, form);// apply 参数必须是数组  call 任意类型都可以传
-         if (form.$valid) {
-            $location.path("tab/insuranceSelect");
-         }
-      };
+         //车辆信息提交方法
+         $scope.carInfoSubmit = function (form) {
+            //车型选择校验
+            if ($U.isEmpty($rootScope.CAR_BEANS.VHL_DATA.MODEL_CODE)) { //如果车型代码为空 未选择车型
+               $U.showToast('请选择品牌型号');
+               return;
+            }
+            $handleService.validateForm.call(this, form);
+            if (form.$valid) {
+               $location.path("tab/insuranceSelect");
+            }
+         };
+         //----------------------------------------end   车辆信息页面----------------------------------------//
+      });
+      return app;
    });
-   return app;
-});

@@ -127,6 +127,11 @@
   font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
   font-size: 10px; }
 
+/* iphone4 */
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2) {
+  .dwwc {
+    height: 150px; } }
+
 /*************begin 通用样式****************/
 .hidden-box {
   display: none; }
@@ -136,6 +141,10 @@
 
 /*************end   通用样式****************/
 /****begin ionic style change****/
+select {
+  border: none;
+  -webkit-appearance: none; }
+
 .nav-therm {
   color: white !important; }
 
@@ -149,6 +158,9 @@
   color: white;
   border-radius: 1px;
   height: 40px; }
+
+button, input, select, textarea {
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif; }
 
 .input-label {
   font-size: 1.4rem;
@@ -198,7 +210,7 @@
 .card-form .item-content {
   font-size: 1.4rem; }
   .card-form .item-content span {
-    font-size: 1.4rem; }
+    font-size: 1.3rem; }
 
 .card-form .item-select select {
   right: 0;
@@ -349,7 +361,8 @@
     margin-right: 4px; }
   .item-ron-wrap .validate-input {
     display: inline-block;
-    color: #00c1af; }
+    color: #00c1af;
+    font-size: 1.3rem !important; }
   .item-ron-wrap .item-validate-picker {
     color: #00c1af; }
   .item-ron-wrap .list-title span {
@@ -371,10 +384,8 @@
     line-height: 30px;
     display: inline-block;
     width: 100%; }
-  .risks-list tr td i {
-    display: inline-block;
-    position: relative;
-    top: 2px; }
+  .risks-list tr td select {
+    width: 100%; }
   .risks-list .item-content {
     white-space: initial; }
   .risks-list .non-ded-checkbox {
@@ -389,7 +400,9 @@
     padding: 5px 16px; }
     .risks-list .td-title i {
       font-size: 25px;
-      margin-right: 5px; }
+      margin-right: 5px;
+      position: relative;
+      top: 2px; }
   .risks-list .action-price {
     color: #ff5d50; }
 
@@ -513,6 +526,28 @@
   border-radius: 3px; }
 
 /********end   reset style*********/
+.item-new-car-des {
+  color: #17c6b6;
+  margin-top: 3px;
+  font-size: 1.4rem; }
+
+.ui-select {
+  height: 100%;
+  width: 100%;
+  position: relative; }
+  .ui-select label {
+    color: #111;
+    width: 100%;
+    display: block;
+    line-height: 30px; }
+  .ui-select select {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200% !important; }
+
 /*************begin 日历控件主题修改*************/
 .mbsc-android-holo .dwv {
   color: #ff6161 !important;
