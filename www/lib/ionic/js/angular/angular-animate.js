@@ -2627,7 +2627,7 @@ var $$AnimateQueueProvider = ['$animateProvider', function($animateProvider) {
           }
 
           // if the event changed from something like enter to leave then we do
-          // it, otherwise if it's the same then the end result will be the same too
+          // it, otherwise if it's the same then the end result.json will be the same too
           if (animationCancelled || (isStructural && animationDetails.event !== event)) {
             options.domOperation();
             runner.end();

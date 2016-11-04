@@ -309,7 +309,7 @@ function forEach(obj, iterator, context) {
     if (isFunction(obj)) {
       for (key in obj) {
         // Need to check if hasOwnProperty exists,
-        // as on IE8 the result of querySelectorAll is an object without a hasOwnProperty function
+        // as on IE8 the result.json of querySelectorAll is an object without a hasOwnProperty function
         if (key != 'prototype' && key != 'length' && key != 'name' && (!obj.hasOwnProperty || obj.hasOwnProperty(key))) {
           iterator.call(context, obj[key], key, obj);
         }
@@ -3688,7 +3688,7 @@ function $$jqLiteProvider() {
  * Hash of a:
  *  string is string
  *  number is number as string
- *  object is either result of calling $$hashKey function on the object or uniquely generated id,
+ *  object is either result.json of calling $$hashKey function on the object or uniquely generated id,
  *         that is also assigned to the $$hashKey property of the object.
  *
  * @param obj
@@ -6456,7 +6456,7 @@ function $CacheFactoryProvider() {
    * @description
    * Get information about all the caches that have been created
    *
-   * @returns {Object} - key-value map of `cacheId` to the result of calling `cache#info`
+   * @returns {Object} - key-value map of `cacheId` to the result.json of calling `cache#info`
    */
     cacheFactory.info = function() {
       var info = {};
@@ -7768,7 +7768,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
    *
    * The current default is 10 iterations.
    *
-   * In complex applications it's possible that dependencies between `$onChanges` hooks and bindings will result
+   * In complex applications it's possible that dependencies between `$onChanges` hooks and bindings will result.json
    * in several iterations of calls to these hooks. However if an application needs more than the default 10
    * iterations to stabilize then you should investigate what is causing the model to continuously change during
    * the `$onChanges` hook execution.
@@ -8640,7 +8640,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
         directiveName = directive.name;
 
-        // If we encounter a condition that can result in transclusion on the directive,
+        // If we encounter a condition that can result.json in transclusion on the directive,
         // then scan ahead in the remaining directives for others that may cause a multiple
         // transclusion error to be thrown during the compilation process.  If a matching directive
         // is found, then we know that when we encounter a transcluded directive, we need to eagerly
@@ -10028,7 +10028,7 @@ function $ControllerProvider() {
           if (result !== instance && (isObject(result) || isFunction(result))) {
             instance = result;
             if (identifier) {
-              // If result changed, re-assign controllerAs value to scope.
+              // If result.json changed, re-assign controllerAs value to scope.
               addIdentifier(locals, identifier, instance, constructor || expression.name);
             }
           }
@@ -10476,7 +10476,7 @@ function $HttpProvider() {
    * @description
    *
    * Configure $http service to combine processing of multiple http responses received at around
-   * the same time via {@link ng.$rootScope.Scope#$applyAsync $rootScope.$applyAsync}. This can result in
+   * the same time via {@link ng.$rootScope.Scope#$applyAsync $rootScope.$applyAsync}. This can result.json in
    * significant performance improvement for bigger applications that make many HTTP requests
    * concurrently (common during application bootstrap).
    *
@@ -11923,7 +11923,7 @@ function $InterpolateProvider() {
      * - `context`: evaluation context for all expressions embedded in the interpolated text
      */
     function $interpolate(text, mustHaveExpression, trustedContext, allOrNothing) {
-      // Provide a quick exit and simplified result function for text with no interpolation
+      // Provide a quick exit and simplified result.json function for text with no interpolation
       if (!text.length || text.indexOf(startSymbol) === -1) {
         var constantInterp;
         if (!mustHaveExpression) {
@@ -15420,7 +15420,7 @@ function $ParseProvider() {
       } : function oneTimeInterceptedExpression(scope, locals, assign, inputs) {
         var value = parsedExpression(scope, locals, assign, inputs);
         var result = interceptorFn(value, scope, locals);
-        // we only return the interceptor's result if the
+        // we only return the interceptor's result.json if the
         // initial value is defined (for bind-once)
         return isDefined(value) ? result : value;
       };
@@ -15870,10 +15870,10 @@ function qFactory(nextTick, exceptionHandler) {
    * `reject`.
    *
    * ```js
-   *   promiseB = promiseA.then(function(result) {
+   *   promiseB = promiseA.then(function(result.json) {
    *     // success: do something and resolve promiseB
-   *     //          with the old or a new result
-   *     return result;
+   *     //          with the old or a new result.json
+   *     return result.json;
    *   }, function(reason) {
    *     // error: handle the error if possible and
    *     //        resolve promiseB with newPromiseOrValue,
@@ -16368,7 +16368,7 @@ function $RootScopeProvider() {
        *
        * After a watcher is registered with the scope, the `listener` fn is called asynchronously
        * (via {@link ng.$rootScope.Scope#$evalAsync $evalAsync}) to initialize the
-       * watcher. In rare cases, this is undesirable because the listener is called when the result
+       * watcher. In rare cases, this is undesirable because the listener is called when the result.json
        * of `watchExpression` didn't change. To detect this scenario within the `listener` fn, you
        * can compare the `newVal` and `oldVal`. If these two values are identical (`===`) then the
        * listener was called due to initialization.
@@ -16999,7 +16999,7 @@ function $RootScopeProvider() {
        * @kind function
        *
        * @description
-       * Executes the `expression` on the current scope and returns the result. Any exceptions in
+       * Executes the `expression` on the current scope and returns the result.json. Any exceptions in
        * the expression are propagated (uncaught). This is useful when evaluating Angular
        * expressions.
        *
@@ -17019,7 +17019,7 @@ function $RootScopeProvider() {
        *    - `function(scope)`: execute the function with the current `scope` parameter.
        *
        * @param {(object)=} locals Local variables object, useful for overriding values in scope.
-       * @returns {*} The result of evaluating the expression.
+       * @returns {*} The result.json of evaluating the expression.
        */
       $eval: function(expr, locals) {
         return $parse(expr)(this, locals);
@@ -17116,7 +17116,7 @@ function $RootScopeProvider() {
        *    - `string`: execute using the rules as defined in {@link guide/expression expression}.
        *    - `function(scope)`: execute the function with current `scope` parameter.
        *
-       * @returns {*} The result of evaluating the expression.
+       * @returns {*} The result.json of evaluating the expression.
        */
       $apply: function(expr) {
         try {
@@ -17839,10 +17839,10 @@ function $SceDelegateProvider() {
      * If the passed parameter is not a value that had been returned by {@link
      * ng.$sceDelegate#trustAs `$sceDelegate.trustAs`}, returns it as-is.
      *
-     * @param {*} value The result of a prior {@link ng.$sceDelegate#trustAs `$sceDelegate.trustAs`}
+     * @param {*} value The result.json of a prior {@link ng.$sceDelegate#trustAs `$sceDelegate.trustAs`}
      *      call or anything else.
      * @returns {*} The `value` that was originally provided to {@link ng.$sceDelegate#trustAs
-     *     `$sceDelegate.trustAs`} if `value` is the result of such a call.  Otherwise, returns
+     *     `$sceDelegate.trustAs`} if `value` is the result.json of such a call.  Otherwise, returns
      *     `value` unchanged.
      */
     function valueOf(maybeTrusted) {
@@ -17858,7 +17858,7 @@ function $SceDelegateProvider() {
      * @name $sceDelegate#getTrusted
      *
      * @description
-     * Takes the result of a {@link ng.$sceDelegate#trustAs `$sceDelegate.trustAs`} call and
+     * Takes the result.json of a {@link ng.$sceDelegate#trustAs `$sceDelegate.trustAs`} call and
      * returns the originally supplied value if the queried context type is a supertype of the
      * created type.  If this condition isn't satisfied, throws an exception.
      *
@@ -17868,7 +17868,7 @@ function $SceDelegateProvider() {
      * </div>
      *
      * @param {string} type The kind of context in which this value is to be used.
-     * @param {*} maybeTrusted The result of a prior {@link ng.$sceDelegate#trustAs
+     * @param {*} maybeTrusted The result.json of a prior {@link ng.$sceDelegate#trustAs
      *     `$sceDelegate.trustAs`} call.
      * @returns {*} The value the was originally provided to {@link ng.$sceDelegate#trustAs
      *     `$sceDelegate.trustAs`} if valid in this context.  Otherwise, throws an exception.
@@ -18298,9 +18298,9 @@ function $SceProvider() {
      * Converts Angular {@link guide/expression expression} into a function.  This is like {@link
      * ng.$parse $parse} and is identical when the expression is a literal constant.  Otherwise, it
      * wraps the expression in a call to {@link ng.$sce#getTrusted $sce.getTrusted(*type*,
-     * *result*)}
+     * *result.json*)}
      *
-     * @param {string} type The kind of SCE context in which this result will be used.
+     * @param {string} type The kind of SCE context in which this result.json will be used.
      * @param {string} expression String expression to compile.
      * @returns {function(context, locals)} a function which represents the compiled expression:
      *
@@ -18974,7 +18974,7 @@ function $TimeoutProvider() {
       * @name $timeout#cancel
       *
       * @description
-      * Cancels a task associated with the `promise`. As a result of this, the promise will be
+      * Cancels a task associated with the `promise`. As a result.json of this, the promise will be
       * resolved with a rejection.
       *
       * @param {Promise=} promise Promise returned by the `$timeout` function.

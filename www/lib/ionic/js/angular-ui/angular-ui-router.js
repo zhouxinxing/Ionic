@@ -1421,7 +1421,7 @@ function $UrlMatcherFactory() {
    * @param {Object|Function} definition   The type definition. See
    *        {@link ui.router.util.type:Type `Type`} for information on the values accepted.
    * @param {Object|Function} definitionFn (optional) A function that is injected before the app
-   *        runtime starts.  The result of this function is merged into the existing `definition`.
+   *        runtime starts.  The result.json of this function is merged into the existing `definition`.
    *        See {@link ui.router.util.type:Type `Type`} for information on the values accepted.
    *
    * @returns {Object}  Returns `$urlMatcherFactoryProvider`.
@@ -1620,7 +1620,7 @@ function $UrlMatcherFactory() {
 
     /**
      * [Internal] Gets the decoded representation of a value if the value is defined, otherwise, returns the
-     * default value, which may be the result of an injectable function.
+     * default value, which may be the result.json of an injectable function.
      */
     function $value(value) {
       function hasReplaceVal(val) { return function(obj) { return obj.from === val; }; }
@@ -2429,15 +2429,15 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * // Override the internal 'views' builder with a function that takes the state
    * // definition, and a reference to the internal function being overridden:
    * $stateProvider.decorator('views', function (state, parent) {
-   *   var result = {},
+   *   var result.json = {},
    *       views = parent(state);
    *
    *   angular.forEach(views, function (views, name) {
    *     var autoName = (state.name + '.' + name).replace('.', '/');
    *     views.templateUrl = views.templateUrl || '/partials/' + autoName + '.html';
-   *     result[name] = views;
+   *     result.json[name] = views;
    *   });
-   *   return result;
+   *   return result.json;
    * });
    *
    * $stateProvider.state('home', {

@@ -21,6 +21,9 @@ $price-color:#ff5d50;
 
 /* iphone4 */
 @media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2){
+  *, .ionic-body, html, body{
+    font-size: 8px;
+  }
   .dwwc{ //日历控件适应
     height: 150px;
   }
@@ -343,11 +346,15 @@ button, input, select, textarea{
       color: #828282;
     }
     td{
+      position: relative;
       input{
         text-align: center;
         line-height: 30px;
-        display: inline-block;
+        display: block;
         width: 100%;
+        height: 30px !important;
+        position: absolute;
+        top: 5px;
       }
       select{
         width: 100%;
@@ -556,6 +563,8 @@ button, input, select, textarea{
     left: 0;
     height: 100%;
     width: 200% !important;
+    border: 1px red solid;
+    z-index: 99;
   }
 }
 

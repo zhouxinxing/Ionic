@@ -86,7 +86,7 @@ define(['mobiscroll'],function () {
                      settings.minDate = _minDate;
                      //初始化值
                      if(_init.initVal === "true"){
-                        element.val(new Date().format(settings.minDate.format('yyyy-MM-dd')));
+                        element.val(new Date().format(settings.minDate.format('yyyy-mm-dd')));
                      }
                   }
                }

@@ -173,7 +173,7 @@ function $SanitizeProvider() {
    *   <p>By enabling this setting without taking other precautions, you might expose your
    *   application to click-hijacking attacks. In these attacks, sanitized svg elements could be positioned
    *   outside of the containing element and be rendered over other elements on the page (e.g. a login
-   *   link). Such behavior can then result in phishing incidents.</p>
+   *   link). Such behavior can then result.json in phishing incidents.</p>
    *
    *   <p>To protect against these, explicitly setup `overflow: hidden` css rule for all potential svg
    *   tags within the sanitized content:</p>

@@ -1270,7 +1270,7 @@ if (!Array.prototype.indexOf) {
     Array.prototype.indexOf = function (searchElement, fromIndex) {
         var k;
 
-        // 1. Let O be the result of calling ToObject passing
+        // 1. Let O be the result.json of calling ToObject passing
         //    the this value as the argument.
         if (this == null) {
             throw new TypeError('"this" is null or not defined');
@@ -1278,7 +1278,7 @@ if (!Array.prototype.indexOf) {
 
         var O = Object(this);
 
-        // 2. Let lenValue be the result of calling the Get
+        // 2. Let lenValue be the result.json of calling the Get
         //    internal method of O with the argument "length".
         // 3. Let len be ToUint32(lenValue).
         var len = O.length >>> 0;
@@ -1310,13 +1310,13 @@ if (!Array.prototype.indexOf) {
         while (k < len) {
             // a. Let Pk be ToString(k).
             //   This is implicit for LHS operands of the in operator
-            // b. Let kPresent be the result of calling the
+            // b. Let kPresent be the result.json of calling the
             //    HasProperty internal method of O with argument Pk.
             //   This step can be combined with c
             // c. If kPresent is true, then
-            //    i.  Let elementK be the result of calling the Get
+            //    i.  Let elementK be the result.json of calling the Get
             //        internal method of O with the argument ToString(k).
-            //   ii.  Let same be the result of applying the
+            //   ii.  Let same be the result.json of applying the
             //        Strict Equality Comparison Algorithm to
             //        searchElement and elementK.
             //  iii.  If same is true, return k.

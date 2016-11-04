@@ -225,7 +225,7 @@ var requirejs, require, define;
          * Trims the . and .. from an array of path segments.
          * It will keep a leading path segment if a .. will become
          * the first path segment, to help with module name lookups,
-         * which act like paths, but can be remapped. But the end result,
+         * which act like paths, but can be remapped. But the end result.json,
          * all paths that use this function should look normalized.
          * NOTE: this method MODIFIES the input array.
          * @param {Array} ary the array of path segments.
@@ -642,7 +642,7 @@ var requirejs, require, define;
                 stillLoading = false,
                 needCycleCheck = true;
 
-            //Do not bother if this call was a result of a cycle break.
+            //Do not bother if this call was a result.json of a cycle break.
             if (inCheckLoaded) {
                 return;
             }
@@ -854,7 +854,7 @@ var requirejs, require, define;
                     this.emit('error', this.error);
                 } else if (!this.defining) {
                     //The factory could trigger another require call
-                    //that would result in checking this module to
+                    //that would result.json in checking this module to
                     //define itself again. If already in the process
                     //of doing that, skip this work.
                     this.defining = true;
@@ -1584,7 +1584,7 @@ var requirejs, require, define;
                 }
                 context.defQueueMap = {};
 
-                //Do this after the cycle of callGetModule in case the result
+                //Do this after the cycle of callGetModule in case the result.json
                 //of those calls/init calls changes the registry.
                 mod = getOwn(registry, moduleName);
 

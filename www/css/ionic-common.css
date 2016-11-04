@@ -129,6 +129,8 @@
 
 /* iphone4 */
 @media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2) {
+  *, .ionic-body, html, body {
+    font-size: 8px; }
   .dwwc {
     height: 150px; } }
 
@@ -379,13 +381,18 @@ button, input, select, textarea {
   .risks-list tr th {
     font-size: 1.3rem;
     color: #828282; }
-  .risks-list tr td input {
-    text-align: center;
-    line-height: 30px;
-    display: inline-block;
-    width: 100%; }
-  .risks-list tr td select {
-    width: 100%; }
+  .risks-list tr td {
+    position: relative; }
+    .risks-list tr td input {
+      text-align: center;
+      line-height: 30px;
+      display: block;
+      width: 100%;
+      height: 30px !important;
+      position: absolute;
+      top: 5px; }
+    .risks-list tr td select {
+      width: 100%; }
   .risks-list .item-content {
     white-space: initial; }
   .risks-list .non-ded-checkbox {
@@ -546,7 +553,9 @@ button, input, select, textarea {
     top: 0;
     left: 0;
     height: 100%;
-    width: 200% !important; }
+    width: 200% !important;
+    border: 1px red solid;
+    z-index: 99; }
 
 /*************begin 日历控件主题修改*************/
 .mbsc-android-holo .dwv {

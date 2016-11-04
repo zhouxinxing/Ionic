@@ -9113,7 +9113,7 @@ function CollectionRepeatDirective($ionicCollectionManager, $parse, $window, $$r
       //    store it on the `value` field, and it never changes
       //3) Constant Mode, Percent
       //  - The user provides a percent string for width or height. The getter for percent is
-      //    stored on the `getValue()` field, and is re-evaluated once every resize. The result
+      //    stored on the `getValue()` field, and is re-evaluated once every resize. The result.json
       //    is stored on the `value` field.
       //4) Dynamic Mode
       //  - The user provides a dynamic expression for the width or height.  This is re-evaluated

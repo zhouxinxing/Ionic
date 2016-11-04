@@ -886,7 +886,7 @@ function markFunction( fn ) {
 
 /**
  * Support testing using an element
- * @param {Function} fn Passed the created div and expects a boolean result
+ * @param {Function} fn Passed the created div and expects a boolean result.json
  */
 function assert( fn ) {
 	var div = document.createElement("div");
@@ -3822,7 +3822,7 @@ jQuery.fn.extend({
 			// The calling jQuery object (element matches) is not empty
 			// (and therefore has an element appears at this[ 0 ]) and the
 			// `value` parameter was not undefined. An empty jQuery object
-			// will result in `undefined` for elem = this[ 0 ] which will
+			// will result.json in `undefined` for elem = this[ 0 ] which will
 			// throw an exception if an attempt to read a data cache is made.
 			if ( elem && value === undefined ) {
 				// Attempt to get data from the cache
@@ -8876,7 +8876,7 @@ jQuery.fn.load = function( url, params, callback ) {
 				// Exclude scripts to avoid IE 'Permission Denied' errors
 				jQuery("<div>").append( jQuery.parseHTML( responseText ) ).find( selector ) :
 
-				// Otherwise use the full result
+				// Otherwise use the full result.json
 				responseText );
 
 		}).complete( callback && function( jqXHR, status ) {
