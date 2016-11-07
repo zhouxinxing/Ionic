@@ -18,5 +18,22 @@ define(function () {
          return output;
       }
    });
+   app.filter('sum', function () {
+      return function (input,lenght,param) {
+         try {
+            if(typeof param === 'object'){
+               var _sum = 0;
+               angular.forEach(param, function (item,index,array) {
+                  _sum+=window.parseFloat(item+'');
+               });
+               return _sum.toFixed(lenght);
+            }
+            return '';
+         }
+         catch (ex){
+            return input;
+         }
+      }
+   });
    return app;
 });

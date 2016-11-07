@@ -435,6 +435,8 @@ button, input, select, textarea {
     font-size: 1.6rem;
     background-color: #ef473a;
     line-height: 50px; }
+  .price-tags-box .price-tags-right .submit-button {
+    background-color: #4CAF50; }
 
 .bar-footer-padding {
   margin-bottom: 50px; }

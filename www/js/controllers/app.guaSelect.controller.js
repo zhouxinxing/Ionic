@@ -22,9 +22,16 @@ define([
                angular.forEach(data.CVRG_LIST, function (item, index, array) {
                   object.CVRG_DETAIL[item.INSRNC_CDE] = item;
                });
+
                $rootScope.CALCOST_RESULT.CALCOST_FLAG = true; //计算标识
-               $scope.INSRNC_BGN_TM_CHANGE = false;
-               console.log(object.CVRG_DETAIL);
+               $scope.REL_CALCOST_FLAG = false; //需要重新计算
+               $scope.INSRNC_BGN_TM_CHANGE = false;  //商业险起期修改标识
+               $scope.INSRNC_BGN_TM_JQ_CHANGE = false; //交强险起期修改标识
+               $scope.SZ_CHANGE_FLAG = false; //三者保额修改标识
+               $scope.SJZW_CHANGE_FLAG = false; //司机座位险保额修改标识
+               $scope.CKZW_CHANGE_FLAG = false; //乘客座位险保额修改标识
+               $scope.BLPS_CHANGE_FLAG = false; //玻璃破碎保额修改标识
+               $scope.CSGH_CHANGE_FLAG = false; //车身刮痕保额修改标识
             };
             return handle;
          })(Handle || {});
@@ -33,11 +40,12 @@ define([
          //-------------------------------------------------------------------------------------------------//
          //---------------------------------------begin 监听方法---------------------------------------------//
          //-------------------------------------------------------------------------------------------------//
-
-         //监听保险起始日期-计算折旧
+         //监听-商业险保险起始日期-计算折旧
          $scope.$watch('CAR_BEANS.INSRNC_BGN_TM', function () {
             //修改标识
             $scope.INSRNC_BGN_TM_CHANGE = true;
+            //重新计算标识
+            $scope.REL_CALCOST_FLAG = true;
             //请求 折旧
             $handleService.http({
                url: $interFace.mitMainFace,
@@ -70,11 +78,43 @@ define([
             });
          });
 
-         //$scope.$watch
+         //监听-》交强险保险起期 -》影像车船税
+         $scope.$watch('CAR_BEANS.INSRNC_BGN_TM_JQ', function (value) {
+            $scope.INSRNC_BGN_TM_JQ_CHANGE = true; //交强险起期变更标识
+            $scope.REL_CALCOST_FLAG = true;//重新计算标识
+         });
 
          //监听折旧值-》同时修改 1.车损保额 2.全车盗抢 3.自燃损失
          $scope.$watch('CAR_BEANS.ACT_VALUE', function (value) {
             $rootScope.CAR_BEANS.CVRG_LIST[0].AMT = $rootScope.CAR_BEANS.CVRG_LIST[2].AMT = $rootScope.CAR_BEANS.CVRG_LIST[6].AMT = value;
+         });
+
+         $scope.$watch('CAR_BEANS.CVRG_LIST[1].AMT', function (value) {
+            $scope.SZ_CHANGE_FLAG = true; //三者保额修改标识
+            $scope.REL_CALCOST_FLAG = true;//重新计算标识
+         });
+         $scope.$watch('CAR_BEANS.CVRG_LIST[3].AMT', function (value) {
+            $scope.SJZW_CHANGE_FLAG = true; //司机座位险保额修改标识
+            $scope.REL_CALCOST_FLAG = true;//重新计算标识
+         });
+         $scope.$watch('CAR_BEANS.CVRG_LIST[4].AMT', function (value) {
+            $scope.CKZW_CHANGE_FLAG = true; //乘客座位险保额修改标识
+            $scope.REL_CALCOST_FLAG = true;//重新计算标识
+         });
+         $scope.$watch('CAR_BEANS.CVRG_LIST[5].BULLET_GLASS', function (value) {
+            $scope.BLPS_CHANGE_FLAG = true; //玻璃破碎保额修改标识
+            $scope.REL_CALCOST_FLAG = true;//重新计算标识
+         });
+         $scope.$watch('CAR_BEANS.CVRG_LIST[8].AMT', function (value) {
+            $scope.CSGH_CHANGE_FLAG = true; //车身刮痕保额修改标识
+            $scope.REL_CALCOST_FLAG = true;//重新计算标识
+         });
+
+         //重新计算 - 次数标识
+         $scope.$watch('REL_CALCOST_FLAG', function (value) {
+            if(!value){
+               $scope.REL_CALCOST_TRIMER = true;
+            }
          });
          //-------------------------------------------------------------------------------------------------//
          //---------------------------------------end 监听方法---------------------------------------------//
@@ -90,10 +130,10 @@ define([
                   //商业险数据
                   if (item.PURCHASE_FLAG) {
                      if (item.INSRNC_CDE != "0357") {
-                        $rootScope.CAR_BEANS.SY_ORIG_FLG?_CVRG_LIST.push(item):'';
+                        $rootScope.CAR_BEANS.SY_ORIG_FLG ? _CVRG_LIST.push(item) : '';
                      }
-                     else{
-                        $rootScope.CAR_BEANS.JQ_ORIG_FLG?_CVRG_LIST.push(item):'';
+                     else {
+                        $rootScope.CAR_BEANS.JQ_ORIG_FLG ? _CVRG_LIST.push(item) : '';
                      }
                   }
                   if (index + 1 == $rootScope.CAR_BEANS.CVRG_LIST.length) {
@@ -118,12 +158,11 @@ define([
                },
                data: _CAR_BEANS,
                success: function (data) {
-                  $handleService.logger('info', data);
                   if ($U.isNotEmpty(data) && data.success == "false") {
                      $U.showToast(data.msg);
                   }
                   else {
-                     $handleService.logger('info', data);
+                     //$handleService.logger('info', data);
                      Handle.resultHandle(data, $rootScope.CALCOST_RESULT);
                   }
                },
@@ -131,6 +170,10 @@ define([
                   $handleService.logger('error', ex);
                }
             });
+         };
+         //提交订单方法
+         $scope.checkHandle= function () {
+
          };
          //----------------------------------------end   报价信息页面----------------------------------------//
       });

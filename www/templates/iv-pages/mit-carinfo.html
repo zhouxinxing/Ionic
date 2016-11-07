@@ -49,15 +49,15 @@
                      <label class="item item-input">
                         <span class="input-label">是否过户车</span>
                         <label class="toggle">
-                           <input type="checkbox" name="CHGOWNERFLAG" ng-model="CAR_BEANS.CHGOWNERFLAG">
+                           <input type="checkbox" name="CHGOWNERFLAG_T" ng-model="CHGOWNERFLAG_T" ng-value="CHGOWNERFLAG_T?(CAR_BEANS.CHGOWNERFLAG='1'):(CAR_BEANS.CHGOWNERFLAG='0')">
                            <div class="track">
                               <div class="handle"></div>
                            </div>
                         </label>
                      </label>
-                     <label class="item item-input" ng-hide="!CAR_BEANS.CHGOWNERFLAG">
+                     <label class="item item-input" ng-if="CHGOWNERFLAG_T">
                         <span class="input-label">转籍过户日期</span>
-                        <input ng-if="CAR_BEANS.CHGOWNERFLAG" type="text" ng-date-picker placeholder="请选择转籍过户日期" name="TRANSFERDATE" ng-model="CAR_BEANS.TRANSFERDATE" required required-msg="请选择转籍过户日期"/>
+                        <input type="text" ng-date-picker placeholder="请选择转籍过户日期" name="TRANSFERDATE" ng-model="CAR_BEANS.TRANSFERDATE" required required-msg="请选择转籍过户日期"/>
                      </label>
                   </div>
                </div>

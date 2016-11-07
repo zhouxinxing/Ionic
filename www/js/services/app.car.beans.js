@@ -6,7 +6,7 @@ define(function () {
    var app = angular.module('app.car.beans', []).factory('$carBeansService', ['$rootScope', function ($rootScope) {
 
       //Token 临时
-      $rootScope.TOKEN = '9A6B5FE1EDB9439C96E80AA4B63DDA21';
+      $rootScope.TOKEN = '38535F88A0E046B0A7376C6D881E9C66';
 
       $rootScope.BASE_BEAN = {
          //第三者责任险保额对象
@@ -16,7 +16,8 @@ define(function () {
          //乘客座位险
          PASSENGER_SEAT: [1, 2, 3, 4, 5, 10, 15, 20],
          //刮痕险
-         SCRATCH_INS: [0.2, 0.5, 1, 2]
+         SCRATCH_INS: [{"CODE":"365001","AMT":0.2}, {"CODE":"365002","AMT":0.5}, {"CODE":"365003","AMT":1}, {"CODE":"365004","AMT":2}],
+         SCRATCH_INS_VAL:{"365001":2000,"365002":5000,"365003":10000,"365004":20000}
       };
 
       $rootScope.CAR_BEANS = {
@@ -116,11 +117,11 @@ define(function () {
 
          //--------------------------------------begin 保险起止期--------------------------------------/
          /** 商业险保险起止期 */
-         INSRNC_BGN_TM: "2016-11-05 00:00",
-         INSRNC_END_TM: "2017-11-04 23:59:59",
+         INSRNC_BGN_TM: "2016-11-08 00:00",
+         INSRNC_END_TM: "2017-11-07 23:59:59",
          /** 交强险保险起止期 */
-         INSRNC_BGN_TM_JQ: "2016-11-05 00:00",
-         INSRNC_END_TM_JQ: "2017-11-04 23:59:59",
+         INSRNC_BGN_TM_JQ: "2016-11-08 00:00",
+         INSRNC_END_TM_JQ: "2017-11-07 23:59:59",
          /** 商业险既时生效  */
          SY_IS_IMMEFC: "0",
          /** 交强险既时生效  */
@@ -244,9 +245,9 @@ define(function () {
                /** 险种代码 */
                INSRNC_CDE: "",
                /** 保险金额/赔偿限额(元） */
-               AMT: "",
+               AMT: "365001",
                /** 不计免赔(0:否 1：是) */
-               FRANCHISE_FLAG: "",
+               FRANCHISE_FLAG: "0",
             },
             //10.发动机涉水损失险
             {

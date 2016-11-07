@@ -80,7 +80,7 @@
                         </td>
                         <td class="text-center">
                            <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[0].PURCHASE_FLAG" value="未投保"  readonly/>
-                           <input type="text" ng-if="CAR_BEANS.CVRG_LIST[0].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?!INSRNC_BGN_TM_CHANGE?CALCOST_RESULT.CVRG_DETAIL['030101'].PREMIUM:'待计算':'待计算'" readonly class="action-price"/>
+                           <input type="text" ng-if="CAR_BEANS.CVRG_LIST[0].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030101']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030101'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                         </td>
                         <td></td>
                      </tr>
@@ -101,7 +101,7 @@
                         </td>
                         <td class="text-center">
                            <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[1].PURCHASE_FLAG" value="未投保"  readonly/>
-                           <input type="text" ng-if="CAR_BEANS.CVRG_LIST[1].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?CALCOST_RESULT.CVRG_DETAIL['030102'].PREMIUM:'待计算'" readonly class="action-price"/>
+                           <input type="text" ng-if="CAR_BEANS.CVRG_LIST[1].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!SZ_CHANGE_FLAG?(CALCOST_RESULT.CVRG_DETAIL['030102']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030102'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                         </td>
                         <td>
                            <i class="icon ion-ios-arrow-right"></i>
@@ -118,7 +118,8 @@
                            <input type="text" ng-model="CAR_BEANS.CVRG_LIST[2].AMT" ng-init="CAR_BEANS.CVRG_LIST[2].AMT=CAR_BEANS.VHL_DATA.ACT_VALUE" readonly/>
                         </td>
                         <td class="text-center">
-                           <input type="text" value="待计算" readonly class="action-price"/>
+                           <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[2].PURCHASE_FLAG" value="未投保"  readonly/>
+                           <input type="text" ng-if="CAR_BEANS.CVRG_LIST[2].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030103']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030103'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                         </td>
                         <td></td>
                      </tr>
@@ -132,13 +133,14 @@
                            <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[3].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[3].INSRNC_CDE='030104'"/>
                            <div class="ui-select">
                               <label ng-bind="CAR_BEANS.CVRG_LIST[3].AMT"></label>
-                              <select ng-model="CAR_BEANS.CVRG_LIST[3].AMT">
+                              <select ng-model="CAR_BEANS.CVRG_LIST[3].AMT" ng-change="SJZW_CHANGE_FLAG=true">
                                  <option ng-repeat="DRIVER_SEAT_ITEM in BASE_BEAN.DRIVER_SEAT" value="{{DRIVER_SEAT_ITEM*10000}}">{{DRIVER_SEAT_ITEM+'万'}}</option>
                               </select>
                            </div>
                         </td>
                         <td class="text-center">
-                           <input type="text" value="待计算" readonly class="action-price"/>
+                           <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[3].PURCHASE_FLAG" value="未投保"  readonly/>
+                           <input type="text" ng-if="CAR_BEANS.CVRG_LIST[3].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!SJZW_CHANGE_FLAG?(CALCOST_RESULT.CVRG_DETAIL['030104']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030104'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                         </td>
                         <td>
                            <i class="icon ion-ios-arrow-right"></i>
@@ -154,13 +156,14 @@
                            <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[4].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[4].INSRNC_CDE='030105'"/>
                            <div class="ui-select">
                               <label ng-bind="CAR_BEANS.CVRG_LIST[4].AMT"></label>
-                              <select ng-model="CAR_BEANS.CVRG_LIST[4].AMT">
+                              <select ng-model="CAR_BEANS.CVRG_LIST[4].AMT" ng-change="CKZW_CHANGE_FLAG=true">
                                  <option ng-repeat="PASSENGER_SEAT_ITEM in BASE_BEAN.PASSENGER_SEAT" value="{{PASSENGER_SEAT_ITEM*10000}}">{{PASSENGER_SEAT_ITEM+'万'}}</option>
                               </select>
                            </div>
                         </td>
                         <td class="text-center">
-                           <input type="text" value="待计算" readonly class="action-price"/>
+                           <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[4].PURCHASE_FLAG" value="未投保"  readonly/>
+                           <input type="text" ng-if="CAR_BEANS.CVRG_LIST[4].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!CKZW_CHANGE_FLAG?(CALCOST_RESULT.CVRG_DETAIL['030105']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030105'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                         </td>
                         <td>
                            <i class="icon ion-ios-arrow-right"></i>
@@ -190,14 +193,15 @@
                                     <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[5].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[5].INSRNC_CDE='030107'"/>
                                     <div class="ui-select">
                                        <label>{{CAR_BEANS.CVRG_LIST[5].BULLET_GLASS=="0"?'普通玻璃':'防弹玻璃'}}</label>
-                                       <select ng-model="CAR_BEANS.CVRG_LIST[5].BULLET_GLASS">
+                                       <select ng-model="CAR_BEANS.CVRG_LIST[5].BULLET_GLASS" ng-change="BLPS_CHANGE_FLAG=true">
                                           <option value="0">普通玻璃</option>
                                           <option value="1">防弹玻璃</option>
                                        </select>
                                     </div>
                                  </td>
                                  <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[5].PURCHASE_FLAG" value="未投保"  readonly/>
+                                    <input type="text" ng-if="CAR_BEANS.CVRG_LIST[5].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!BLPS_CHANGE_FLAG?(CALCOST_RESULT.CVRG_DETAIL['030107']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030107'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td>
                                     <i class="icon ion-ios-arrow-right"></i>
@@ -210,11 +214,12 @@
                                     </div>
                                  </td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[6].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[6].INSRNC_CDE='030101'"/> <!--险种代码-->
+                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[6].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[6].INSRNC_CDE='030108'"/> <!--险种代码-->
                                     <input type="text" ng-model="CAR_BEANS.CVRG_LIST[6].AMT" ng-init="CAR_BEANS.CVRG_LIST[6].AMT=CAR_BEANS.VHL_DATA.ACT_VALUE" readonly/> <!--险种金额-->
                                  </td>
                                  <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[6].PURCHASE_FLAG" value="未投保"  readonly/>
+                                    <input type="text" ng-if="CAR_BEANS.CVRG_LIST[6].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030108']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030108'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
@@ -240,16 +245,19 @@
                                  <td class="text-center">
                                     <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[8].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[8].INSRNC_CDE='030110'"/>
                                     <div class="ui-select">
-                                       <label ng-bind="CAR_BEANS.CVRG_LIST[8].AMT"></label>
-                                       <select ng-model="CAR_BEANS.CVRG_LIST[8].AMT">
-                                          <option ng-repeat="SCRATCH_INS_ITEM in BASE_BEAN.SCRATCH_INS" value="{{SCRATCH_INS_ITEM*10000}}">{{SCRATCH_INS_ITEM+'万'}}</option>
+                                       <label ng-bind="BASE_BEAN.SCRATCH_INS_VAL[CAR_BEANS.CVRG_LIST[8].AMT]"></label>
+                                       <select ng-model="CAR_BEANS.CVRG_LIST[8].AMT" ng-change="CSGH_CHANGE_FLAG=true">
+                                          <option ng-repeat="(key,value) in BASE_BEAN.SCRATCH_INS" value="{{value.CODE}}">{{value.AMT+'万'}}</option>
                                        </select>
                                     </div>
                                  </td>
                                  <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[8].PURCHASE_FLAG" value="未投保"  readonly/>
+                                    <input type="text" ng-if="CAR_BEANS.CVRG_LIST[8].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!CSGH_CHANGE_FLAG?(CALCOST_RESULT.CVRG_DETAIL['030110']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030110'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
-                                 <td></td>
+                                 <td>
+                                    <i class="icon ion-ios-arrow-right"></i>
+                                 </td>
                               </tr>
                               <tr>
                                  <td>
@@ -261,7 +269,8 @@
                                     <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[9].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[9].INSRNC_CDE='030111'"/>
                                  </td>
                                  <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[9].PURCHASE_FLAG" value="未投保"  readonly/>
+                                    <input type="text" ng-if="CAR_BEANS.CVRG_LIST[9].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030111']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030111'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
@@ -275,7 +284,8 @@
                                     <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[10].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[10].INSRNC_CDE='030112'"/>
                                  </td>
                                  <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[10].PURCHASE_FLAG" value="未投保"  readonly/>
+                                    <input type="text" ng-if="CAR_BEANS.CVRG_LIST[10].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030112']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030112'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
@@ -299,10 +309,11 @@
                                     </div>
                                  </td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[12].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[12].INSRNC_CDE='030112'"/>
+                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[12].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[12].INSRNC_CDE='030114'"/>
                                  </td>
                                  <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[12].PURCHASE_FLAG" value="未投保"  readonly/>
+                                    <input type="text" ng-if="CAR_BEANS.CVRG_LIST[12].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030114']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030114'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
@@ -316,7 +327,8 @@
                                     <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[13].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[13].INSRNC_CDE='030115'"/>
                                  </td>
                                  <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[13].PURCHASE_FLAG" value="未投保"  readonly/>
+                                    <input type="text" ng-if="CAR_BEANS.CVRG_LIST[13].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030115']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030115'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
@@ -330,119 +342,112 @@
                                     <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[14].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[14].INSRNC_CDE='030116'"/>
                                  </td>
                                  <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!CAR_BEANS.CVRG_LIST[14].PURCHASE_FLAG" value="未投保"  readonly/>
+                                    <input type="text" ng-if="CAR_BEANS.CVRG_LIST[14].PURCHASE_FLAG" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030116']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030116'].PREMIUM):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
                               <tr ng-if="CAR_BEANS.CVRG_LIST[0].PURCHASE_FLAG">
                                  <td>
                                     <div class="tab-cel checkbox-box">
-                                       <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[0].PURCHASE_FLAG"><span>不计免赔险(车损)</span></ion-checkbox>
+                                       <ion-checkbox ng-model="FRANCHISE_FLAG_0T" ng-value="FRANCHISE_FLAG_0T?CAR_BEANS.CVRG_LIST[0].FRANCHISE_FLAG='1':CAR_BEANS.CVRG_LIST[0].FRANCHISE_FLAG='0'"><span>不计免赔险(车损)</span></ion-checkbox>
                                     </div>
                                  </td>
+                                 <td class="text-center"></td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[0].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[0].FRANCHISE_FLAG='1'"/>
-                                 </td>
-                                 <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!FRANCHISE_FLAG_0T" value="未投保"  readonly/>
+                                    <input type="text" ng-if="FRANCHISE_FLAG_0T" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030101']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030101'].N_YL12):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
                               <tr ng-if="CAR_BEANS.CVRG_LIST[1].PURCHASE_FLAG">
                                  <td>
                                     <div class="tab-cel checkbox-box">
-                                       <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[1].PURCHASE_FLAG"><span>不计免赔险(三者)</span></ion-checkbox>
+                                       <ion-checkbox ng-model="FRANCHISE_FLAG_1T" ng-value="FRANCHISE_FLAG_1T?CAR_BEANS.CVRG_LIST[1].FRANCHISE_FLAG='1':CAR_BEANS.CVRG_LIST[1].FRANCHISE_FLAG='0'"><span>不计免赔险(三者)</span></ion-checkbox>
                                     </div>
                                  </td>
+                                 <td class="text-center"></td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[1].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[1].FRANCHISE_FLAG='1'"/>
-                                 </td>
-                                 <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!FRANCHISE_FLAG_1T" value="未投保"  readonly/>
+                                    <input type="text" ng-if="FRANCHISE_FLAG_1T" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030102']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030102'].N_YL12):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
                               <tr ng-if="CAR_BEANS.CVRG_LIST[2].PURCHASE_FLAG">
                                  <td>
                                     <div class="tab-cel checkbox-box">
-                                       <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[2].PURCHASE_FLAG"><span>不计免赔险(盗抢)</span></ion-checkbox>
+                                       <ion-checkbox ng-model="FRANCHISE_FLAG_2T" ng-value="FRANCHISE_FLAG_2T?CAR_BEANS.CVRG_LIST[2].FRANCHISE_FLAG='1':CAR_BEANS.CVRG_LIST[2].FRANCHISE_FLAG='0'"><span>不计免赔险(盗抢)</span></ion-checkbox>
                                     </div>
                                  </td>
+                                 <td class="text-center"></td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[2].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[2].FRANCHISE_FLAG='1'"/>
-                                 </td>
-                                 <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!FRANCHISE_FLAG_2T" value="未投保"  readonly/>
+                                    <input type="text" ng-if="FRANCHISE_FLAG_2T" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030103']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030103'].N_YL12):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
                               <tr ng-if="CAR_BEANS.CVRG_LIST[3].PURCHASE_FLAG">
                                  <td>
                                     <div class="tab-cel checkbox-box">
-                                       <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[3].PURCHASE_FLAG"><span>不计免赔险(司机)</span></ion-checkbox>
+                                       <ion-checkbox ng-model="FRANCHISE_FLAG_3T" ng-value="FRANCHISE_FLAG_3T?CAR_BEANS.CVRG_LIST[3].FRANCHISE_FLAG='1':CAR_BEANS.CVRG_LIST[3].FRANCHISE_FLAG='0'"><span>不计免赔险(司机)</span></ion-checkbox>
                                     </div>
                                  </td>
+                                 <td class="text-center"></td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[3].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[3].FRANCHISE_FLAG='1'"/>
-                                 </td>
-                                 <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!FRANCHISE_FLAG_3T" value="未投保"  readonly/>
+                                    <input type="text" ng-if="FRANCHISE_FLAG_3T" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030104']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030104'].N_YL12):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
                               <tr ng-if="CAR_BEANS.CVRG_LIST[4].PURCHASE_FLAG">
                                  <td>
                                     <div class="tab-cel checkbox-box">
-                                       <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[4].PURCHASE_FLAG"><span>不计免赔险(乘客)</span></ion-checkbox>
+                                       <ion-checkbox ng-model="FRANCHISE_FLAG_4T" ng-value="FRANCHISE_FLAG_4T?CAR_BEANS.CVRG_LIST[4].FRANCHISE_FLAG='1':CAR_BEANS.CVRG_LIST[4].FRANCHISE_FLAG='0'"><span>不计免赔险(乘客)</span></ion-checkbox>
                                     </div>
                                  </td>
+                                 <td class="text-center"></td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[4].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[4].FRANCHISE_FLAG='1'"/>
-                                 </td>
-                                 <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!FRANCHISE_FLAG_4T" value="未投保"  readonly/>
+                                    <input type="text" ng-if="FRANCHISE_FLAG_4T" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030105']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030105'].N_YL12):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
                               <tr ng-if="CAR_BEANS.CVRG_LIST[8].PURCHASE_FLAG">
                                  <td>
                                     <div class="tab-cel checkbox-box">
-                                       <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[8].PURCHASE_FLAG"><span>不计免赔险(刮痕)</span></ion-checkbox>
+                                       <ion-checkbox ng-model="FRANCHISE_FLAG_8T" ng-value="FRANCHISE_FLAG_8T?CAR_BEANS.CVRG_LIST[8].FRANCHISE_FLAG='1':CAR_BEANS.CVRG_LIST[8].FRANCHISE_FLAG='0'"><span>不计免赔险(刮痕)</span></ion-checkbox>
                                     </div>
                                  </td>
+                                 <td class="text-center"></td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[8].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[8].FRANCHISE_FLAG='1'"/>
-                                 </td>
-                                 <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!FRANCHISE_FLAG_8T" value="未投保"  readonly/>
+                                    <input type="text" ng-if="FRANCHISE_FLAG_8T" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030110']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030110'].N_YL12):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
                               <tr ng-if="CAR_BEANS.CVRG_LIST[6].PURCHASE_FLAG">
                                  <td>
                                     <div class="tab-cel checkbox-box">
-                                       <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[6].PURCHASE_FLAG"><span>不计免赔险(自燃)</span></ion-checkbox>
+                                       <ion-checkbox ng-model="FRANCHISE_FLAG_6T" ng-value="FRANCHISE_FLAG_6T?CAR_BEANS.CVRG_LIST[6].FRANCHISE_FLAG='1':CAR_BEANS.CVRG_LIST[6].FRANCHISE_FLAG='0'"><span>不计免赔险(自燃)</span></ion-checkbox>
                                     </div>
                                  </td>
+                                 <td class="text-center"></td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[6].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[6].FRANCHISE_FLAG='1'"/>
-                                 </td>
-                                 <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!FRANCHISE_FLAG_6T" value="未投保"  readonly/>
+                                    <input type="text" ng-if="FRANCHISE_FLAG_6T" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030108']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030108'].N_YL12):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
                               <tr ng-if="CAR_BEANS.CVRG_LIST[9].PURCHASE_FLAG">
                                  <td>
                                     <div class="tab-cel checkbox-box">
-                                       <ion-checkbox ng-disabled="!CAR_BEANS.CVRG_LIST[9].PURCHASE_FLAG"><span>不计免赔险(涉水)</span></ion-checkbox>
+                                       <ion-checkbox ng-model="FRANCHISE_FLAG_9T" ng-value="FRANCHISE_FLAG_9T?CAR_BEANS.CVRG_LIST[9].FRANCHISE_FLAG='1':CAR_BEANS.CVRG_LIST[9].FRANCHISE_FLAG='0'"><span>不计免赔险(涉水)</span></ion-checkbox>
                                     </div>
                                  </td>
+                                 <td class="text-center"></td>
                                  <td class="text-center">
-                                    <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[9].FRANCHISE_FLAG" ng-init="CAR_BEANS.CVRG_LIST[9].FRANCHISE_FLAG='1'"/>
-                                 </td>
-                                 <td class="text-center">
-                                    <input type="text" value="待计算" readonly class="action-price"/>
+                                    <input type="text" ng-if="!FRANCHISE_FLAG_9T" value="未投保"  readonly/>
+                                    <input type="text" ng-if="FRANCHISE_FLAG_9T" ng-value="CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['030111']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['030111'].N_YL12):'待计算'):'待计算'" readonly class="action-price"/>
                                  </td>
                                  <td></td>
                               </tr>
@@ -467,13 +472,19 @@
                      <div class="row">
                         <div class="col col-50">交强险</div>
                         <div class="col col-50 com-price">
-                           <div class="item-content"><span>待计算</span></div>
+                           <div class="item-content">
+                              <span>{{CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_JQ_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['0357']==undefined?'待计算':CALCOST_RESULT.CVRG_DETAIL['0357'].PREMIUM):'待计算'):'待计算'}}</span>
+                           </div>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col col-50">车船税</div>
                         <div class="col col-50 com-price">
-                           <div class="item-content"><span>待计算</span></div>
+                           <div class="item-content">
+                              <span>
+                                 {{CALCOST_RESULT.CALCOST_FLAG?(!INSRNC_BGN_TM_JQ_CHANGE?(CALCOST_RESULT.CVRG_DETAIL['0357']==undefined?'待计算':CALCOST_RESULT.VHLTAX.SUM_UP_TAX):'待计算'):'待计算'}}
+                              </span>
+                           </div>
                         </div>
                      </div>
                      <div class="row com-price-desc">
@@ -490,10 +501,11 @@
    <div class="bar bar-footer no-padding bar-footer-price">
       <div class="price-tags-box">
          <div class="price-tags price-tags-left">
-            总价:<span>￥0</span>
+            总价:<span>{{CALCOST_RESULT.CALCOST_FLAG?('￥'+('' | sum:2:[CALCOST_RESULT.SY_BASE.PREMIUM,CALCOST_RESULT.JQ_BASE.PREMIUM,CALCOST_RESULT.VHLTAX.SUM_UP_TAX])):'待计算'}}</span>
          </div>
          <div class="price-tags price-tags-right">
-            <button class="button button-balanced" ng-click="calAmount();">计算保费</button>
+            <button class="button button-balanced" ng-click="calAmount();" ng-if="REL_CALCOST_FLAG">{{REL_CALCOST_TRIMER?'重新计算':'计算保费'}}</button>
+            <button class="button button-balanced submit-button" ng-click="checkHandle();"  ng-if="!REL_CALCOST_FLAG">提交订单</button>
          </div>
       </div>
    </div>
