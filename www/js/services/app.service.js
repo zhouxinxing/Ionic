@@ -9,7 +9,7 @@ define(function () {
             if (_handleScroll.length) {
                $rootScope.scrollTimer = window.setInterval(function () {
                   $ionicScrollDelegate.$getByHandle('handleScroll').resize();
-               }, 1000);
+               }, 1200);
             }
             //解决安卓BUG-》点击checkbox 的时候，焦点总是移动
             angular.element('input[type="checkbox"]').on('change', function () {

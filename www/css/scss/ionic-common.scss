@@ -13,6 +13,7 @@ $search-button-color:#00BCD4;
 $bar-footer-height:50px;
 $nav-therm-color:white;
 $price-color:#ff5d50;
+$common-title-color:#ff5353;
 
 *, .ionic-body, html, body {
   font-family: $font-family;
@@ -156,6 +157,8 @@ button, input, select, textarea{
 .form-group {
   background: white;
   margin: 10px 0;
+  margin: 10px 5px;
+  border-radius: 2px;
   .input-label {
     padding-left: 10px;
     white-space: nowrap;
@@ -215,7 +218,7 @@ button, input, select, textarea{
   /**表单分组-标题**/
   .form-group-title {
     padding: 10px 8px;
-    color: #ff5353;
+    color: $common-title-color;
     font-size: 1.5rem;
     position: relative;
     border-bottom: 1px #e2e2e2 solid;
@@ -299,7 +302,7 @@ button, input, select, textarea{
 
 /***车险报价***/
 .item-ron-wrap{
-  border-bottom: none;
+  border-bottom: none !important;
   .item{
     border-bottom: none;
   }
@@ -581,3 +584,76 @@ button, input, select, textarea{
   border-color: $mobiscroll-therm-color !important;
 }
 /*************end   日历控件主题修改*************/
+
+
+
+/*********begin tab 切换**********/
+.toggle-tabs {
+  width: 100%;
+  float: none;
+  list-style: none;
+  position: relative;
+  text-align: left;
+  border-radius: 2px;
+  overflow: hidden;
+  height: 265px;
+}
+.toggle-tabs li {
+  float: left;
+  display: block;
+}
+.toggle-tabs input[type="radio"] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+.toggle-tabs label {
+  display: block;
+  font-weight: normal;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  padding: 5px;
+}
+.toggle-tabs .tab-content {
+  z-index: 2;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  padding: 5px 10px;
+  height: 260px;
+}
+.toggle-tabs [id^="tab"]:checked + label {
+  color: $common-title-color;
+  border-bottom: 2px $common-title-color solid;
+}
+.toggle-tabs [id^="tab"]:checked ~ [id^="tab-content"] {
+  display: block;
+}
+.delivery-address {
+  padding: 6px 0;
+  font-size: 1.4rem;
+  color: $common-title-color;
+  border-bottom: 1px #e2e2e2 solid;
+}
+.delivery-from{
+  .item{
+    text-align: left;
+    .input-label{
+      width: 35%;
+      float: left;
+    }
+    input,select{
+      width: 65%;
+      float: left;
+    }
+  }
+}
+/*********end   tab 切换**********/

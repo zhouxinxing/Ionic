@@ -6,7 +6,7 @@ define(function () {
    var app = angular.module('app.car.beans', []).factory('$carBeansService', ['$rootScope', function ($rootScope) {
 
       //Token 临时
-      $rootScope.TOKEN = '38535F88A0E046B0A7376C6D881E9C66';
+      $rootScope.TOKEN = 'E69E53BC10DE47098D1A1568B0A62F42';
 
       $rootScope.BASE_BEAN = {
          //第三者责任险保额对象
@@ -82,8 +82,10 @@ define(function () {
 
          //--------------------------------------begin  投保人被保人车主关系信息--------------------------------------/
          /**投保人同车主    */
+         APP_SAME_CHECK:true,
          appIsDrvOwner: "1",
          /**被保人同车主    */
+         REC_SAME_CHECK:true,
          insrntIsDrvOwner: "1",
          //--------------------------------------end  投保人被保人车主关系信息--------------------------------------/
 
@@ -117,11 +119,11 @@ define(function () {
 
          //--------------------------------------begin 保险起止期--------------------------------------/
          /** 商业险保险起止期 */
-         INSRNC_BGN_TM: "2016-11-08 00:00",
-         INSRNC_END_TM: "2017-11-07 23:59:59",
+         INSRNC_BGN_TM: "2016-11-18 00:00",
+         INSRNC_END_TM: "2017-11-17 23:59:59",
          /** 交强险保险起止期 */
-         INSRNC_BGN_TM_JQ: "2016-11-08 00:00",
-         INSRNC_END_TM_JQ: "2017-11-07 23:59:59",
+         INSRNC_BGN_TM_JQ: "2016-11-18 00:00",
+         INSRNC_END_TM_JQ: "2017-11-17 23:59:59",
          /** 商业险既时生效  */
          SY_IS_IMMEFC: "0",
          /** 交强险既时生效  */

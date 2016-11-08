@@ -1,0 +1,93 @@
+<ion-view view-title="车主信息" class="mit-view" hide-tabs="true">
+   <ion-content class="im-wrapper">
+      <div class="card-form">
+         <form class="list-block-from" name="form" ng-submit="" novalidate="novalidate">
+            <div class="item-text-wrap">
+               <div class="list">
+                  <div class="form-group">
+                     <div class="form-group-title">
+                        <div>投保人信息</div>
+                        <div class="checkbox-box field-check-box">
+                           <ion-checkbox ng-checked="CAR_BEANS.APP_SAME_CHECK" ng-model="CAR_BEANS.APP_SAME_CHECK" ng-value="{{CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.appIsDrvOwner='1':CAR_BEANS.appIsDrvOwner='0'}}"><span class="field-title">同车主</span></ion-checkbox>
+                        </div>
+                     </div>
+                     <label class="item item-input">
+                        <span class="input-label">姓名</span>
+                        <input type="text" placeholder="请输入姓名" name="APP_NME" ng-model="CAR_BEANS.APP_NME" ng-value="CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.DRV_OWNER:''" ng-require="!CAR_BEANS.APP_SAME_CHECK" required-msg="请输入投保人姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的投保人姓名输入有误" ng-readonly="CAR_BEANS.APP_SAME_CHECK"/>
+                     </label>
+                     <label class="item item-input">
+                        <span class="input-label">身份证号码</span>
+                        <input type="text" placeholder="请输入身份证号" name="APP_CERT_NO" ng-model="CAR_BEANS.APP_CERT_NO" ng-value="CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.CERTI_CODE:''" required required-msg="请输入投保人身份证号" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/" pattern-msg="您的投保人身份证号输入有误" ng-readonly="CAR_BEANS.APP_SAME_CHECK"/>
+                     </label>
+                     <label class="item item-input">
+                        <span class="input-label">手机号码</span>
+                        <input type="text" placeholder="请输入手机号码" name="APP_TEL" ng-model="CAR_BEANS.APP_TEL" ng-value="CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.CERTI_TEL:''" required required-msg="请输入投保人手机号码" ng-pattern="/^[1][3-9][0-9]{9}$/" pattern-msg="您的投保人手机号码输入不正确"/>
+                     </label>
+                  </div>
+                  <div class="form-group">
+                     <div class="form-group-title">
+                        <div>被保险人信息</div>
+                        <div class="checkbox-box field-check-box">
+                           <ion-checkbox ng-checked="CAR_BEANS.REC_SAME_CHECK" ng-model="CAR_BEANS.REC_SAME_CHECK" ng-value="{{CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.insrntIsDrvOwner='1':CAR_BEANS.insrntIsDrvOwner='0'}}"><span class="field-title">同车主</span></ion-checkbox>
+                        </div>
+                     </div>
+                     <label class="item item-input">
+                        <span class="input-label">姓名</span>
+                        <input type="text" placeholder="请输入姓名" name="INSRNT_CNM" ng-model="CAR_BEANS.INSRNT_CNM" ng-value="REC_SAME_CHECK?DRV_OWNER:''" required required-msg="请输入被保人姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的被保人姓名输入有误" ng-readonly="CAR_BEANS.REC_SAME_CHECK"/>
+                     </label>
+                     <label class="item item-input">
+                        <span class="input-label">身份证号码</span>
+                        <input type="text" placeholder="请输入身份证号" name="BIZ_CERT_NO" ng-model="CAR_BEANS.BIZ_CERT_NO" ng-value="REC_SAME_CHECK?CERTI_CODE:''" required required-msg="请输入被保人身份证号" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/" pattern-msg="您的被保人身份证号输入有误"  ng-readonly="CAR_BEANS.REC_SAME_CHECK"/>
+                     </label>
+                     <label class="item item-input">
+                        <span class="input-label">手机号码</span>
+                        <input type="text" placeholder="请输入手机号码" name="INSRNT_TEL" ng-model="CAR_BEANS.INSRNT_TEL" ng-value="REC_SAME_CHECK?CERTI_TEL:''" required required-msg="请输入被保人手机号码" ng-pattern="/^[1][3-9][0-9]{9}$/" pattern-msg="您的被保人手机号码输入不正确"/>
+                     </label>
+                  </div>
+                  <div class="form-group">
+                     <div class="form-group-title">
+                        <div>保单配送信息</div>
+                     </div>
+                     <ul class="toggle-tabs" ng-ul-adaption>
+                        <li>
+                           <input type="radio" name="tabs" id="tab1" checked />
+                           <label for="tab1">免费配送</label>
+                           <div id="tab-content1" class="tab-content">
+                              <div class="delivery-address">
+                                 <div>配送地址</div>
+                                 <div class="checkbox-box field-check-box">
+                                    <ion-checkbox><span class="field-title">同被保险人</span></ion-checkbox>
+                                 </div>
+                              </div>
+                              <div class="delivery-from">
+                                 <label class="item item-input">
+                                    <span class="input-label">收件人姓名</span>
+                                    <input type="text" placeholder="请输入姓名" name="INSRNT_CNM" ng-model="CAR_BEANS.INSRNT_CNM" ng-value="REC_SAME_CHECK?DRV_OWNER:''" required required-msg="请输入被保人姓名" ng-pattern="/^[\u4e00-\u9fa5 ]{2,8}$/" pattern-msg="您的被保人姓名输入有误"/>
+                                    <div style="clear: both"></div>
+                                 </label>
+                                 <label class="item item-input">
+                                    <span class="input-label">收件人城市</span>
+                                    <span class="city-picker">
+                                       <input type="text" placeholder="请选择城市" ng-city-picker="true"/>
+                                    </span>
+                                    <div style="clear: both"></div>
+                                 </label>
+                              </div>
+                           </div>
+                        </li>
+                        <li>
+                           <input type="radio" name="tabs" id="tab2" />
+                           <label for="tab2">门店自取</label>
+                           <div id="tab-content2" class="tab-content">
+                              <p>选项卡内容 2</p>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <button type="submit" class="button button-assertive button-width-full">下一步</button>
+         </form>
+      </div>
+   </ion-content>
+</ion-view>

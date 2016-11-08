@@ -48,7 +48,7 @@
                      <div class="form-group-title">
                         <div>投保人信息</div>
                         <div class="checkbox-box field-check-box">
-                           <ion-checkbox ng-checked="true" ng-model="CAR_BEANS.APP_SAME_CHECK" ng-init="CAR_BEANS.APP_SAME_CHECK = true"><span class="field-title">同车主</span></ion-checkbox>
+                           <ion-checkbox ng-checked="true" ng-model="CAR_BEANS.APP_SAME_CHECK" ng-value="{{CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.appIsDrvOwner='1':CAR_BEANS.appIsDrvOwner='0'}}"><span class="field-title">同车主</span></ion-checkbox>
                         </div>
                      </div>
                      <div ng-if="!CAR_BEANS.APP_SAME_CHECK">
@@ -70,7 +70,7 @@
                      <div class="form-group-title">
                         <div>被保险人信息</div>
                         <div class="checkbox-box field-check-box">
-                           <ion-checkbox ng-checked="true" ng-model="CAR_BEANS.REC_SAME_CHECK" ng-init="CAR_BEANS.REC_SAME_CHECK = true"><span class="field-title">同车主</span></ion-checkbox>
+                           <ion-checkbox ng-checked="true" ng-model="CAR_BEANS.REC_SAME_CHECK" ng-value="{{CAR_BEANS.APP_SAME_CHECK?CAR_BEANS.insrntIsDrvOwner='1':CAR_BEANS.insrntIsDrvOwner='0'}}"><span class="field-title">同车主</span></ion-checkbox>
                         </div>
                      </div>
                      <div ng-if="!CAR_BEANS.REC_SAME_CHECK">

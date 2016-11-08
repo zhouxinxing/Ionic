@@ -15,7 +15,7 @@ require.config({
     modalSelect:Controller.Constant.libBase + 'vendor/ionic-modal-select/js/ionic-modal-select',
     css: Controller.Constant.libBase + 'vendor/require/require.css.min',
     /***按需加载 插件库***/
-    mobiscroll: Controller.Constant.libBase + 'vendor/mobiscroll/js/mobiscroll.2.13.2',
+    mobiscroll: Controller.Constant.libBase + 'vendor/mobiscroll/js/mobiscroll-2.13.2.full',
     /***工具库***/
     utils: Controller.Constant.base + 'js/handles/app.handles'
   },

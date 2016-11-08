@@ -40,6 +40,12 @@ define(['modules/app'], function (app) {
                files: [
                   'js/controllers/app.guaSelect.controller.js'
                ]
+            },
+            {
+               name: 'owConfirmControllerFile',
+               files: [
+                  'js/controllers/app.owConfirm.controller.js'
+               ]
             }
          ]
       });
@@ -159,6 +165,19 @@ define(['modules/app'], function (app) {
          },
          resolve: resovleDep({
             name: 'guaSelectControllerFile'
+         })
+      });
+      //信息确认页面
+      $stateProvider.state('tab.owConfirm', {
+         url: '/owConfirm',
+         views: {
+            'indexContent':{
+               templateUrl: 'templates/iv-pages/mit-owinfo-confirm.html',
+               controller: 'owConfirmController'
+            }
+         },
+         resolve: resovleDep({
+            name: 'owConfirmControllerFile'
          })
       });
       /*********************end   车险投保页面***********************/

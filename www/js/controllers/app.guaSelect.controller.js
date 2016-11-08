@@ -116,6 +116,24 @@ define([
                $scope.REL_CALCOST_TRIMER = true;
             }
          });
+
+         $scope.$watch('CAR_BEANS.SY_ORIG_FLG', function (value) { //是否购买商业险
+            $scope.REL_CALCOST_FLAG = true;//重新计算标识
+         });
+
+         $scope.$watch('CAR_BEANS.JQ_ORIG_FLG', function (value) { //是否购买交强险
+            $scope.REL_CALCOST_FLAG = true;//重新计算标识
+         });
+
+         //监听所有选择框 有变化 就需要重新计算
+         angular.forEach($rootScope.CAR_BEANS.CVRG_LIST, function (item,index,array) {
+            $scope.$watch('CAR_BEANS.CVRG_LIST['+index+'].PURCHASE_FLAG', function (value) {
+               $scope.REL_CALCOST_FLAG = true;//重新计算标识
+            });
+            $scope.$watch('CAR_BEANS.CVRG_LIST['+index+'].FRANCHISE_FLAG', function (value) {
+               $scope.REL_CALCOST_FLAG = true;//重新计算标识
+            });
+         });
          //-------------------------------------------------------------------------------------------------//
          //---------------------------------------end 监听方法---------------------------------------------//
          //-------------------------------------------------------------------------------------------------//
@@ -148,7 +166,7 @@ define([
             //2.提交数据到后台服务
             $handleService.http({
                //url: $interFace.mitMainFace,
-               url: 'data/result.json',
+              url: 'data/result.json',
                method: 'POST',
                headers: {
                   token: $rootScope.TOKEN,
@@ -173,7 +191,8 @@ define([
          };
          //提交订单方法
          $scope.checkHandle= function () {
-
+            //跳转到-》信息确认页面
+            $location.path("tab/owConfirm");
          };
          //----------------------------------------end   报价信息页面----------------------------------------//
       });
