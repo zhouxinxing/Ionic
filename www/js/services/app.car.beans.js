@@ -6,7 +6,7 @@ define(function () {
    var app = angular.module('app.car.beans', []).factory('$carBeansService', ['$rootScope', function ($rootScope) {
 
       //Token 临时
-      $rootScope.TOKEN = 'E69E53BC10DE47098D1A1568B0A62F42';
+      $rootScope.TOKEN = '61C40B7F16F043C287DA775E48704B1E';
 
       $rootScope.BASE_BEAN = {
          //第三者责任险保额对象
@@ -16,8 +16,11 @@ define(function () {
          //乘客座位险
          PASSENGER_SEAT: [1, 2, 3, 4, 5, 10, 15, 20],
          //刮痕险
-         SCRATCH_INS: [{"CODE":"365001","AMT":0.2}, {"CODE":"365002","AMT":0.5}, {"CODE":"365003","AMT":1}, {"CODE":"365004","AMT":2}],
-         SCRATCH_INS_VAL:{"365001":2000,"365002":5000,"365003":10000,"365004":20000}
+         SCRATCH_INS: [{"CODE": "365001", "AMT": 0.2}, {"CODE": "365002", "AMT": 0.5}, {
+            "CODE": "365003",
+            "AMT": 1
+         }, {"CODE": "365004", "AMT": 2}],
+         SCRATCH_INS_VAL: {"365001": 2000, "365002": 5000, "365003": 10000, "365004": 20000}
       };
 
       $rootScope.CAR_BEANS = {
@@ -82,10 +85,10 @@ define(function () {
 
          //--------------------------------------begin  投保人被保人车主关系信息--------------------------------------/
          /**投保人同车主    */
-         APP_SAME_CHECK:true,
+         APP_SAME_CHECK: true,
          appIsDrvOwner: "1",
          /**被保人同车主    */
-         REC_SAME_CHECK:true,
+         REC_SAME_CHECK: true,
          insrntIsDrvOwner: "1",
          //--------------------------------------end  投保人被保人车主关系信息--------------------------------------/
 
@@ -370,7 +373,7 @@ define(function () {
 
       //保费计算 返回数据结构
       $rootScope.CALCOST_RESULT = {
-         CALCOST_FLAG:false,
+         CALCOST_FLAG: false,
          SY_BASE: { //商业险
             //保额合计
             AMOUNT: "0",
@@ -398,7 +401,43 @@ define(function () {
             SUM_UP_TAX: "0"
          },
          //保费明细
-         CVRG_DETAIL:{}
+         CVRG_DETAIL: {}
+      };
+
+      //提交核保 数据对象
+      $rootScope.SUB_CH_DATA = {
+         //投保人名称
+         APP_NME: "",
+         //付款人姓名
+         PAY_PRSN_NME: "",
+         //报价单号
+         CAL_APP_NO: "",
+         //投保人证件类型
+         APP_CERT_TYPE: "",
+         //投保人证件号码
+         APP_CERT_NO: "",
+         //投保人联系人电话
+         APP_TEL: "",
+         //被保险人姓名
+         INSRNT_CNM: "",
+         //被保人证件类型
+         BIZ_CERT_TYPE: "",
+         //被保人证件号码
+         BIZ_CERT_NO: "",
+         //被保险人电话
+         INSRNT_TEL: "",
+         //业务员工号
+         HAND_PER: "",
+         //投保人地址
+         APP_ADDR: "",
+         //被保人地址
+         INSRNT_ADDR: "",
+         //续保标志
+         ORIG_FLG: "",
+         //上年商业险保单号
+         ORIG_PLY_NO_SY: "",
+         //上年交强险保单号
+         ORIG_PLY_NO_JQ: ""
       };
       return {};
    }]);

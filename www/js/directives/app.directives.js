@@ -152,60 +152,90 @@ define(['mobiscroll'], function () {
    }
    ]);
    //7.城市组件
-   app.directive('ngCityPicker', ["$http", function ($http) {
+   app.directive('ngCityPicker', ["$http","$compile", function ($http,$compile) {
       return {
          restrict: 'A',
          multiElement: true,
          link: function (scope, element, attr) {
-            //获取省市区
-            $http.get('data/area-data.json').success(function (data) {
-               //创建DOM
-               var _html = '<ul style="display:none" id="city-list">';
-               angular.forEach(data, function (ptem) {
-                  if (ptem.flag == '1') { //1为有效
-                     _html += '<li data-val=' + '"' + ptem.code + '"' + '>' + ptem.name;
-
-                     var _city_ul = '<ul>';
-                     angular.forEach(ptem.city, function (ctem) {
-                        _city_ul += '<li data-val=' + '"' + ctem.code + '"' + '>' + ctem.name;
-
-                        var _area_ul = '<ul>';
-                        angular.forEach(ctem.area, function (cotem) {
-                           _area_ul += '<li data-val=' + '"' + cotem.code + '"' + '>' + cotem.name + '</li>';
+            console.log(attr.ngCityPicker);
+            //点击 显示
+            element.click(function () {
+               element.parent().append($compile('<ion-spinner class="city-spinner" icon="ios"></ion-spinner>')(scope));
+               //获取省市区
+               $http.get('data/area-data.json').success(function (citydata) {
+                  //---------------------------------------begin 创建DOM---------------------------------------//
+                  var _html = '<ul style="display:none" id="c_city_list">';
+                  angular.forEach(citydata, function (ptem) {
+                     if (ptem.flag == '1') { //1为有效
+                        _html += '<li data-val=' + '"' + ptem.code + '"' + '>' + ptem.name;
+                        //----------------------------------begin 城市----------------------------------//
+                        var _city_ul = '<ul>';
+                        angular.forEach(ptem.city, function (ctem) {
+                           _city_ul += '<li data-val=' + '"' + ctem.code + '"' + '>' + ctem.name;
+                           //----------------------------------begin 区域----------------------------------//
+                           var _area_ul = '<ul>';
+                           angular.forEach(ctem.area, function (cotem) {
+                              _area_ul += '<li data-val=' + '"' + cotem.code + '"' + '>' + cotem.name + '</li>';
+                           });
+                           _area_ul += '</ul>';
+                           //----------------------------------end 区域----------------------------------//
+                           //区添加到市
+                           _city_ul += _area_ul;
+                           _city_ul += '</li>';
                         });
-                        _area_ul += '</ul>';
+                        _city_ul += '</ul>';
+                        //----------------------------------end   城市----------------------------------//
+                        //市区添加到省
+                        _html += _city_ul;
+                        _html += '</li>';
+                     }
+                  });
+                  _html += '</ul>';
+                  //---------------------------------------end   创建DOM---------------------------------------//
 
-                        //区添加到市
-                        _city_ul += _area_ul;
+                  //创建滚动
+                  $(_html).mobiscroll().treelist({
+                     lang: 'zh',
+                     theme: 'android-ics light',//样式
+                     mode: 'scroller',//选择模式  scroller  clickpick  mixed
+                     display: 'bottom',//指定显示模式 modal bottom
+                     fixedWidth: [160, 160, 160],
+                     headerText: '选择城市',
+                     placeholder: '请选择城市',
+                     onSelect: function (valueText, inst) {
+                        var _val = valueText.split(' '),
+                            _ele_next = element.nextAll('input'),
+                            _city_name_val = citydata[_val[0]].name + ' ' + citydata[_val[0]].city[_val[1]].name + ' ' + citydata[_val[0]].city[_val[1]].area[_val[2]].name;
+                        //1.获取选中中文字符串 赋到文本
+                        element.val(_city_name_val);
+                        //2.获取值 赋值
+                        if(_ele_next.length>0){
+                           angular.forEach(_ele_next, function (nitem,nindex,narray) {
+                              var _el_item = angular.element(nitem),
+                                  _scopes  =_el_item.attr('ng-model').split('.'),
+                                  _car_no_header = citydata[_val[0]].city[_val[1]].carNoHeader;
+                              switch (_el_item.attr('for-val')){
+                                 case 'code':
+                                    scope['C_'+_scopes[_scopes.length-1]]=valueText;
+                                    break;
+                                 case 'name':
+                                    scope['C_'+_scopes[_scopes.length-1]]=_city_name_val;
+                                    break;
+                                 case 'carNo':
+                                    scope['C_'+_scopes[_scopes.length-1]]=_car_no_header;
+                                    break;
+                              }
+                           });
+                        }
+                     }
+                  });
 
-                        _city_ul += '</li>';
-                     });
-                     _city_ul += '</ul>';
-
-                     //市区添加到省
-                     _html += _city_ul;
-
-                     _html += '</li>';
-                  }
-               });
-               _html += '</ul>';
-               //创建滚动
-               $(_html).mobiscroll().treelist({
-                  lang: 'zh',
-                  theme: 'android-ics light',//样式
-                  mode: 'scroller',//选择模式  scroller  clickpick  mixed
-                  display: 'bottom',//指定显示模式 modal bottom
-                  fixedWidth: [160, 160, 160],
-                  placeholder: '请选择城市',
-                  onSelect: function (valueText, inst) {
-                     console.log(valueText);
-                  }
-               });
-               //点击 显示
-               element.click(function () {
+                  //进行展示
                   $(_html).mobiscroll('show');
-                  return false;
+                  //移除加载框
+                  element.parent().find('.city-spinner').remove();
                });
+               return false;
             });
          }
       };

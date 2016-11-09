@@ -224,6 +224,9 @@ button, input, select, textarea {
 .card-form .item-modal-select .toggle {
   top: 0; }
 
+.card-form .disc-item-select {
+  padding: 3px 15px; }
+
 .mit-view {
   background-color: #f7f7f7; }
 
@@ -579,7 +582,7 @@ button, input, select, textarea {
   text-align: left;
   border-radius: 2px;
   overflow: hidden;
-  height: 265px; }
+  height: 232px; }
 
 .toggle-tabs li {
   float: left;
@@ -596,10 +599,6 @@ button, input, select, textarea {
   text-transform: uppercase;
   cursor: pointer;
   position: relative;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
   text-align: center;
   padding: 5px; }
 
@@ -611,7 +610,7 @@ button, input, select, textarea {
   position: absolute;
   left: 0;
   padding: 5px 10px;
-  height: 260px; }
+  height: 230px; }
 
 .toggle-tabs [id^="tab"]:checked + label {
   color: #ff5353;
@@ -635,4 +634,29 @@ button, input, select, textarea {
     width: 65%;
     float: left; }
 
+.expect-note {
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 15% 0;
+  font-size: 1.8rem;
+  color: #c9c9c9; }
+
 /*********end   tab 切换**********/
+.clause-content-box {
+  padding: 5px 8px; }
+  .clause-content-box a {
+    font-size: 1.2rem;
+    text-decoration: none; }
+
+.clause-agree-box {
+  position: relative;
+  height: 70px;
+  margin-top: -15px; }
+  .clause-agree-box .clause-agree-title {
+    font-size: 1.2rem !important; }
+
+.city-spinner {
+  position: absolute;
+  right: 15px;
+  top: 5px; }

@@ -7,9 +7,18 @@
                   <div class="form-group">
                      <div class="form-group-title">车辆信息</div>
                      <label class="item item-input">
+                        <span class="input-label">投保城市</span>
+                        <span class="city-picker">
+                           <input type="text" placeholder="请选择投保城市" name="RECIPIENT_ADDS" ng-model="CAR_BEANS.RECIPIENT_ADDS" ng-city-picker="true" required required-msg="请选择投保城市" readonly/>
+                           <input type="hidden" for-val="code"  ng-model="CAR_BEANS.CITY_CODE" ng-value="CAR_BEANS.CITY_CODE=C_CITY_CODE"/>
+                           <input type="hidden" for-val="name"  ng-model="CAR_BEANS.RECIPIENT_ADDS" ng-value="CAR_BEANS.RECIPIENT_ADDS=C_RECIPIENT_ADDS"/>
+                           <input type="hidden" for-val="carNo" ng-model="CAR_BEANS.CITY_CNHEADER" ng-value="CAR_BEANS.CITY_CNHEADER=C_CITY_CNHEADER"/>
+                        </span>
+                     </label>
+                     <label class="item item-input">
                         <span class="input-label">车牌号</span>
-                        <span  ng-if="CAR_BEANS.IS_NEW_CAR" class="item-new-car-des">*新车未上牌*</span>
-                        <input ng-if="!CAR_BEANS.IS_NEW_CAR" type="text" maxlength="7" placeholder="请输入车牌号" name="LCN_NO" ng-model="CAR_BEANS.LCN_NO" required required-msg="请输入车牌号" ng-pattern="/^[\u4e00-\u9fa5]{1}[A-Za-z]{1}[A-Z_0-9]{5}$/" pattern-msg="您的车牌号输入有误"/>
+                        <span ng-if="CAR_BEANS.IS_NEW_CAR" class="item-new-car-des">*新车未上牌*</span>
+                        <input ng-if="!CAR_BEANS.IS_NEW_CAR" type="text"  placeholder="请输入车牌号" name="LCN_NO" ng-model="CAR_BEANS.LCN_NO" maxlength="7" required  required-msg="请输入车牌号" ng-pattern="/^[\u4e00-\u9fa5]{1}[A-Za-z]{1}[A-Z_0-9]{5}$/" pattern-msg="您的车牌号输入有误"/>
                         <div class="checkbox-box field-check-box">
                            <ion-checkbox ng-model="CAR_BEANS.IS_NEW_CAR">
                               <span class="field-title">新车未上牌</span>

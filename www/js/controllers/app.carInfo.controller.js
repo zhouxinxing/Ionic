@@ -15,6 +15,11 @@ define([
       ]);
       //表单控制器
       app.controller('carInfoController', function ($scope,$rootScope, $http, $location, $handleService, $interFace, $compile, $carBeansService) {
+
+         //----------------------------------------begin 监听方法----------------------------------------//
+
+         //----------------------------------------end   监听方法----------------------------------------//
+
          //----------------------------------------begin 车辆信息页面----------------------------------------//
          $scope.CAR_SEARCH_INFO = "奥迪A8";
          $handleService.initFormApp();
@@ -27,8 +32,8 @@ define([
             }
             else {
                $handleService.http({
-                  //url: $interFace.mitMainFace,
-                  url: 'data/basedata.json',
+                  url: $interFace.mitMainFace,
+                  //url: 'data/basedata.json',
                   method: 'POST',
                   headers: {
                      token: $rootScope.TOKEN,
@@ -143,6 +148,7 @@ define([
 
          //车辆信息提交方法
          $scope.carInfoSubmit = function (form) {
+            console.log($rootScope.CAR_BEANS);
             //车型选择校验
             if ($U.isEmpty($rootScope.CAR_BEANS.VHL_DATA.MODEL_CODE)) { //如果车型代码为空 未选择车型
                $U.showToast('请选择品牌型号');
@@ -154,6 +160,7 @@ define([
             }
          };
          //----------------------------------------end   车辆信息页面----------------------------------------//
+
       });
       return app;
    });

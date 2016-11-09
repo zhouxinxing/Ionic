@@ -8,12 +8,12 @@ $font-size: 10px;
 $font-black-color: black;
 $box-border: 1px #E8E8E8 solid;
 $mobiscroll-therm-color: #ff6161;
-$field-checkbox-color:#00c1af;
-$search-button-color:#00BCD4;
-$bar-footer-height:50px;
-$nav-therm-color:white;
-$price-color:#ff5d50;
-$common-title-color:#ff5353;
+$field-checkbox-color: #00c1af;
+$search-button-color: #00BCD4;
+$bar-footer-height: 50px;
+$nav-therm-color: white;
+$price-color: #ff5d50;
+$common-title-color: #ff5353;
 
 *, .ionic-body, html, body {
   font-family: $font-family;
@@ -21,48 +21,50 @@ $common-title-color:#ff5353;
 }
 
 /* iphone4 */
-@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2){
-  *, .ionic-body, html, body{
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2) {
+  *, .ionic-body, html, body {
     font-size: 8px;
   }
-  .dwwc{ //日历控件适应
+  .dwwc { //日历控件适应
     height: 150px;
   }
 }
 
-
-
 /*************begin 通用样式****************/
-.hidden-box{
+.hidden-box {
   display: none;
 }
-.no-padding{
+
+.no-padding {
   padding: 0;
 }
+
 /*************end   通用样式****************/
 
 /****begin ionic style change****/
-select{
+select {
   border: none;
   -webkit-appearance: none;
 }
 
-.nav-therm{
+.nav-therm {
   color: $nav-therm-color !important;
 }
+
 .card {
   box-shadow: none;
   border: $box-border;
 }
-.button{
+
+.button {
   min-height: 36px;
-  line-height:initial;
+  line-height: initial;
   color: white;
   border-radius: 1px;
   height: 40px;
 }
 
-button, input, select, textarea{
+button, input, select, textarea {
   font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
 }
 
@@ -82,13 +84,14 @@ button, input, select, textarea{
   padding: 10px 49px 10px 15px;
   background: none;
 }
-.icon-for-right{
+
+.icon-for-right {
   float: right;
   font-size: 2rem;
   color: black;
 }
 
-.card-form{
+.card-form {
   .item {
     border-left: 0;
     border-right: 0;
@@ -127,7 +130,6 @@ button, input, select, textarea{
       font-size: 1.3rem;
     }
   }
-
   .item-select {
     select {
       right: 0;
@@ -137,14 +139,15 @@ button, input, select, textarea{
       direction: ltr;
     }
   }
-
-  .item-modal-select{
-    .toggle{
+  .item-modal-select {
+    .toggle {
       top: 0;
     }
   }
+  .disc-item-select{
+    padding: 3px 15px;
+  }
 }
-
 
 .mit-view {
   background-color: $view-bg-color;
@@ -169,24 +172,24 @@ button, input, select, textarea{
     padding-right: 10px;
   }
 
-  .checkbox-box{
+  .checkbox-box {
     .item-checkbox {
       display: block;
       padding: 14px 0 10px 44px;
     }
-    .item{
+    .item {
       border: none;
     }
-    .checkbox input, .checkbox-icon{
+    .checkbox input, .checkbox-icon {
       width: 22px;
       height: 22px;
       top: 2px;
     }
-    .checkbox input:checked+.checkbox-icon:before, .checkbox input:checked:before {
+    .checkbox input:checked + .checkbox-icon:before, .checkbox input:checked:before {
       background: #ffffff;
       border-color: $field-checkbox-color;
     }
-    .checkbox input:after, .checkbox-icon:after{
+    .checkbox input:after, .checkbox-icon:after {
       border: 1px solid $field-checkbox-color;
       border-top: 0;
       border-right: 0;
@@ -195,13 +198,13 @@ button, input, select, textarea{
       top: 30%;
       left: 25%;
     }
-    .checkbox input:before, .checkbox-icon:before{
+    .checkbox input:before, .checkbox-icon:before {
       border-radius: 2px;
       border-width: 1px;
       width: 100%;
       height: 100%;
-      margin-top:0;
-      margin-left:0;
+      margin-top: 0;
+      margin-left: 0;
     }
   }
   .field-check-box {
@@ -209,7 +212,7 @@ button, input, select, textarea{
     position: absolute;
     right: 25px;
     top: 5px;
-    .field-title{
+    .field-title {
       color: $field-checkbox-color;
       display: block;
       margin-top: -5px
@@ -239,22 +242,22 @@ button, input, select, textarea{
 }
 
 /***查询组件样式***/
-.scm-form-item{
+.scm-form-item {
   padding: 5px 0;
-  .item-input{
+  .item-input {
     float: left;
     border-bottom: none;
     display: inline-block;
     margin-right: 0;
     padding-right: 0;
     width: 75%;
-    .ion-search{
+    .ion-search {
       display: inline-block;
       position: absolute;
       left: 15px;
       top: 12px;
     }
-    .search-input{
+    .search-input {
       border: 1px #e8e8e8 solid;
       padding: 17px 26px;
       min-height: initial;
@@ -264,7 +267,7 @@ button, input, select, textarea{
       border-top-left-radius: 3px;
     }
   }
-  .button-search{
+  .button-search {
     float: left;
     width: 24%;
     height: 100%;
@@ -274,16 +277,17 @@ button, input, select, textarea{
     border-bottom-right-radius: 3px;
   }
 }
-.scm-card{
+
+.scm-card {
   margin: 0.3rem;
   padding: 0.5rem;
   border: none;
-  .item-select select{
-    direction:rtl;
+  .item-select select {
+    direction: rtl;
     padding-right: 30px;
     width: 65%;
   }
-  .button-sure-scm{
+  .button-sure-scm {
     background: #00BCD4;
     color: white;
     border-radius: 3px;
@@ -291,7 +295,7 @@ button, input, select, textarea{
     margin: 0;
     margin-top: 15px;
   }
-  .search-note-box{
+  .search-note-box {
     width: 100%;
     text-align: center;
     padding-top: 10%;
@@ -301,56 +305,57 @@ button, input, select, textarea{
 }
 
 /***车险报价***/
-.item-ron-wrap{
+.item-ron-wrap {
   border-bottom: none !important;
-  .item{
+  .item {
     border-bottom: none;
   }
-  .ins-header-checkbox{
-    .checkbox-box{
+  .ins-header-checkbox {
+    .checkbox-box {
       width: 35%;
       display: inline-block;
     }
-    .item-input{
+    .item-input {
       width: 65%;
       display: inline-block;
     }
   }
-  .input-label-inline{
+  .input-label-inline {
     font-size: 1.5rem;
     margin-right: 4px;
   }
-  .validate-input{
+  .validate-input {
     display: inline-block;
     color: $field-checkbox-color;
     font-size: 1.3rem !important;
   }
-  .item-validate-picker{
+  .item-validate-picker {
     color: $field-checkbox-color;
   }
-  .list-title span{
+  .list-title span {
     display: inline-block;
     text-align: center;
     font-size: 1.3rem;
     color: #b1b1b1;
   }
-  .form-group{
-    .checkbox-box .checkbox-icon{
+  .form-group {
+    .checkbox-box .checkbox-icon {
       top: 4px;
     }
   }
 }
-.risks-list{
+
+.risks-list {
   width: 100%;
   font-size: 1.3rem;
-  tr{
-    th{
+  tr {
+    th {
       font-size: 1.3rem;
       color: #828282;
     }
-    td{
+    td {
       position: relative;
-      input{
+      input {
         text-align: center;
         line-height: 30px;
         display: block;
@@ -359,92 +364,95 @@ button, input, select, textarea{
         position: absolute;
         top: 5px;
       }
-      select{
+      select {
         width: 100%;
       }
     }
   }
-  .item-content{
+  .item-content {
     white-space: initial;
   }
-  .non-ded-checkbox{
+  .non-ded-checkbox {
     position: relative;
     top: 6px;
   }
-  .tr-title{
+  .tr-title {
     border-top: 1px #ffe1e1 solid;
     border-bottom: 1px #ffe1e1 solid;
   }
-  .td-title{
+  .td-title {
     font-size: 1.5rem;
     color: #FF5722;
     padding: 5px 16px;
-    i{
+    i {
       font-size: 25px;
       margin-right: 5px;
       position: relative;
       top: 2px;
     }
   }
-  .action-price{
+  .action-price {
     color: $price-color;
   }
 }
-.bar-footer-price{
+
+.bar-footer-price {
   height: $bar-footer-height;
 }
-.price-tags-box{
+
+.price-tags-box {
   width: 100%;
-  .price-tags{
+  .price-tags {
     width: 50%;
     float: left;
     height: 100%;
     text-align: center;
   }
-  .price-tags-left{
+  .price-tags-left {
     font-size: 1.6rem;
     line-height: $bar-footer-height;
-    span{
+    span {
       color: $price-color;
       font-weight: bold;
     }
   }
-  .price-tags-right{
-    .button{
+  .price-tags-right {
+    .button {
       width: 100%;
       height: 100%;
       font-size: 1.6rem;
       background-color: #ef473a;
       line-height: $bar-footer-height;
     }
-    .submit-button{
+    .submit-button {
       background-color: #4CAF50;
     }
   }
 }
-.bar-footer-padding{
+
+.bar-footer-padding {
   margin-bottom: $bar-footer-height;
 }
 
 /***电子投保样式****/
-.insurance-list{
-  i{
+.insurance-list {
+  i {
     color: #387ef5;
   }
 }
 
 /****modal select 样式重置****/
-.modal-backdrop{
-  .bar-stable .button.button-clear{
+.modal-backdrop {
+  .bar-stable .button.button-clear {
     color: black;
   }
-  .item{
+  .item {
     padding: 5px 15px;
   }
-  .button{
+  .button {
     font-size: 1.5rem;
   }
-  .agent-item-content{
+  .agent-item-content {
     font-size: 1.3rem;
     display: inline-block;
     width: 30%;
@@ -453,9 +461,11 @@ button, input, select, textarea{
     color: #6d6d6d;
   }
 }
-.margin-right-arrow{
+
+.margin-right-arrow {
   margin-right: 12px;
 }
+
 /****end ionic style change****/
 
 /********begin reset style*********/
@@ -486,10 +496,12 @@ button, input, select, textarea{
 .bar-stable .button.button-clear {
   color: white;
 }
-.bar .title.title-left{
+
+.bar .title.title-left {
   text-align: center;
 }
-.nav-right-button{
+
+.nav-right-button {
   z-index: 99;
   position: absolute;
   width: 100%;
@@ -499,70 +511,76 @@ button, input, select, textarea{
   padding-right: 15px;
   color: white;
 }
+
 .com-price-box {
   font-size: 1.4rem;
   padding: 0 5px;
-  .com-price{
+  .com-price {
     color: $price-color;
     text-align: center;
     font-size: 1.6rem;
   }
-  .com-price-desc{
+  .com-price-desc {
     font-size: 1.2rem;
     color: $field-checkbox-color;
   }
 }
 
-.car-module-list{
-  .list{
+.car-module-list {
+  .list {
     height: 200px;
   }
-  .item{
+  .item {
     font-size: 1.3rem;
     color: #795548;
   }
 }
-.banner-swiper{
-  img{
+
+.banner-swiper {
+  img {
     width: 100%;
   }
 }
+
 .bland-row {
-  button{
+  button {
     height: 7rem;
   }
-  .col-25{
-    button{
+  .col-25 {
+    button {
       font-size: 1.2rem;
     }
   }
 }
-.row-list{
-  .row{
-    .button.button-block{
+
+.row-list {
+  .row {
+    .button.button-block {
       margin-top: 0;
       margin-bottom: 0;
       border-radius: 3px;
     }
   }
 }
+
 /********end   reset style*********/
-.item-new-car-des{
+.item-new-car-des {
   color: #17c6b6;
   margin-top: 3px;
   font-size: 1.4rem;
 }
-.ui-select{
+
+.ui-select {
   height: 100%;
   width: 100%;
   position: relative;
-  label{
+  label {
     color: #111;
     width: 100%;
     display: block;
     line-height: 30px;
   }
-  select{
+  select {
     opacity: 0;
     position: absolute;
     top: 0;
@@ -574,18 +592,17 @@ button, input, select, textarea{
   }
 }
 
-
 /*************begin 日历控件主题修改*************/
-.mbsc-android-holo .dwv{
+.mbsc-android-holo .dwv {
   color: $mobiscroll-therm-color !important;
   border-bottom: 2px solid $mobiscroll-therm-color !important;
 }
-.mbsc-android-holo .dwwol{
+
+.mbsc-android-holo .dwwol {
   border-color: $mobiscroll-therm-color !important;
 }
+
 /*************end   日历控件主题修改*************/
-
-
 
 /*********begin tab 切换**********/
 .toggle-tabs {
@@ -596,30 +613,30 @@ button, input, select, textarea{
   text-align: left;
   border-radius: 2px;
   overflow: hidden;
-  height: 265px;
+  height: 232px;
 }
+
 .toggle-tabs li {
   float: left;
   display: block;
 }
+
 .toggle-tabs input[type="radio"] {
   position: absolute;
   top: -9999px;
   left: -9999px;
 }
+
 .toggle-tabs label {
   display: block;
   font-weight: normal;
   text-transform: uppercase;
   cursor: pointer;
   position: relative;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
   text-align: center;
   padding: 5px;
 }
+
 .toggle-tabs .tab-content {
   z-index: 2;
   display: none;
@@ -628,32 +645,65 @@ button, input, select, textarea{
   position: absolute;
   left: 0;
   padding: 5px 10px;
-  height: 260px;
+  height: 230px;
 }
+
 .toggle-tabs [id^="tab"]:checked + label {
   color: $common-title-color;
   border-bottom: 2px $common-title-color solid;
 }
+
 .toggle-tabs [id^="tab"]:checked ~ [id^="tab-content"] {
   display: block;
 }
+
 .delivery-address {
   padding: 6px 0;
   font-size: 1.4rem;
   color: $common-title-color;
   border-bottom: 1px #e2e2e2 solid;
 }
-.delivery-from{
-  .item{
+
+.delivery-from {
+  .item {
     text-align: left;
-    .input-label{
+    .input-label {
       width: 35%;
       float: left;
     }
-    input,select{
+    input, select {
       width: 65%;
       float: left;
     }
   }
 }
+
+.expect-note {
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 15% 0;
+  font-size: 1.8rem;
+  color: #c9c9c9;
+}
 /*********end   tab 切换**********/
+.clause-content-box {
+  padding: 5px 8px;
+  a{
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
+}
+.clause-agree-box {
+  position: relative;
+  height: 70px;
+  margin-top: -15px;
+  .clause-agree-title{
+    font-size: 1.2rem !important;
+  }
+}
+.city-spinner{
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}

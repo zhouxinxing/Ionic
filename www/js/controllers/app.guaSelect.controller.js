@@ -112,7 +112,7 @@ define([
 
          //重新计算 - 次数标识
          $scope.$watch('REL_CALCOST_FLAG', function (value) {
-            if(!value){
+            if (!value) {
                $scope.REL_CALCOST_TRIMER = true;
             }
          });
@@ -126,11 +126,11 @@ define([
          });
 
          //监听所有选择框 有变化 就需要重新计算
-         angular.forEach($rootScope.CAR_BEANS.CVRG_LIST, function (item,index,array) {
-            $scope.$watch('CAR_BEANS.CVRG_LIST['+index+'].PURCHASE_FLAG', function (value) {
+         angular.forEach($rootScope.CAR_BEANS.CVRG_LIST, function (item, index, array) {
+            $scope.$watch('CAR_BEANS.CVRG_LIST[' + index + '].PURCHASE_FLAG', function (value) {
                $scope.REL_CALCOST_FLAG = true;//重新计算标识
             });
-            $scope.$watch('CAR_BEANS.CVRG_LIST['+index+'].FRANCHISE_FLAG', function (value) {
+            $scope.$watch('CAR_BEANS.CVRG_LIST[' + index + '].FRANCHISE_FLAG', function (value) {
                $scope.REL_CALCOST_FLAG = true;//重新计算标识
             });
          });
@@ -165,8 +165,8 @@ define([
             console.log(_CAR_BEANS);
             //2.提交数据到后台服务
             $handleService.http({
-               //url: $interFace.mitMainFace,
-              url: 'data/result.json',
+               url: $interFace.mitMainFace,
+               //url: 'data/result.json',
                method: 'POST',
                headers: {
                   token: $rootScope.TOKEN,
@@ -190,7 +190,7 @@ define([
             });
          };
          //提交订单方法
-         $scope.checkHandle= function () {
+         $scope.checkHandle = function () {
             //跳转到-》信息确认页面
             $location.path("tab/owConfirm");
          };
