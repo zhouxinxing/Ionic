@@ -157,7 +157,6 @@ define(['mobiscroll'], function () {
          restrict: 'A',
          multiElement: true,
          link: function (scope, element, attr) {
-            console.log(attr.ngCityPicker);
             //点击 显示
             element.click(function () {
                element.parent().append($compile('<ion-spinner class="city-spinner" icon="ios"></ion-spinner>')(scope));
@@ -205,15 +204,15 @@ define(['mobiscroll'], function () {
                      onSelect: function (valueText, inst) {
                         var _val = valueText.split(' '),
                             _ele_next = element.nextAll('input'),
-                            _city_name_val = citydata[_val[0]].name + ' ' + citydata[_val[0]].city[_val[1]].name + ' ' + citydata[_val[0]].city[_val[1]].area[_val[2]].name;
+                           _car_no_header = citydata[_val[0]].city[_val[1]].carNoHeader,
+                           _city_name_val = citydata[_val[0]].name + ' ' + citydata[_val[0]].city[_val[1]].name + ' ' + citydata[_val[0]].city[_val[1]].area[_val[2]].name;
                         //1.获取选中中文字符串 赋到文本
                         element.val(_city_name_val);
                         //2.获取值 赋值
                         if(_ele_next.length>0){
                            angular.forEach(_ele_next, function (nitem,nindex,narray) {
                               var _el_item = angular.element(nitem),
-                                  _scopes  =_el_item.attr('ng-model').split('.'),
-                                  _car_no_header = citydata[_val[0]].city[_val[1]].carNoHeader;
+                                  _scopes  =_el_item.attr('ng-model').split('.');
                               switch (_el_item.attr('for-val')){
                                  case 'code':
                                     scope['C_'+_scopes[_scopes.length-1]]=valueText;
@@ -227,6 +226,8 @@ define(['mobiscroll'], function () {
                               }
                            });
                         }
+                        //3.执行回调 刷新scope
+                        scope.$apply();
                      }
                   });
 
@@ -241,5 +242,34 @@ define(['mobiscroll'], function () {
       };
    }
    ]);
+   app.directive('textTransform', function() {
+      var transformConfig = {
+         uppercase: function(input){
+            return input.toUpperCase();
+         },
+         capitalize: function(input){
+            return input.replace(
+               /([a-zA-Z])([a-zA-Z]*)/gi,
+               function(matched, $1, $2){
+                  return $1.toUpperCase() + $2;
+               });
+         },
+         lowercase: function(input){
+            return input.toLowerCase();
+         }
+      };
+      return {
+         require: 'ngModel',
+         link: function(scope, element, iAttrs, modelCtrl) {
+            var transform = transformConfig[iAttrs.textTransform];
+            if(transform){
+               modelCtrl.$parsers.push(function(input) {
+                  return transform(input || "");
+               });
+               element.css("text-transform", iAttrs.textTransform);
+            }
+         }
+      };
+   });
    return app;
 });

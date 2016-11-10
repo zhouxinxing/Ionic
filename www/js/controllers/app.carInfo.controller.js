@@ -14,19 +14,22 @@ define([
          'ionic-modal-select'
       ]);
       //表单控制器
-      app.controller('carInfoController', function ($scope,$rootScope, $http, $location, $handleService, $interFace, $compile, $carBeansService) {
+      app.controller('carInfoController', function ($scope, $rootScope, $http, $location, $handleService, $interFace, $compile, $carBeansService) {
 
          //----------------------------------------begin 监听方法----------------------------------------//
-
+         $scope.$watch('CAR_BEANS.CITY_CNHEADER', function (val) {
+            if($U.isNotEmpty(val)){
+               $rootScope.CAR_BEANS.LCN_NO=val
+            }
+         });
          //----------------------------------------end   监听方法----------------------------------------//
 
          //----------------------------------------begin 车辆信息页面----------------------------------------//
-         $scope.CAR_SEARCH_INFO = "奥迪A8";
          $handleService.initFormApp();
          //车型查询-方法
          $scope.queryCarModule = function () {
             //判断查询条件 非空再调用接口
-            if ($U.isEmpty($scope.CAR_SEARCH_INFO)) {
+            if ($U.isEmpty($rootScope.CAR_BEANS.CAR_SEARCH_INFO)) {
                $U.showToast('请输入车型名称或者车架号');
                return;
             }
@@ -42,8 +45,8 @@ define([
                      'Accept-Source': 'HWEB'
                   },
                   data: {
-                     RACK_NO: $scope.CAR_SEARCH_INFO,
-                     VEHICLE_NAME: $scope.CAR_SEARCH_INFO,
+                     RACK_NO: $rootScope.CAR_BEANS.CAR_SEARCH_INFO,
+                     VEHICLE_NAME: $rootScope.CAR_BEANS.CAR_SEARCH_INFO,
                      REGISTER_DATE: '',
                      VEHICLE_CODE: '',
                      VEHICLE_NO: '*-*',
@@ -66,6 +69,7 @@ define([
          };
          //车型选择事件
          $scope.checkCarModel = function (VHL) {
+            //车型对象封装
             $rootScope.CAR_BEANS.VHL_DATA = VHL;
             //给车型数据 拿出来进行封装
             //1.车型代码
@@ -160,7 +164,6 @@ define([
             }
          };
          //----------------------------------------end   车辆信息页面----------------------------------------//
-
       });
       return app;
    });

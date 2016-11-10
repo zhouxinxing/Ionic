@@ -660,3 +660,11 @@ button, input, select, textarea {
   position: absolute;
   right: 15px;
   top: 5px; }
+
+.text-alcation-note {
+  padding: 35px;
+  position: absolute;
+  width: 100%;
+  color: #979797;
+  font-size: 1.4rem;
+  text-align: center; }

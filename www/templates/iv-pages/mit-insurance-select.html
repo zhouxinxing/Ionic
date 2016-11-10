@@ -35,8 +35,9 @@
                   <label class="item item-input item-select">
                      <span class="input-label">验车情况</span>
                      <select ng-model="CAR_BEANS.CHK_CDE">
-                        <option value="">已验车</option>
-                        <option value="">免验车</option>
+                        <option value="305005003">已验车</option>
+                        <option value="305005003">免验车</option>
+                        <option value="305005004">需验车</option>
                      </select>
                   </label>
                   <label class="item item-input item-select">
@@ -464,7 +465,7 @@
                      <label class="item item-input item-validate-picker">
                         <i class="ion-android-calendar"></i>
                         <span class="input-label-inline">生效日期</span>
-                        <input type="text" class="validate-input" ng-date-picker="datetime" placeholder="请选择生效日期" ng-model="CAR_BEANS.INSRNC_BGN_TM_JQ" init-picker='{"maxDate":"0,3,0,0","minDate":"0,0,0,1","initVal":"true"}'/>
+                        <input type="text" class="validate-input" ng-date-picker="datetime" placeholder="请选择生效日期" ng-model="CAR_BEANS.INSRNC_BGN_TM_JQ" ng-value="CAR_BEANS.INSRNC_BGN_TM_JQ?TAX_FLAG='1':'0'" init-picker='{"maxDate":"0,3,0,0","minDate":"0,0,0,1","initVal":"true"}'/>
                      </label>
                   </div>
                   <div class="com-price-box" ng-show="CAR_BEANS.JQ_ORIG_FLG">

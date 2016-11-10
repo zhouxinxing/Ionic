@@ -6,7 +6,7 @@
                <div class="list scm-form-item">
                   <label class="item item-input">
                      <i class="icon ion-search placeholder-icon"></i>
-                     <input type="text" class="search-input" placeholder="输入要找的车型名称或车架号" ng-model="CAR_SEARCH_INFO">
+                     <input type="text" class="search-input" ng-model="CAR_BEANS.CAR_SEARCH_INFO" placeholder="输入要找的车型名称或车架号">
                   </label>
                   <button class="button button-calm button-search" ng-click="queryCarModule()">查询</button>
                </div>
@@ -18,7 +18,7 @@
          <form class="list-block-from" novalidate="novalidate">
             <div class="item-text-wrap">
                <div class="list list-screen-box">
-                  <div class="search-note-box"><i class="icon ion-ios-search-strong"></i> 暂无数据</div>
+                  <div class="search-note-box"><i class="icon ion-ios-search-strong"></i>暂无数据</div>
                </div>
             </div>
          </form>

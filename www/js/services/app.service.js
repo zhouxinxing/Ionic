@@ -1,6 +1,6 @@
 define(function () {
    'use strict';
-   return angular.module('app.handle.service', ['ionic']).factory('$handleService', ['$rootScope','$ionicLoading', '$http','$ionicScrollDelegate', function ($rootScope,$ionicLoading, $http,$ionicScrollDelegate) {
+   return angular.module('app.handle.service', ['ionic']).factory('$handleService', ['$rootScope', '$ionicLoading', '$http', '$ionicScrollDelegate', function ($rootScope, $ionicLoading, $http, $ionicScrollDelegate) {
       var HandleService = {
          initFormApp: function () {
             //滚动重置-修复页面滚动BUG

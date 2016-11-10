@@ -5,8 +5,22 @@ define(function () {
    'use strict';
    var app = angular.module('app.car.beans', []).factory('$carBeansService', ['$rootScope', function ($rootScope) {
 
+      var Handle = (function (handle) {
+         handle.recNexDate = function () {
+            var nex = new Date();
+            nex.setDate(nex.getDate() + 1);
+            return nex.format('yyyy-MM-dd 00:00');
+         };
+         handle.recNexYear = function () {
+            var nex = new Date();
+            nex.setFullYear(nex.getFullYear() + 1);
+            return nex.format('yyyy-MM-dd 59:59');
+         };
+         return handle;
+      })(Handle || {});
+
       //Token 临时
-      $rootScope.TOKEN = '61C40B7F16F043C287DA775E48704B1E';
+      $rootScope.TOKEN = '9A44FE5A41714D6DB037ED742AD05F8D';
 
       $rootScope.BASE_BEAN = {
          //第三者责任险保额对象
@@ -36,6 +50,10 @@ define(function () {
          //--------------------------------------begin 个代信息--------------------------------------/
          //是否选择个贷
          IS_CMPNY_AGT: false,
+         /** 代理人工号*/
+         CMPNY_AGT_CDE: "",
+         /** 代理人名称*/
+         CMPNY_AGT_NME: "",
          //--------------------------------------end   个代信息--------------------------------------/
 
          //--------------------------------------begin 车主信息--------------------------------------/
@@ -55,13 +73,13 @@ define(function () {
 
          //--------------------------------------begin 投保人信息--------------------------------------/
          /** 投保人姓名 */
-         APP_NME: "西沙测",
+         APP_NME: "",
          /** 投保人证件类型 */
-         APP_CERT_TYPE: "120001",
+         APP_CERT_TYPE: "",
          /** 投保人证件号码 */
-         APP_CERT_NO: "420683198705065436",
+         APP_CERT_NO: "",
          /** 投保人联系人电话 */
-         APP_TEL: "13628707956",
+         APP_TEL: "",
          /** 投保人地址 */
          APP_ADDR: "",
          /** 投保人邮箱 */
@@ -70,13 +88,13 @@ define(function () {
 
          //--------------------------------------begin 被保人信息--------------------------------------/
          /** 被保险人姓名 */
-         INSRNT_CNM: "西沙测",
+         INSRNT_CNM: "",
          /** 被保人证件类型 */
-         BIZ_CERT_TYPE: "120001",
+         BIZ_CERT_TYPE: "",
          /** 被保人证件号码 */
-         BIZ_CERT_NO: "420683198705065436",
+         BIZ_CERT_NO: "",
          /** 被保险人电话 */
-         INSRNT_TEL: "13628707956",
+         INSRNT_TEL: "",
          /** 被保险人地址 */
          INSRNT_ADDR: "",
          /** 被保险人邮箱*/
@@ -97,20 +115,18 @@ define(function () {
          //--------------------------------------end    业务员信息--------------------------------------/
 
          //--------------------------------------begin  车辆信息--------------------------------------/
-         /** 车牌号码 */
-         LCN_NO: "粤B60260",
-         /** 发动机号 */
-         ENG_NO: "6026989632",
-         /** 车架号/VIN码 */
-         VHL_FRM: "LSVAM4187C2184847",
-         /**车型代码 */
-         BRND_CDE: "LYD1032SHD",
+         /** 车牌号码 如:粤B60260 */
+         LCN_NO: "",
+         /** 发动机号 如：6026989632*/
+         ENG_NO: "",
+         /** 车架号/VIN码  如:LSVAM4187C2184847*/
+         VHL_FRM: "",
+         /**车型代码  如:LYD1032SHD*/
+         BRND_CDE: "",
          /**   打印厂牌车型 */
          BRND_NME_OTHER: "",
-         /**品牌类型 */
-         VEHICLE_NAME: "朗逸SVW7167MSD 品悠版",
          /** 初次登记日期 */
-         REGISTER_DATE: "2016-08-10",
+         REGISTER_DATE: "",
          /** 过户车标志 */
          CHGOWNERFLAG: "0",
          /** 转移登记日期 */
@@ -122,11 +138,11 @@ define(function () {
 
          //--------------------------------------begin 保险起止期--------------------------------------/
          /** 商业险保险起止期 */
-         INSRNC_BGN_TM: "2016-11-18 00:00",
-         INSRNC_END_TM: "2017-11-17 23:59:59",
+         INSRNC_BGN_TM: Handle.recNexDate(),
+         INSRNC_END_TM: Handle.recNexYear(),
          /** 交强险保险起止期 */
-         INSRNC_BGN_TM_JQ: "2016-11-18 00:00",
-         INSRNC_END_TM_JQ: "2017-11-17 23:59:59",
+         INSRNC_BGN_TM_JQ: Handle.recNexDate(),
+         INSRNC_END_TM_JQ: Handle.recNexYear(),
          /** 商业险既时生效  */
          SY_IS_IMMEFC: "0",
          /** 交强险既时生效  */
@@ -136,7 +152,7 @@ define(function () {
 
          //--------------------------------------begin  报价信息--------------------------------------/
          /** 是否计算车船税 */
-         TAX_FLAG: "1",
+         TAX_FLAG: "0",
          /** 新车购置价 */
          VHL_VAL: "920500",
          /** 新车购置价浮动值 */
@@ -334,27 +350,56 @@ define(function () {
          ],
          /** 车型数据*/
          VHL_DATA: {
-            "BRAND_NAME": "奥迪",
-            "CAR_MAKER": "德国奥迪汽车股份有限公司",
-            "CAR_PRICE": "920500",
-            "CAR_REMARK": "手自一体 舒适型 245kw",
-            "CAR_SORT": "轿车类",
-            "CAR_STYLE": "进口车",
-            "DESCRIBE": "2012款 奥迪 A8 AUDI A8L 50TFSI QUATTRO轿车 手自一体 舒适型 245kw 5座 3.0L",
-            "DISPLACEMENT": "2.995",
-            "FAMILY_NAME": "A8",
-            "FUELFLAG": "0",
-            "MARKET_YEAR": "201208",
-            "MODEL": "",
-            "MODEL_CODE": "ADI1230DGA",
-            "MODEL_NAME": "AUDI A8L 50TFSI QUATTRO轿车",
-            "NEW_ENERGY_FLAG": "",
-            "QUALITY": "2075",
-            "RISK_NAME": "正常车型",
-            "RUN_NAME": "奥迪A8L 3.0T AT舒适型",
-            "SET_NUM": "5",
-            "TONNAGE": "",
-            "VEHICLE_PRICE": "999200"
+            /** 车型代码 */
+            MODEL_CODE: "",
+            /** 车型名称 */
+            MODEL_NAME: "",
+            /** 车型分类 */
+            CAR_SORT: "",
+            /** 进口/国产 */
+            CAR_STYLE: "",
+            /** 制造厂商 */
+            CAR_MAKER: "",
+            /** 吨位 */
+            TONNAGE: "",
+            /** 座位数 */
+            SET_NUM: "",
+            /** 排量 */
+            DISPLACEMENT: "",
+            /** 整备质量 */
+            QUALITY: "",
+            /** 车辆年份 */
+            MARKET_YEAR: "",
+            /** 新车购置价 */
+            CAR_PRICE: "",
+            /** 描述 */
+            CAR_REMARK: "",
+            /** 风险类型 */
+            RISK_NAME: "",
+            /** 车船税减免标志 */
+            FUELFLAG: "",
+            /** 新能源标志 */
+            NEW_ENERGY_FLAG: "",
+            /** 车型(传平台) */
+            MODEL: "",
+            /** 车型描述 */
+            DESCRIBE: "",
+            /**item是否选择 */
+            ischecked: "",
+            /** 开具税务机关 */
+            PAYTAX_REVENUE: "",
+            /** 减免标志 */
+            TAX_TYPE: "",
+            /** 能源种类 */
+            FUEL_TYPE: "",
+            /** 减免税原因 */
+            DEDUE_CDE: "",
+            /** 减免税方案*/
+            DEDUE_TYP: "",
+            /** 减免税比例*/
+            DEDUE_RATE: "",
+            /** 减免税凭证*/
+            PAYTAX_VOU: ""
          },
          //--------------------------------------end  报价信息--------------------------------------/
 

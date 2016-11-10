@@ -48,6 +48,7 @@ define([
             }
             $handleService.validateForm.call(this, form);// apply 参数必须是数组  call 任意类型都可以传
             if (form.$valid) {
+               console.log($rootScope.CAR_BEANS);
                //校验通过->1.参数保存 2.路由跳转
                $location.path("tab/carinfo");
             }

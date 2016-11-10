@@ -22,7 +22,6 @@ define([
                angular.forEach(data.CVRG_LIST, function (item, index, array) {
                   object.CVRG_DETAIL[item.INSRNC_CDE] = item;
                });
-
                $rootScope.CALCOST_RESULT.CALCOST_FLAG = true; //计算标识
                $scope.REL_CALCOST_FLAG = false; //需要重新计算
                $scope.INSRNC_BGN_TM_CHANGE = false;  //商业险起期修改标识
@@ -140,6 +139,7 @@ define([
 
          //保费计算方法
          $scope.calAmount = function () {
+            console.log($rootScope.CAR_BEANS);
             var _CVRG_LIST = [], _CAR_BEANS = angular.copy($rootScope.CAR_BEANS);
             (function (window) {
                //1.对参数进行封装
@@ -162,7 +162,6 @@ define([
                _CAR_BEANS.INSRNC_BGN_TM = _CAR_BEANS.INSRNC_BGN_TM + ':00';
                _CAR_BEANS.INSRNC_BGN_TM_JQ = _CAR_BEANS.INSRNC_BGN_TM_JQ + ':00';
             }(window));
-            console.log(_CAR_BEANS);
             //2.提交数据到后台服务
             $handleService.http({
                url: $interFace.mitMainFace,

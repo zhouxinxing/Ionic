@@ -33,6 +33,7 @@
   </select>
 </label>
 <ion-scroll>
+   <div class="text-alcation-note" ng-if="CAR_DATA.VHL_LIST==undefined">无法匹配到相关车型数据</div>
    <ion-list class="car-module-list">
       <ion-radio ng-repeat="VHL in CAR_DATA.VHL_LIST | unique:'MODEL_NAME'" ng-value="VHL.MODEL_CODE" ng-click="checkCarModel(VHL);">{{VHL.DESCRIBE+'(参考价:'+VHL.VEHICLE_PRICE+')'}}</ion-radio>
    </ion-list>
