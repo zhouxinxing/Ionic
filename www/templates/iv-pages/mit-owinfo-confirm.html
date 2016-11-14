@@ -69,7 +69,7 @@
                                     <span class="input-label">收件人城市</span>
                                     <span class="city-picker">
                                        <input type="text" placeholder="请选择收件地址所在城市" name="RECIPIENT_ADDS" ng-model="SUB_CH_DATA.RECIPIENT_ADDS" ng-city-picker="true" required required-msg="请选择收件地址所在城市" readonly/>
-                                       <input type="hidden" for-val = "code"  ng-model="SUB_CH_DATA.CITY_CODE"      ng-value="SUB_CH_DATA.CITY_CODE=C_CITY_CODE"/>
+                                       <input type="hidden" for-val = "code"  ng-model="SUB_CH_DATA.CITY_CODE"      ng-value="C_CITY_CODE!=undefined?SUB_CH_DATA.CITY_CODE=C_CITY_CODE:''"/>
                                        <input type="hidden" for-val = "name"  ng-model="SUB_CH_DATA.RECIPIENT_ADDS" ng-value="SUB_CH_DATA.RECIPIENT_ADDS=C_RECIPIENT_ADDS"/>
                                        <input type="hidden" for-val = "carNo" ng-model="SUB_CH_DATA.CITY_CNHEADER"  ng-value="SUB_CH_DATA.CITY_CNHEADER=C_CITY_CNHEADER"/>
                                     </span>

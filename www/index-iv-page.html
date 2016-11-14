@@ -8,7 +8,7 @@
    <link href="css/ionic-common.css" rel="stylesheet">
    <title>车险投保</title>
 </head>
-<body ng-app="">
+<body ng-app="" onload="beforeHandle();">
 <ion-nav-bar class="bar-stable theme-color">
    <ion-nav-back-button></ion-nav-back-button>
 </ion-nav-bar>
@@ -17,4 +17,9 @@
 <script src="lib/vendor/jquery/jquery.min.js" type="application/javascript"></script> <!--主动加载主库 require 无法加载-->
 <script src="lib/ionic/js/ionic.bundle.min.js" type="application/javascript"></script>
 <script src="lib/vendor/require/require.js" defer async="true" data-main="js/main.config"></script>
+<script type="application/javascript">
+   function beforeHandle(){
+     // alert('++');
+   }
+</script>
 </html>

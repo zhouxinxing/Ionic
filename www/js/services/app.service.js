@@ -93,7 +93,25 @@ define(function () {
             }
             $U.showToast($U.isNotEmpty(msg) ? msg : defmsg);
             return false;
-         }
+         },
+         sessionHandle:{
+            saveSession: function (key,object) {
+               if($U.isNotEmpty(key)&&$U.isNotEmpty(object)){
+                  window.sessionStorage.setItem(key,JSON.stringify(object));
+               }
+            },
+            getSession: function (key) {
+               if($U.isNotEmpty(key)){
+                  var str_object = window.sessionStorage.getItem(key);
+                  try {
+                     return JSON.parse(str_object);
+                  }
+                  catch (ex){
+                     return str_object;
+                  }
+               }
+            }
+         },
       };
       return HandleService;
    }]);

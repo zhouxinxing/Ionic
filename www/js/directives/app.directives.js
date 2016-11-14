@@ -156,6 +156,9 @@ define(['mobiscroll'], function () {
       return {
          restrict: 'A',
          multiElement: true,
+         //scope:{
+         //   selCHandle:'&selCHandle'
+         //},
          link: function (scope, element, attr) {
             //点击 显示
             element.click(function () {
@@ -170,17 +173,21 @@ define(['mobiscroll'], function () {
                         //----------------------------------begin 城市----------------------------------//
                         var _city_ul = '<ul>';
                         angular.forEach(ptem.city, function (ctem) {
-                           _city_ul += '<li data-val=' + '"' + ctem.code + '"' + '>' + ctem.name;
-                           //----------------------------------begin 区域----------------------------------//
-                           var _area_ul = '<ul>';
-                           angular.forEach(ctem.area, function (cotem) {
-                              _area_ul += '<li data-val=' + '"' + cotem.code + '"' + '>' + cotem.name + '</li>';
-                           });
-                           _area_ul += '</ul>';
-                           //----------------------------------end 区域----------------------------------//
-                           //区添加到市
-                           _city_ul += _area_ul;
-                           _city_ul += '</li>';
+                           if(ctem.flag == '1'){
+                              _city_ul += '<li data-val=' + '"' + ctem.code + '"' + '>' + ctem.name;
+                              //----------------------------------begin 区域----------------------------------//
+                              var _area_ul = '<ul>';
+                              angular.forEach(ctem.area, function (cotem) {
+                                 if(ctem.flag == '1'){
+                                    _area_ul += '<li data-val=' + '"' + cotem.code + '"' + '>' + cotem.name + '</li>';
+                                 }
+                              });
+                              _area_ul += '</ul>';
+                              //----------------------------------end 区域----------------------------------//
+                              //区添加到市
+                              _city_ul += _area_ul;
+                              _city_ul += '</li>';
+                           }
                         });
                         _city_ul += '</ul>';
                         //----------------------------------end   城市----------------------------------//
@@ -228,6 +235,7 @@ define(['mobiscroll'], function () {
                         }
                         //3.执行回调 刷新scope
                         scope.$apply();
+                        scope.selCHandle();
                      }
                   });
 

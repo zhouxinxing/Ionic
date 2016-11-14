@@ -139,11 +139,10 @@ define([
 
          //保费计算方法
          $scope.calAmount = function () {
-            console.log($rootScope.CAR_BEANS);
             var _CVRG_LIST = [], _CAR_BEANS = angular.copy($rootScope.CAR_BEANS);
             (function (window) {
                //1.对参数进行封装
-               //a.筛选已投保的险种
+               //a.*****************************筛选已投保的险种*****************************
                angular.forEach($rootScope.CAR_BEANS.CVRG_LIST, function (item, index, array) {
                   //商业险数据
                   if (item.PURCHASE_FLAG) {
@@ -158,10 +157,16 @@ define([
                      _CAR_BEANS.CVRG_LIST = _CVRG_LIST;
                   }
                });
-               //b.给时间添加尾缀
+               //b.*****************************给时间添加尾缀*****************************
                _CAR_BEANS.INSRNC_BGN_TM = _CAR_BEANS.INSRNC_BGN_TM + ':00';
                _CAR_BEANS.INSRNC_BGN_TM_JQ = _CAR_BEANS.INSRNC_BGN_TM_JQ + ':00';
+               //c.*****************************去掉空字段*****************************
+               if(!_CAR_BEANS.IS_CMPNY_AGT){
+                  delete _CAR_BEANS.CMPNY_AGT_CDE;
+                  delete _CAR_BEANS.CMPNY_AGT_NME;
+               }
             }(window));
+            console.log(_CAR_BEANS);
             //2.提交数据到后台服务
             $handleService.http({
                url: $interFace.mitMainFace,
@@ -175,12 +180,17 @@ define([
                },
                data: _CAR_BEANS,
                success: function (data) {
-                  if ($U.isNotEmpty(data) && data.success == "false") {
-                     $U.showToast(data.msg);
+                  $handleService.logger('info', data);
+                  if ($U.isNotEmpty(data)) {
+                     if(data.success == "false" || ($U.isNotEmpty(data.head)&&data.head.success==false)){
+                        $U.showToast(data.msg || '服务器繁忙');
+                     }
+                     else {
+                        Handle.resultHandle(data, $rootScope.CALCOST_RESULT);
+                     }
                   }
                   else {
-                     //$handleService.logger('info', data);
-                     Handle.resultHandle(data, $rootScope.CALCOST_RESULT);
+
                   }
                },
                error: function (ex) {

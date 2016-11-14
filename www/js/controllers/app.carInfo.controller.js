@@ -17,11 +17,6 @@ define([
       app.controller('carInfoController', function ($scope, $rootScope, $http, $location, $handleService, $interFace, $compile, $carBeansService) {
 
          //----------------------------------------begin 监听方法----------------------------------------//
-         $scope.$watch('CAR_BEANS.CITY_CNHEADER', function (val) {
-            if($U.isNotEmpty(val)){
-               $rootScope.CAR_BEANS.LCN_NO=val
-            }
-         });
          //----------------------------------------end   监听方法----------------------------------------//
 
          //----------------------------------------begin 车辆信息页面----------------------------------------//
@@ -164,6 +159,10 @@ define([
             }
          };
          //----------------------------------------end   车辆信息页面----------------------------------------//
+         $scope.selCHandle = function () {
+            $rootScope.CAR_BEANS.LCN_NO = angular.copy($rootScope.CAR_BEANS.CITY_CNHEADER);
+            $scope.$apply();
+         };
       });
       return app;
    });

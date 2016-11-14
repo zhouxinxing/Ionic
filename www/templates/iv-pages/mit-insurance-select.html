@@ -35,7 +35,7 @@
                   <label class="item item-input item-select">
                      <span class="input-label">验车情况</span>
                      <select ng-model="CAR_BEANS.CHK_CDE">
-                        <option value="305005003">已验车</option>
+                        <option value="305005002">已验车</option>
                         <option value="305005003">免验车</option>
                         <option value="305005004">需验车</option>
                      </select>
@@ -43,8 +43,12 @@
                   <label class="item item-input item-select">
                      <span class="input-label">理由</span>
                      <select ng-model="CAR_BEANS.CHK_RSLT">
-                        <option value="">验车合格</option>
-                        <option value="">验车不合格</option>
+                        <option value="305012001">新车</option>
+                        <option value="305012002">单保责任类</option>
+                        <option value="305012003">按期续保，且未加保损失类险种</option>
+
+                        <option value="305012006">验车合格</option>
+                        <option value="305012007">验车不合格</option>
                      </select>
                   </label>
                </div>
@@ -94,9 +98,9 @@
                         <td class="text-center">
                            <input type="hidden" ng-model="CAR_BEANS.CVRG_LIST[1].INSRNC_CDE" ng-init="CAR_BEANS.CVRG_LIST[1].INSRNC_CDE='030102'"/>
                            <div class="ui-select">
-                              <label ng-bind="CAR_BEANS.CVRG_LIST[1].AMT"></label>
+                              <label ng-bind="BASE_BEAN.LIABILITY_INS_VAL[CAR_BEANS.CVRG_LIST[1].AMT]"></label>
                               <select ng-model="CAR_BEANS.CVRG_LIST[1].AMT">
-                                 <option ng-repeat="LIABILITY_ITEM in BASE_BEAN.LIABILITY_INS" value="{{LIABILITY_ITEM*10000}}">{{LIABILITY_ITEM+'万'}}</option>
+                                 <option ng-repeat="(key,value) in BASE_BEAN.LIABILITY_INS" value="{{value.CODE}}">{{value.AMT+'万'}}</option>
                               </select>
                            </div>
                         </td>
@@ -460,12 +464,12 @@
                <div class="form-group">
                   <div class="ins-header-checkbox">
                      <div class="checkbox-box">
-                        <ion-checkbox ng-checked="CAR_BEANS.JQ_ORIG_FLG" ng-model="CAR_BEANS.JQ_ORIG_FLG"><span>交强险</span></ion-checkbox>
+                        <ion-checkbox ng-checked="CAR_BEANS.JQ_ORIG_FLG" ng-model="CAR_BEANS.JQ_ORIG_FLG" ng-value="CAR_BEANS.JQ_ORIG_FLG?TAX_FLAG='1':'0'"><span>交强险</span></ion-checkbox>
                      </div>
                      <label class="item item-input item-validate-picker">
                         <i class="ion-android-calendar"></i>
                         <span class="input-label-inline">生效日期</span>
-                        <input type="text" class="validate-input" ng-date-picker="datetime" placeholder="请选择生效日期" ng-model="CAR_BEANS.INSRNC_BGN_TM_JQ" ng-value="CAR_BEANS.INSRNC_BGN_TM_JQ?TAX_FLAG='1':'0'" init-picker='{"maxDate":"0,3,0,0","minDate":"0,0,0,1","initVal":"true"}'/>
+                        <input type="text" class="validate-input" ng-date-picker="datetime" placeholder="请选择生效日期" ng-model="CAR_BEANS.INSRNC_BGN_TM_JQ" init-picker='{"maxDate":"0,3,0,0","minDate":"0,0,0,1","initVal":"true"}'/>
                      </label>
                   </div>
                   <div class="com-price-box" ng-show="CAR_BEANS.JQ_ORIG_FLG">
